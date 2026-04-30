@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RRSP Savings Calculator 2026 — Canada | CalcWise</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "RRSP Savings Calculator 2026 — Canada | CalcWise",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/rrsp-savings.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When is the best time to contribute?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Contribute as early in the year as possible — not at the last-minute March deadline — to maximize compounding time. Setting up automatic monthly contributions is even better: it dollar-cost averages a"
+      }
+    },    {
+      "@type": "Question",
+      "name": "What happens if I over-contribute to RRSP?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You get a $2,000 lifetime over-contribution buffer before penalties apply. Beyond that, the CRA charges 1% per month. Unlike TFSA over-contributions, this $2,000 buffer is helpful — some people delibe"
+      }
+    },    {
+      "@type": "Question",
+      "name": "RRSP withdrawal in retirement — tax strategy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Draw down your RRSP/RRIF in lower-income years (e.g., before CPP and OAS begin) to minimize the marginal rate paid. Withdrawing $20,000/year at a 20% rate is far better than being forced into $40,000/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>RRSP Savings Calculator</h1>
+  <p>Project RRSP growth and estimate your annual tax refund by province. 2025 limit: $33,810.</p>
+  <div class="country-badge">&#127464;&#127462; Canada only</div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" ><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <h2>RRSP Details</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Current RRSP Balance</label><div class="input-prefix"><span>$</span><input type="number" id="bal" value="60000" oninput="c()"></div></div>
+      <div class="form-row"><label>Annual Contribution</label><div class="input-prefix"><span>$</span><input type="number" id="ann" value="15000" oninput="c()"></div></div>
+      <div class="form-row"><label>Annual Income</label><div class="input-prefix"><span>$</span><input type="number" id="inc" value="95000" oninput="c()"></div></div>
+      <div class="form-row"><label>Province</label>
+        <select id="prov" onchange="c()">
+          <option value="AB">Alberta</option><option value="BC">British Columbia</option>
+          <option value="ON" selected>Ontario</option><option value="QC">Quebec</option>
+          <option value="MB">Manitoba</option><option value="SK">Saskatchewan</option>
+          <option value="NS">Nova Scotia</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Expected Annual Return</label><div class="input-suffix"><span>%</span><input type="number" id="rate" value="7" step="0.1" oninput="c()"></div></div>
+      <div class="form-row"><label>Years Until Retirement</label><input type="number" id="yrs" value="25" min="1" oninput="c()"></div>
+    </div>
+    <button class="calc-btn" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Projected RRSP Value</div><div class="value teal" id="proj">—</div></div>
+        <div class="result-item"><div class="label">Total Contributed</div><div class="value " id="totC">—</div></div>
+        <div class="result-item"><div class="label">Tax-Deferred Growth</div><div class="value teal" id="growth">—</div></div>
+        <div class="result-item"><div class="label">Est. Annual Tax Refund</div><div class="value " id="refund">—</div></div>
+        <div class="result-item"><div class="label">Your 2026 RRSP Limit</div><div class="value " id="limit">—</div></div>
+        <div class="result-item"><div class="label">Combined Marginal Rate</div><div class="value " id="margRate">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('stacked')">Growth Breakdown</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>RRSP 2025 Key Facts</h2>
+  <p><strong>2026 RRSP limit:</strong> $33,810 (18% of 2024 earned income, whichever is less). <strong>Deadline:</strong> March 3, 2026. Must convert to RRIF by December 31 of the year you turn 71.</p>
+  <h3>Home Buyers' Plan (HBP)</h3>
+  <p>First-time buyers can withdraw up to <strong>$60,000</strong> tax-free from RRSP for a home purchase (updated 2024). Repay over 15 years. Funds must have been in the RRSP for at least 90 days.</p>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">When is the best time to contribute?</button><div class="faq-a">Contribute as early in the year as possible — not at the last-minute March deadline — to maximize compounding time. Setting up automatic monthly contributions is even better: it dollar-cost averages and removes the annual challenge of finding a lump sum.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What happens if I over-contribute to RRSP?</button><div class="faq-a">You get a $2,000 lifetime over-contribution buffer before penalties apply. Beyond that, the CRA charges 1% per month. Unlike TFSA over-contributions, this $2,000 buffer is helpful — some people deliberately carry a small over-contribution to get a head start on next year.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">RRSP withdrawal in retirement — tax strategy?</button><div class="faq-a">Draw down your RRSP/RRIF in lower-income years (e.g., before CPP and OAS begin) to minimize the marginal rate paid. Withdrawing $20,000/year at a 20% rate is far better than being forced into $40,000/year withdrawals at 33% after RRIF conversion.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; Marginal rates are simplified estimates. Actual RRSP room: check your CRA Notice of Assessment.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div>
+    <div style="color:#d4001a;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Scotiabank</div>
+    <div style="color:#111827;font-size:1.1rem;font-weight:700;line-height:1.3;margin-bottom:8px;">The Passport® Visa Infinite — $0 foreign transaction fees</div>
+    <div style="color:#6b7280;font-size:0.78rem;line-height:1.5;">Earn 3x Scene+ points on groceries. Travel insurance included. Annual fee waived first year.</div>
+  </div>
+  <div>
+    <div style="background:#d4001a;color:white;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Apply Now →</div>
+    <div style="color:#9ca3af;font-size:0.6rem;margin-top:8px;">Min. income $60,000/yr. Subject to approval.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="tfsa.html">TFSA Calculator</a></li><li><a href="rrsp-loan.html">RRSP Loan</a></li><li><a href="income-tax.html">Income Tax</a></li><li><a href="retirement-planning.html">Retirement Planning</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div style="color:#0066cc;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">Sun Life Financial</div>
+  <div style="color:#111827;font-size:1.4rem;font-weight:700;line-height:1.25;margin-bottom:12px;">Protect what<br>matters most.</div>
+  <div style="color:#6b7280;font-size:0.82rem;line-height:1.65;margin-bottom:22px;">Term life insurance from $20/month. Get a quote in 60 seconds — no medical exam required for coverage up to $1M.</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px;">
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:14px;">
+      <div style="color:#0369a1;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 10-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $18/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;">
+      <div style="color:#15803d;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 20-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $29/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:9px;padding:14px;">
+      <div style="color:#7c3aed;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ Whole Life</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">Builds cash value</div>
+      <div style="color:#6b7280;font-size:0.72rem;">Lifelong protection</div>
+    </div>
+  </div>
+  <div style="background:#0066cc;color:white;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Free Quote →</div>
+  <div style="color:#9ca3af;font-size:0.6rem;text-align:center;line-height:1.5;">Sun Life Assurance Company of Canada. Subject to underwriting.</div>
+</div></div>
+</div>
+</div>
+<script>
+const pm={AB:{low:.25,mid:.36,high:.48},BC:{low:.28,mid:.43,high:.535},ON:{low:.29,mid:.43,high:.5353},QC:{low:.37,mid:.50,high:.5397},MB:{low:.27,mid:.434,high:.5},SK:{low:.27,mid:.395,high:.475},NS:{low:.29,mid:.45,high:.54}};
+let ch=null;
+let country='ca';
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function c(){
+  const bal=parseFloat(document.getElementById('bal').value)||0;
+  const ann=parseFloat(document.getElementById('ann').value)||0;
+  const inc=parseFloat(document.getElementById('inc').value)||0;
+  const rate=(parseFloat(document.getElementById('rate').value)||0)/100;
+  const yrs=parseInt(document.getElementById('yrs').value)||25;
+  const prov=document.getElementById('prov').value;
+  const m=pm[prov]||pm.ON;
+  const marginal=inc>150000?m.high:inc>80000?m.mid:m.low;
+  let v=bal; const balData=[]; const cData=[];
+  for(let y=0;y<yrs;y++){v=(v+ann)*(1+rate);balData.push(Math.round(v));cData.push(Math.round(bal+ann*(y+1)));}
+  const totC=bal+ann*yrs;
+  document.getElementById('proj').textContent='$'+Math.round(v).toLocaleString();
+  document.getElementById('totC').textContent='$'+Math.round(totC).toLocaleString();
+  document.getElementById('growth').textContent='$'+Math.round(Math.max(0,v-totC)).toLocaleString();
+  document.getElementById('refund').textContent='$'+Math.round(ann*marginal).toLocaleString();
+  document.getElementById('limit').textContent='$'+Math.round(Math.min(inc*.18,33810)).toLocaleString();
+  document.getElementById('margRate').textContent=(marginal*100).toFixed(1)+'%';
+  try{if(ch)ch.destroy();}catch(e){ch=null;}
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new window.Chart(ctx,{type:'bar',data:{labels:Array.from({length:yrs},(_,i)=>'Yr '+(i+1)),datasets:[
+    {label:'Contributions',data:cData,backgroundColor:'rgba(21,42,69,0.7)',stack:'s'},
+    {label:'Growth',data:balData.map((b,i)=>b-cData[i]),backgroundColor:'rgba(14,165,160,0.7)',stack:'s'}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{stacked:true,grid:{display:false},ticks:{maxTicksLimit:10}},y:{stacked:true,ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:rgba(21,42,69,0.7)"></div>Contributions</div><div class="legend-item"><div class="legend-dot" style="background:rgba(14,165,160,0.7)"></div>Growth</div>';
+}
+function showChart(m){c();}
+document.addEventListener('DOMContentLoaded',()=>{c();});
+</script>
+<footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice. For informational purposes only.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="#">Privacy</a></div>
+</div></footer>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>

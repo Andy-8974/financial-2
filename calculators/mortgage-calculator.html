@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortgage Calculator 2026 — USA & Canada | CalcWise</title>
+<meta name="description" content="Free mortgage calculator for USA and Canada. Monthly payments, amortization, and total interest. Updated for Canada 30-year amortization 2024.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Mortgage Calculator 2026 — USA & Canada | CalcWise",
+  "description": "Free mortgage calculator for USA and Canada. Monthly payments, amortization, and total interest. Updated for Canada 30-year amortization 2024.",
+  "url": "https://calcwise.pro/calculators/mortgage-calculator.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Canadian mortgage stress test in 2025?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You must qualify at the higher of: your contracted rate + 2%, or 5.25%. So at 5.49%, you qualify at 7.49%. This applies to all federally regulated lenders. Credit unions may differ by province."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Who qualifies for Canada's 30-year amortization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Since August 1, 2024, first-time buyers purchasing newly constructed homes can access insured mortgages with 30-year amortization. On a $500K mortgage at 5.5%, extending from 25 to 30 years saves ~$25"
+      }
+    },    {
+      "@type": "Question",
+      "name": "Fixed vs variable rate — which is better?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fixed provides payment certainty — ideal when rates are expected to rise. Variable rates (tied to prime) historically save money long-term but carry uncertainty. After Bank of Canada rate cuts in 2024"
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do extra mortgage payments work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most Canadian mortgages allow 10–20% annual prepayment of original principal without penalty. An extra $200/month on a $500K mortgage at 5.5% over 25 years can save 4+ years of payments and $80,000+ i"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Mortgage Calculator</h1>
+  <p>Monthly payments, amortization schedule, and total interest. Canada: semi-annual compounding & 30-yr rule (2024).</p>
+  <div class="country-toggle">
+      <button class="toggle-btn active" data-country="us" aria-label="Switch to USA calculator" onclick="setCountry('us')"><span class="flag">&#127482;&#127480;</span> USA</button>
+      <button class="toggle-btn" data-country="ca" aria-label="Switch to Canada calculator" onclick="setCountry('ca')"><span class="flag">&#127464;&#127462;</span> Canada</button>
+    </div>
+</div></div><div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <!-- LEFT: INPUTS -->
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <h2>Mortgage Details</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Home Price</label><div class="input-prefix"><span>$</span><input type="number" id="homePrice" value="650000" oninput="calc()"></div></div>
+      <div class="form-row"><label>Down Payment</label><div class="input-prefix"><span>$</span><input type="number" id="downPayment" value="130000" oninput="calc()"></div></div>
+      <div class="form-row"><label>Annual Interest Rate</label><div class="input-suffix"><span>%</span><input type="number" id="rate" value="5.49" step="0.01" oninput="calc()"></div></div>
+      <div class="form-row"><label>Amortization Period</label>
+        <select id="amort" onchange="calc()">
+          <option value="10">10 years</option><option value="15">15 years</option>
+          <option value="20">20 years</option><option value="25" selected>25 years</option>
+          <option value="30">30 years</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Payment Frequency</label>
+        <select id="freq" onchange="calc()">
+          <option value="12" selected>Monthly</option>
+          <option value="24">Semi-monthly</option>
+          <option value="26">Bi-weekly</option>
+          <option value="52">Weekly</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Annual Property Tax</label><div class="input-prefix"><span>$</span><input type="number" id="propTax" value="5000" oninput="calc()"></div></div>
+      <div class="form-row"><label>Annual Home Insurance</label><div class="input-prefix"><span>$</span><input type="number" id="homeIns" value="1800" oninput="calc()"></div></div>
+      <div class="form-row"><label>Monthly Condo / HOA Fee</label><div class="input-prefix"><span>$</span><input type="number" id="condoFee" value="0" oninput="calc()"></div></div>
+      <div class="form-row"><label>Extra Monthly Payment</label><div class="input-prefix"><span>$</span><input type="number" id="extraPayment" value="0" oninput="calc()" placeholder="0"></div></div>
+    </div>
+    <div id="caNote" style="display:none;background:var(--teal-pale);border-radius:8px;padding:0.65rem 0.85rem;font-size:0.77rem;color:var(--text-mid);margin-bottom:0.75rem;">
+      &#128161; <strong>Canada 2024:</strong> 30-yr amortization available for first-time buyers on new builds (insured). Standard max is 25 yrs with &lt;20% down.
+    </div>
+    <button class="calc-btn" aria-label="Calculate Mortgage" onclick="calc()">Calculate Mortgage</button>
+  </div>
+  <!-- RIGHT: RESULTS + CHART -->
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label" id="payLbl">Monthly Payment</div><div class="value teal" id="payment">—</div></div>
+        <div class="result-item"><div class="label">Loan Amount</div><div class="value" id="loanAmt">—</div></div>
+        <div class="result-item"><div class="label">Total Interest</div><div class="value" id="totInt">—</div></div>
+        <div class="result-item"><div class="label">Total Cost</div><div class="value" id="totCost">—</div></div>
+        <div class="result-item"><div class="label">Down Payment %</div><div class="value" id="downPct">—</div></div>
+        <div class="result-item"><div class="label" id="pithLbl">PITH / Period</div><div class="value teal" id="withTax">—</div></div>
+        <div class="result-item" id="extraRow" style="display:none"><div class="label">Early Payoff</div><div class="value teal" id="extraPayoff">—</div></div>
+        <div class="result-item" id="extraSavRow" style="display:none"><div class="label">Interest Saved</div><div class="value teal" id="extraSaved">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('balance')">Balance</button>
+        <button class="chart-tab-sm" onclick="showChart('breakdown')">Breakdown</button>
+        <button class="chart-tab-sm" onclick="showChart('compare')">Rate Compare</button>
+      </div>
+      <div class="chart-container"><canvas id="mortgageChart"></canvas></div>
+      <div class="chart-legend" id="chartLegend"></div>
+    </div>
+  </div>
+</div>
+
+<!-- AMORTIZATION TABLE -->
+<div class="content-card">
+  <h2>Amortization Schedule (Annual)</h2>
+  <div style="overflow-x:auto">
+    <table class="data-table">
+      <thead><tr><th>Year</th><th class="r">Principal Paid</th><th class="r">Interest Paid</th><th class="r">Balance</th><th class="r">Equity</th></tr></thead>
+      <tbody id="amortBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="content-card">
+  <h2>Canada vs USA Mortgage Differences</h2>
+  <div class="info-grid">
+    <div class="info-box"><h4>&#127464;&#127462; Canada</h4><p>Mortgages compound <strong>semi-annually</strong> by law. Max 25-yr amortization for insured mortgages (30-yr for first-time buyers on new builds, Aug 2024). Stress test: qualify at contract rate +2% or 5.25%, whichever is higher.</p></div>
+    <div class="info-box"><h4>&#127482;&#127480; USA</h4><p>Mortgages compound <strong>monthly</strong>. 30-year fixed is standard. PMI required if down &lt;20%. Conforming loan limit $806,500 (2025). Mortgage interest often tax-deductible on Schedule A.</p></div>
+  </div>
+  <h3>The Formula</h3>
+  <div class="formula-box">M = P &times; [r(1+r)&sup2;] / [(1+r)&sup2; &minus; 1]&#10;&#10;P = principal | r = periodic rate | n = total payments&#10;&#127464;&#127462; Canada: r = (1 + annual/2)^(2/freq) &minus; 1 &nbsp;(semi-annual compounding)</div>
+</div>
+
+<div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the Canadian mortgage stress test in 2025?</button><div class="faq-a">You must qualify at the higher of: your contracted rate + 2%, or 5.25%. So at 5.49%, you qualify at 7.49%. This applies to all federally regulated lenders. Credit unions may differ by province.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Who qualifies for Canada's 30-year amortization?</button><div class="faq-a">Since August 1, 2024, first-time buyers purchasing newly constructed homes can access insured mortgages with 30-year amortization. On a $500K mortgage at 5.5%, extending from 25 to 30 years saves ~$250/month but adds ~$75,000 in total interest.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Fixed vs variable rate — which is better?</button><div class="faq-a">Fixed provides payment certainty — ideal when rates are expected to rise. Variable rates (tied to prime) historically save money long-term but carry uncertainty. After Bank of Canada rate cuts in 2024–25, variable rates have become more competitive. Most Canadian variable mortgages let you lock in at any time.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do extra mortgage payments work?</button><div class="faq-a">Most Canadian mortgages allow 10–20% annual prepayment of original principal without penalty. An extra $200/month on a $500K mortgage at 5.5% over 25 years can save 4+ years of payments and $80,000+ in interest. US mortgages generally have no prepayment penalties.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What closing costs should I budget for?</button><div class="faq-a"><strong>Canada:</strong> Land transfer tax (1–2%), legal fees ($1,500–$3,000), home inspection ($400–600), title insurance (~$300), HST on CMHC premium (paid at closing). <strong>USA:</strong> Closing costs typically 2–5% of loan: origination fees, appraisal, title insurance, prepaid escrow.</div></div>
+</div>
+<div class="disclaimer">&#9888;&#65039; Results are estimates. Canadian rates use semi-annual compounding (Bank Act). Not financial advice — consult a licensed mortgage broker.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div>
+    <div style="color:#d4001a;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Scotiabank</div>
+    <div style="color:#111827;font-size:1.1rem;font-weight:700;line-height:1.3;margin-bottom:8px;">The Passport® Visa Infinite — $0 foreign transaction fees</div>
+    <div style="color:#6b7280;font-size:0.78rem;line-height:1.5;">Earn 3x Scene+ points on groceries. Travel insurance included. Annual fee waived first year.</div>
+  </div>
+  <div>
+    <div style="background:#d4001a;color:white;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Apply Now →</div>
+    <div style="color:#9ca3af;font-size:0.6rem;margin-top:8px;">Min. income $60,000/yr. Subject to approval.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="rent-vs-buy.html">Rent vs. Buy</a></li><li><a href="cmhc-mortgage-insurance.html">CMHC Insurance</a></li><li><a href="mortgage-qualifier.html">Mortgage Qualifier</a></li><li><a href="mortgage-refinance.html">Mortgage Refinance</a></li><li><a href="income-tax.html">Income Tax</a></li><li><a href="net-worth.html">Net Worth</a></li><li><a href="capital-gains-tax.html">Capital Gains Tax</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div style="color:#0066cc;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">Sun Life Financial</div>
+  <div style="color:#111827;font-size:1.4rem;font-weight:700;line-height:1.25;margin-bottom:12px;">Protect what<br>matters most.</div>
+  <div style="color:#6b7280;font-size:0.82rem;line-height:1.65;margin-bottom:22px;">Term life insurance from $20/month. Get a quote in 60 seconds — no medical exam required for coverage up to $1M.</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px;">
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:14px;">
+      <div style="color:#0369a1;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 10-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $18/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;">
+      <div style="color:#15803d;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 20-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $29/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:9px;padding:14px;">
+      <div style="color:#7c3aed;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ Whole Life</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">Builds cash value</div>
+      <div style="color:#6b7280;font-size:0.72rem;">Lifelong protection</div>
+    </div>
+  </div>
+  <div style="background:#0066cc;color:white;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Free Quote →</div>
+  <div style="color:#9ca3af;font-size:0.6rem;text-align:center;line-height:1.5;">Sun Life Assurance Company of Canada. Subject to underwriting.</div>
+</div></div>
+</div></div>
+<script>function safeNum(v,fallback=0){
+  const n=parseFloat(v);
+  return(!isFinite(n)||isNaN(n))?fallback:n;
+}
+
+function c(){calc();}
+let country='us', chartMode='balance', mortChart=null;
+
+function setCountry(c){
+  country=c;
+  document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.toggle('active',b.dataset.country===c));
+  document.getElementById('caNote').style.display=c==='ca'?'block':'none';
+  calc();
+}
+
+function periodicRate(annualPct,freq){
+  if(country==='ca'){
+    const semi=annualPct/100/2;
+    const eff=Math.pow(1+semi,2)-1;
+    return Math.pow(1+eff,1/ ((freq)||1))-1;
+  }
+  return annualPct/100/12;
+}
+
+function fmt(n){return '$'+Math.round(n).toLocaleString();}
+
+function calc(){
+  const P      = parseFloat(document.getElementById('homePrice').value)  || 0;
+  const down   = parseFloat(document.getElementById('downPayment').value) || 0;
+  const annual = parseFloat(document.getElementById('rate').value)        || 0;
+  const years  = parseInt(document.getElementById('amort').value)         || 25;
+  const freq   = parseInt(document.getElementById('freq').value)          || 12;
+  const propTax  = parseFloat(document.getElementById('propTax').value)   || 0;
+  const homeIns  = parseFloat(document.getElementById('homeIns').value)   || 0;
+  const condoFee = parseFloat(document.getElementById('condoFee').value)  || 0; // monthly
+
+  const loan = Math.max(0, P - down);
+
+  // ── Correct periodic rate for the chosen frequency ────────────────────────
+  // Canada: semi-annual compounding converted to any frequency
+  // USA:    monthly compounding, but payment frequency affects pmt calculation
+  const r = periodicRate(annual, freq);
+  const n = years * freq;
+
+  const pmt = r > 0
+    ? loan * r * Math.pow(1+r, n) / (Math.pow(1+r, n) - 1)
+    : (n > 0 ? loan / ((n)||1) : 0);
+  // ── Guard: payment must cover interest ────────────────────────────────
+  const _minPmt = loan * periodicRate(annual, freq);
+  if (pmt < _minPmt && loan > 0) {
+    ['monthlyPayment','withTax','totalInt','totalCost','downPct','pith'].forEach(id => {
+      const el = document.getElementById(id); if (el) el.textContent = '—';
+    });
+    const warnEl = document.getElementById('paymentWarn');
+    if (warnEl) { warnEl.style.display = 'block'; warnEl.textContent = '⚠️ Payment too low — does not cover monthly interest. Increase payment or reduce rate.'; }
+    return;
+  }
+  const warnEl = document.getElementById('paymentWarn');
+  if (warnEl) warnEl.style.display = 'none';
+
+  // ── PITH extras — normalised to the chosen payment frequency ─────────────
+  const taxPerPmt   = propTax  / ((freq)||1);          // annual → per payment
+  const insPerPmt   = homeIns  / ((freq)||1);          // annual → per payment
+  // condoFee is entered monthly; convert to chosen frequency
+  const condoPerPmt = condoFee * (12 / ((freq)||1));   // monthly → per payment
+  const pith = pmt + taxPerPmt + insPerPmt + condoPerPmt;
+
+  // ── Frequency label ───────────────────────────────────────────────────────
+  const freqLabels = {12:'Monthly', 24:'Semi-monthly', 26:'Bi-weekly', 52:'Weekly'};
+  const lbl = freqLabels[freq] || 'Monthly';
+
+  document.getElementById('payLbl').textContent  = lbl + ' P&I Payment';
+  document.getElementById('pithLbl').textContent = lbl + ' PITH Total';
+  document.getElementById('payment').textContent  = fmt(pmt);
+  document.getElementById('loanAmt').textContent  = fmt(loan);
+  document.getElementById('totInt').textContent   = fmt(pmt * n - loan);
+  document.getElementById('totCost').textContent  = fmt(pmt * n);
+  document.getElementById('downPct').textContent  = P > 0 ? (down/P*100).toFixed(1)+'%' : '0%';
+  document.getElementById('withTax').textContent  = fmt(pith);
+
+  // Extra payment payoff comparison
+  const extra = parseFloat(document.getElementById('extraPayment').value) || 0;
+  const extraRow = document.getElementById('extraRow');
+  const extraSavRow = document.getElementById('extraSavRow');
+  if(extra > 0 && loan > 0 && r > 0){
+    // Simulate standard payoff
+    const stdMonths = n; const stdInt = pmt * n - loan;
+    // Simulate with extra payment (monthly basis for simplicity)
+    const rMonthly = periodicRate(annual, 12);
+    let bal2 = loan, mExtra = 0;
+    while(bal2 > 0.01 && mExtra < 600){
+      const iP = bal2 * rMonthly;
+      const pmtExtra = Math.min(pmt/freq*12 + extra, bal2 + iP);
+      bal2 = Math.max(0, bal2 - (pmtExtra - iP));
+      mExtra++;
+    }
+    const extraInt = (pmt/freq*12 + extra) * mExtra - loan;
+    const moSaved = Math.max(0, stdMonths - mExtra);
+    const intSaved = Math.max(0, stdInt - extraInt);
+    const ySaved = Math.floor(moSaved/12), mSaved = moSaved%12;
+    extraRow.style.display = '';
+    extraSavRow.style.display = '';
+    document.getElementById('extraPayoff').textContent = (ySaved>0?ySaved+'y ':'')+(mSaved>0?mSaved+'m ':'')+' sooner';
+    document.getElementById('extraSaved').textContent = fmt(intSaved)+' interest';
+  } else {
+    extraRow.style.display = 'none';
+    extraSavRow.style.display = 'none';
+  }
+
+  // Save snapshot
+
+  // ── Amortization table (always period-by-period, grouped annually) ────────
+  let bal=loan, rows=[], yr=1, yP=0, yI=0;
+  for (let p=0; p<n; p++){
+    const iP  = bal * r;
+    const prP = Math.min(pmt - iP, bal);
+    yI += iP; yP += prP; bal = Math.max(0, bal - prP);
+    if ((p+1) % freq === 0 || p === n-1){
+      rows.push({yr, yP, yI, bal, eq: down + loan - bal});
+      yr++; yP=0; yI=0;
+    }
+  }
+  document.getElementById('amortBody').innerHTML =
+    rows.map(r=>`<tr><td>${r.yr}</td><td class="r teal">${fmt(r.yP)}</td><td class="r">${fmt(r.yI)}</td><td class="r bold">${fmt(r.bal)}</td><td class="r">${fmt(r.eq)}</td></tr>`).join('');
+  window._mR=rows; window._mL=loan; window._mD=down; window._mA=annual; window._mY=years;
+  showChart(chartMode);
+}
+
+function showChart(mode){
+  chartMode=mode;
+  document.querySelectorAll('.chart-tab-sm').forEach((t,i)=>t.classList.toggle('active',['balance','breakdown','compare'][i]===mode));
+  if(mortChart){mortChart.destroy();}
+  const ctx=document.getElementById('mortgageChart').getContext('2d');
+  const rows=window._mR||[]; const loan=window._mL||0; const down=window._mD||0;
+  if(mode==='balance'){
+    mortChart=new Chart(ctx,{type:'line',data:{labels:rows.map(r=>'Yr '+r.yr),datasets:[
+      {label:'Balance',data:rows.map(r=>Math.round(r.bal)),borderColor:'#0ea5a0',backgroundColor:'rgba(14,165,160,0.1)',fill:true,tension:0.3,pointRadius:0,borderWidth:2},
+      {label:'Equity',data:rows.map(r=>Math.round(r.eq)),borderColor:'#c9a84c',backgroundColor:'rgba(201,168,76,0.08)',fill:true,tension:0.3,pointRadius:0,borderWidth:2}
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false},ticks:{maxTicksLimit:8}}}}});
+    document.getElementById('chartLegend').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Balance</div><div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div>Equity</div>';
+  } else if(mode==='breakdown'){
+    const totInt=rows.reduce((a,r)=>a+r.yI,0);
+    mortChart=new Chart(ctx,{type:'doughnut',data:{labels:['Total Interest','Principal','Down Payment'],datasets:[{data:[Math.round(totInt),Math.round(loan),Math.round(down)],backgroundColor:['#ef4444','#0ea5a0','#c9a84c'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' $'+Math.round(c.raw).toLocaleString()}}}}});
+    document.getElementById('chartLegend').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Interest</div><div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Principal</div><div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div>Down Payment</div>';
+  } else {
+    const baseRate=window._mA||5.49; const years=window._mY||25;
+    const rates=[Math.max(0.1,baseRate-1),baseRate,baseRate+1,baseRate+2];
+    const colors=['#3b82f6','#0ea5a0','#f59e0b','#ef4444'];
+    const datasets=rates.map((rate,i)=>{
+      const r=country==='ca'?(Math.pow(1+rate/100/2,2/12)-1):rate/100/12;
+      const n=years*12;
+      const pmt=r>0?loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):(n>0?loan/ ((n)||1):0);
+      let bal=loan; const data=[];
+      for(let y=0;y<years;y++){for(let m=0;m<12;m++){const int=bal*r;bal=Math.max(0,bal-(pmt-int));}data.push(Math.round(bal));}
+      return{label:rate.toFixed(2)+'%',data,borderColor:colors[i],backgroundColor:'transparent',tension:0.3,pointRadius:0,borderWidth:i===1?2.5:1.5};
+    });
+    mortChart=new Chart(ctx,{type:'line',data:{labels:Array.from({length:years},(_,i)=>'Yr '+(i+1)),datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false},ticks:{maxTicksLimit:8}}}}});
+    document.getElementById('chartLegend').innerHTML=rates.map((r,i)=>`<div class="legend-item"><div class="legend-dot" style="background:${colors[i]}"></div>${r.toFixed(2)}%</div>`).join('');
+  }
+}
+
+// Load saved on init
+document.addEventListener('DOMContentLoaded',()=>{calc();});</script>
+<footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice. For informational purposes only.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="#">Privacy</a></div>
+</div></footer>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inflation Calculator — USA & Canada CPI Data 2026 | CalcWise</title>
+<meta name="description" content="Calculate purchasing power changes using US CPI and Canadian CPI historical data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Inflation Calculator — USA & Canada CPI Data 2026 | CalcWise",
+  "description": "Calculate purchasing power changes using US CPI and Canadian CPI historical data.",
+  "url": "https://calcwise.pro/calculators/inflation.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Inflation Calculator</h1>
+  <p>See how prices have changed over time using US and Canadian CPI data. Calculate what a past dollar is worth today.</p>
+  <div class="country-toggle">
+      <button class="toggle-btn active" data-country="us" aria-label="Switch to USA calculator" onclick="setCountry('us')"><span class="flag">&#127482;&#127480;</span> USA</button>
+      <button class="toggle-btn" data-country="ca" aria-label="Switch to Canada calculator" onclick="setCountry('ca')"><span class="flag">&#127464;&#127462;</span> Canada</button>
+    </div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" ><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
+      <h2>Purchasing Power</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Amount</label><div class="input-prefix"><span>$</span><input type="number" id="amt" value="1000" oninput="c()"></div></div>
+      <div class="form-row"><label>Direction</label>
+        <select id="dir" onchange="c()">
+          <option value="past">Past dollars → Today's value</option>
+          <option value="future">Today's dollars → Future value</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Start Year</label><input type="number" id="y1" value="2000" min="1914" max="2025" oninput="c()"></div>
+      <div class="form-row"><label>End Year</label><input type="number" id="y2" value="2025" min="1914" max="2040" oninput="c()"></div>
+      <div class="form-row"><label>Custom Rate (optional override)</label><div class="input-suffix"><span>%/yr</span><input type="number" id="custom" value="" step="0.1" placeholder="Blank = use CPI data" oninput="c()"></div></div>
+    </div>
+    <button class="calc-btn" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Adjusted Value</div><div class="value teal" id="adj">—</div></div>
+        <div class="result-item"><div class="label">Cumulative Inflation</div><div class="value " id="cumInf">—</div></div>
+        <div class="result-item"><div class="label">Avg Annual Rate</div><div class="value teal" id="avgRate">—</div></div>
+        <div class="result-item"><div class="label">Purchasing Power Change</div><div class="value " id="ppChange">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('line')">Value Over Time</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+
+<div class="content-card">
+  <h2>Historical Inflation Rates</h2>
+  <table class="data-table">
+    <thead><tr><th>Period</th><th class="r">🇺🇸 US Avg</th><th class="r">🇨🇦 CA Avg</th></tr></thead>
+    <tbody>
+      <tr><td>1970s</td><td class="r">7.5%</td><td class="r">7.4%</td></tr>
+      <tr><td>1980s</td><td class="r">5.5%</td><td class="r">5.7%</td></tr>
+      <tr><td>1990s</td><td class="r">3.0%</td><td class="r">3.2%</td></tr>
+      <tr><td>2000s</td><td class="r">2.6%</td><td class="r">2.4%</td></tr>
+      <tr><td>2010s</td><td class="r">1.9%</td><td class="r">1.8%</td></tr>
+      <tr><td>2020–2022 (peak)</td><td class="r teal">4.3% (9.1% peak Jun'22)</td><td class="r teal">4.2% (8.1% peak Jun'22)</td></tr>
+      <tr><td>2023–2025 (cooling)</td><td class="r">3.4% → 2.7%</td><td class="r">3.9% → 2.4%</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:0.85rem;font-size:0.84rem;color:var(--text-mid)">At 2% inflation, purchasing power halves every <strong>36 years</strong> (Rule of 72: 72÷2=36).</p>
+</div>
+
+<div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What drove Canada's 2022 inflation spike?</button>
+  <div class="faq-a">Canada's CPI peaked at 8.1% in June 2022 — the highest since 1983. Causes: pandemic supply-chain disruptions, Russia-Ukraine war (energy/food), and aggressive monetary stimulus. The Bank of Canada raised rates from 0.25% to 5.0% between March 2022 and July 2023. By early 2025, inflation had returned near the 2% target and the policy rate had been cut to approximately 3.25%.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does inflation affect retirement savings?</button>
+  <div class="faq-a">$70,000/year in expenses today becomes $127,000 in 30 years at 2% inflation. Your portfolio must outpace inflation or you lose real purchasing power. Equities have historically outpaced inflation by ~4–5% real return. Cash and low-yield fixed income often fail to keep up — which is why holding too much cash in early retirement is risky.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is "real" vs "nominal" return?</button>
+  <div class="faq-a">Nominal return is the stated return (e.g., 7%). Real return adjusts for inflation: Real ≈ Nominal − Inflation. At 7% nominal with 3% inflation, real return is ~4%. The Fisher equation is more precise: Real = (1 + Nominal) / (1 + Inflation) − 1. Always compare investment returns in real terms to know if you're actually getting ahead.</div></div>
+</div>
+<div class="disclaimer">⚠️ CPI rates are period averages for estimation. Personal inflation varies by spending patterns. Not financial advice.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+  <div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+      <div style="width:32px;height:32px;background:#e8f5e9;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <span style="color:#1b5e20;font-weight:700;font-size:0.95rem;">EQ Bank</span>
+    </div>
+    <div style="color:#111827;font-size:1.1rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Earn 4.00%* on your savings</div>
+    <div style="color:#6b7280;font-size:0.78rem;line-height:1.6;">Canada's leading digital bank. No monthly fees. No minimum balance. CDIC insured deposits.</div>
+  </div>
+  <div>
+    <div style="background:#2e7d32;color:white;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Open a Free Account</div>
+    <div style="color:#9ca3af;font-size:0.6rem;margin-top:8px;">*Rate subject to change. Conditions apply.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="compound-interest.html">Compound Interest</a></li><li><a href="retirement-planning.html">Retirement Planning</a></li><li><a href="fire.html">FIRE Calculator</a></li><li><a href="currency-exchange.html">Currency Exchange</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:linear-gradient(180deg,#0d1f35 0%,#152a45 50%,#0d1f35 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);gap:0;">
+  <div style="color:#c9a84c;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">TD Canada Trust</div>
+  <div style="color:white;font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:12px;">Your first home<br>starts here.</div>
+  <div style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.65;margin-bottom:24px;">TD mortgage specialists are ready to help. Get pre-approved online in 3 minutes and lock in your rate for 120 days.</div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:24px;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">5-Year Fixed</div>
+    <div style="color:#c9a84c;font-size:2.2rem;font-weight:700;line-height:1;">4.94%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">APR 5.02% — as low as</div>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:auto;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Variable Rate</div>
+    <div style="color:white;font-size:2rem;font-weight:700;line-height:1;">Prime − 0.10%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">Currently 6.85%</div>
+  </div>
+  <div style="margin-top:24px;">
+    <div style="background:#c9a84c;color:#0d1f35;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Pre-Approved Today</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;text-align:center;line-height:1.5;">OAC. Rates subject to change. TD Bank Group.</div>
+  </div>
+</div></div>
+</div>
+</div>
+<script>function safeNum(v,fallback=0){
+  const n=parseFloat(v);
+  return(!isFinite(n)||isNaN(n))?fallback:n;
+}
+
+let country='us', ch=null;
+
+// Decade-averaged annual CPI rates
+const usAvg={1910:.02,1920:.03,1930:-.02,1940:.06,1950:.04,1960:.025,1970:.075,1980:.055,1990:.03,2000:.026,2010:.019,2020:.043};
+const caAvg={1910:.02,1920:.03,1930:-.018,1940:.055,1950:.038,1960:.028,1970:.074,1980:.057,1990:.032,2000:.024,2010:.018,2020:.042};
+
+function setCountry(co){
+  country=co;
+  document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.toggle('active',b.dataset.country===co));
+  c();
+}
+
+function getAvgRate(y1,y2,tbl){
+  let total=0,count=0;
+  for(let y=y1;y<y2;y++){
+    const decade=Math.floor(y/10)*10;
+    total+=(tbl[decade]||0.025);
+    count++;
+  }
+  return count>0?total/count:0.025;
+}
+
+function fmt(n){return '$'+Math.round(n).toLocaleString();}
+
+function c(){
+  const amt=parseFloat(document.getElementById('amt').value)||0;
+  const y1=parseInt(document.getElementById('y1').value)||2000;
+  const y2=parseInt(document.getElementById('y2').value)||2025;
+  const dir=document.getElementById('dir').value;
+  const customVal=document.getElementById('custom').value.trim();
+  const yrs=Math.abs(y2-y1);
+  if(yrs===0){return;}
+
+  let avgRate;
+  if(customVal!==''){
+    avgRate=parseFloat(customVal)/100||0.025;
+  } else {
+    avgRate=getAvgRate(Math.min(y1,y2),Math.max(y1,y2),country==='us'?usAvg:caAvg);
+  }
+
+  const cumInf=Math.pow(1+avgRate,yrs)-1;
+  const adj=dir==='past'?amt*(1+cumInf):amt/(1+cumInf);
+
+  document.getElementById('adj').textContent=fmt(adj);
+  document.getElementById('cumInf').textContent=(cumInf*100).toFixed(1)+'%';
+  document.getElementById('avgRate').textContent=(avgRate*100).toFixed(2)+'%/year';
+  document.getElementById('ppChange').textContent=dir==='past'
+    ?fmt(adj-amt)+' more'
+    :fmt(amt-adj)+" less in today's money";
+
+  // Build chart data
+  const labels=[];const data=[];
+  const steps=Math.min(yrs,50);
+  for(let i=0;i<=steps;i++){
+    labels.push(Math.min(y1,y2)+Math.round(i*yrs/steps));
+    const v=dir==='past'?amt*Math.pow(1+avgRate,i*yrs/steps):amt/Math.pow(1+avgRate,i*yrs/steps);
+    data.push(parseFloat(v.toFixed(2)));
+  }
+
+  try{if(ch)ch.destroy();}catch(e){ch=null;}
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new window.Chart(ctx,{type:'line',data:{labels,datasets:[{
+    label:'Value',data,borderColor:'#0ea5a0',backgroundColor:'rgba(14,165,160,0.1)',
+    fill:true,tension:0.3,pointRadius:0,borderWidth:2
+  }]},options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{y:{ticks:{callback:v=>'$'+v.toLocaleString()}},x:{grid:{display:false},ticks:{maxTicksLimit:10}}}}});
+  document.getElementById('leg').innerHTML=
+    '<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>'
+    +(dir==='past'?'Purchasing Power Growth':'Purchasing Power Decline')+'</div>';
+}
+
+function showChart(m){c();}
+document.addEventListener('DOMContentLoaded',()=>{setCountry('us');});
+</script>
+<footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice. For informational purposes only.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="#">Privacy</a></div>
+</div></footer>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>

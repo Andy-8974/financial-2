@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMHC Mortgage Insurance Calculator 2026 — Canada | CalcWise</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "CMHC Mortgage Insurance Calculator 2026 — Canada | CalcWise",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/cmhc-mortgage-insurance.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is CMHC insurance the same as home insurance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. CMHC mortgage default insurance protects the lender if you default. Home insurance protects your property from fire, theft, and damage. Both are typically required if your down payment is under 20"
+      }
+    },    {
+      "@type": "Question",
+      "name": "How is PST on the CMHC premium paid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PST on the premium must be paid at closing — it cannot be added to the mortgage. In Ontario, a $15,500 CMHC premium incurs $1,240 in PST due at closing. Budget for this in your closing costs."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the minimum down payment in Canada in 2025?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "5% for homes up to $500,000. 5% on first $500K + 10% on the portion from $500K–$999,999 for homes in that range. 20% minimum for homes $1M–$1.49M (unless first-time buyer new build). 20% minimum for a"
+      }
+    },    {
+      "@type": "Question",
+      "name": "Can I get a refund on CMHC insurance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CMHC premiums are generally not refundable once the mortgage is funded. However, if your buyer assumes your mortgage, CMHC coverage transfers — no new premium required."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>CMHC Mortgage Insurance Calculator</h1>
+  <p>Calculate your required mortgage default insurance premium. Updated for 2025 with the expanded $1.5M insured mortgage cap.</p>
+  <div class="country-badge">&#127464;&#127462; Canada only</div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 2L4 6v6c0 5.5 3.5 10.7 8 12 4.5-1.3 8-6.5 8-12V6L12 2z"/></svg></div>
+      <h2>CMHC Insurance Details</h2>
+    </div>
+    <div class="form-row"><label>Purchase Price</label><div class="input-prefix"><span>$</span><input type="number" id="price" value="650000" oninput="c()"></div></div>
+    <div class="form-row"><label>Down Payment</label><div class="input-prefix"><span>$</span><input type="number" id="down" value="65000" oninput="c()"></div></div>
+    <div class="form-row"><label>Annual Interest Rate</label><div class="input-suffix"><span>%</span><input type="number" id="rate" value="5.49" step="0.01" oninput="c()"></div></div>
+    <div class="form-row"><label>Amortization</label>
+      <select id="amort" onchange="c()">
+        <option value="25" selected>25 years</option>
+        <option value="30">30 years (first-time / new build)</option>
+        <option value="20">20 years</option>
+      </select>
+    </div>
+    <div class="form-row"><label>Province (PST on premium)</label>
+      <select id="prov" onchange="c()">
+        <option value="0|AB">Alberta — no PST</option>
+        <option value="0|BC">British Columbia — no PST</option>
+        <option value="0.08|ON" selected>Ontario — 8% PST</option>
+        <option value="0.09|QC">Quebec — 9% PST</option>
+        <option value="0.07|MB">Manitoba — 7% PST</option>
+        <option value="0|NS">Nova Scotia — no PST</option>
+        <option value="0|SK">Saskatchewan — no PST</option>
+      </select>
+    </div>
+    <button class="calc-btn" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Down Payment %</div><div class="value teal" id="dpct">—</div></div>
+        <div class="result-item"><div class="label">CMHC Rate</div><div class="value " id="cmhcRate">—</div></div>
+        <div class="result-item"><div class="label">Insurance Premium</div><div class="value teal" id="premium">—</div></div>
+        <div class="result-item"><div class="label">PST on Premium (at closing)</div><div class="value " id="pst">—</div></div>
+        <div class="result-item"><div class="label">Total Mortgage</div><div class="value " id="totalMort">—</div></div>
+        <div class="result-item"><div class="label">Monthly Payment</div><div class="value teal" id="monthly">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('doughnut')">Breakdown</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>2025 CMHC Premium Rates</h2>
+  <table class="data-table">
+    <thead><tr><th>Down Payment</th><th class="r">Rate</th><th class="r">On $500K loan</th></tr></thead>
+    <tbody>
+      <tr><td>5% – 9.99%</td><td class="r teal">4.00%</td><td class="r">$20,000</td></tr>
+      <tr><td>10% – 14.99%</td><td class="r teal">3.10%</td><td class="r">$15,500</td></tr>
+      <tr><td>15% – 19.99%</td><td class="r teal">2.80%</td><td class="r">$14,000</td></tr>
+      <tr><td>20%+</td><td class="r" style="color:var(--success);font-weight:600">No insurance required</td><td class="r">—</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:0.85rem;font-size:0.84rem;color:var(--text-mid)">&#128161; <strong>2025 update:</strong> Insured mortgage cap raised from $1M to <strong>$1.5M</strong> (Dec 2024), allowing buyers in high-cost markets to access insured mortgages with under 20% down on homes up to $1.5M.</p>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is CMHC insurance the same as home insurance?</button><div class="faq-a">No. CMHC mortgage default insurance protects the lender if you default. Home insurance protects your property from fire, theft, and damage. Both are typically required if your down payment is under 20%.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How is PST on the CMHC premium paid?</button><div class="faq-a">PST on the premium must be paid at closing — it cannot be added to the mortgage. In Ontario, a $15,500 CMHC premium incurs $1,240 in PST due at closing. Budget for this in your closing costs.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the minimum down payment in Canada in 2025?</button><div class="faq-a">5% for homes up to $500,000. 5% on first $500K + 10% on the portion from $500K–$999,999 for homes in that range. 20% minimum for homes $1M–$1.49M (unless first-time buyer new build). 20% minimum for all homes $1.5M+.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I get a refund on CMHC insurance?</button><div class="faq-a">CMHC premiums are generally not refundable once the mortgage is funded. However, if your buyer assumes your mortgage, CMHC coverage transfers — no new premium required.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; Canada only. Rates current 2025. Consult your mortgage broker for exact costs.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(79,70,229,0.3);">
+  <div>
+    <div style="color:rgba(255,255,255,0.7);font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Questrade</div>
+    <div style="color:white;font-size:1.15rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Buy ETFs free.<br>Stocks from $4.95.</div>
+    <div style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.5;">Canada's #1 online brokerage. Open a TFSA, RRSP, or FHSA in minutes.</div>
+  </div>
+  <div>
+    <div style="background:white;color:#4f46e5;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Open Account Free</div>
+    <div style="color:rgba(255,255,255,0.35);font-size:0.6rem;margin-top:8px;">IIROC regulated. CIPF member. 1M+ Canadians.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="mortgage-calculator.html">Mortgage Calculator</a></li><li><a href="mortgage-qualifier.html">Mortgage Qualifier</a></li><li><a href="mortgage-refinance.html">Mortgage Refinance</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:linear-gradient(180deg,#0d1f35 0%,#152a45 50%,#0d1f35 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);gap:0;">
+  <div style="color:#c9a84c;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">TD Canada Trust</div>
+  <div style="color:white;font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:12px;">Your first home<br>starts here.</div>
+  <div style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.65;margin-bottom:24px;">TD mortgage specialists are ready to help. Get pre-approved online in 3 minutes and lock in your rate for 120 days.</div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:24px;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">5-Year Fixed</div>
+    <div style="color:#c9a84c;font-size:2.2rem;font-weight:700;line-height:1;">4.94%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">APR 5.02% — as low as</div>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:auto;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Variable Rate</div>
+    <div style="color:white;font-size:2rem;font-weight:700;line-height:1;">Prime − 0.10%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">Currently 6.85%</div>
+  </div>
+  <div style="margin-top:24px;">
+    <div style="background:#c9a84c;color:#0d1f35;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Pre-Approved Today</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;text-align:center;line-height:1.5;">OAC. Rates subject to change. TD Bank Group.</div>
+  </div>
+</div></div>
+</div>
+</div>
+<script>function safeNum(v,fallback=0){
+  const n=parseFloat(v);
+  return(!isFinite(n)||isNaN(n))?fallback:n;
+}
+
+let ch=null;
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function c(){
+  const price=parseFloat(document.getElementById('price').value)||0;
+  const down=parseFloat(document.getElementById('down').value)||0;
+  const rate=parseFloat(document.getElementById('rate').value)||5.49;
+  const years=parseInt(document.getElementById('amort').value)||25;
+  const pv=document.getElementById('prov').value.split('|');
+  const pstRate=parseFloat(pv[0])||0;
+  const dpct=price>0?down/price*100:0;
+  document.getElementById('dpct').textContent=dpct.toFixed(2)+'%';
+  if(price>1500000){['cmhcRate','premium','pst','totalMort','monthly'].forEach(id=>document.getElementById(id).textContent='N/A');return;}
+  if(dpct>=20){document.getElementById('cmhcRate').textContent='0% — None required';['premium','pst'].forEach(id=>document.getElementById(id).textContent='$0');document.getElementById('totalMort').textContent='$'+Math.round(price-down).toLocaleString();document.getElementById('monthly').textContent='—';return;}
+  if(dpct<5){return;}
+  const rates=dpct<10?0.04:dpct<15?0.031:0.028;
+  const loan=price-down; const premium=loan*rates; const pst=premium*pstRate;
+  const totalMort=loan+premium;
+  const r=Math.pow(1+rate/100/2,2/12)-1; const n=years*12;
+  const pmt=r>0?totalMort*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):totalMort/ ((n)||1);
+  document.getElementById('cmhcRate').textContent=(rates*100).toFixed(2)+'%';
+  document.getElementById('premium').textContent='$'+Math.round(premium).toLocaleString();
+  document.getElementById('pst').textContent='$'+Math.round(pst).toLocaleString();
+  document.getElementById('totalMort').textContent='$'+Math.round(totalMort).toLocaleString();
+  document.getElementById('monthly').textContent='$'+pmt.toFixed(2);
+  if(ch)ch.destroy();
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new Chart(ctx,{type:'doughnut',data:{labels:['Down Payment','Loan','CMHC Premium','PST'],datasets:[{data:[Math.round(down),Math.round(loan),Math.round(premium),Math.round(pst)],backgroundColor:['#0ea5a0','#152a45','#c9a84c','#ef4444'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'right'},tooltip:{callbacks:{label:ctx=>' $'+Math.round(ctx.raw).toLocaleString()}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Down Payment</div><div class="legend-item"><div class="legend-dot" style="background:#152a45"></div>Loan</div><div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div>Premium</div><div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>PST</div>';
+}
+function showChart(m){c();}
+document.addEventListener('DOMContentLoaded',c);
+</script>
+<footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice. For informational purposes only.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="#">Privacy</a></div>
+</div></footer>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>

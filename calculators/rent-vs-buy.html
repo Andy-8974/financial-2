@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rent vs Buy Calculator 2026 — USA & Canada | CalcWise</title>
+<meta name="description" content="Should you rent or buy a home? Compare 5-30 year total costs including equity, appreciation, and opportunity cost.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Rent vs Buy Calculator 2026 — USA & Canada | CalcWise",
+  "description": "Should you rent or buy a home? Compare 5-30 year total costs including equity, appreciation, and opportunity cost.",
+  "url": "https://calcwise.pro/calculators/rent-vs-buy.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When does buying beat renting financially?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The break-even point is typically 4–8 years in most Canadian cities. Before that, transaction costs (land transfer tax, legal fees, realtor commissions on sale) make renting cheaper. After break-even,"
+      }
+    },    {
+      "@type": "Question",
+      "name": "Why does the calculator show renting winning sometimes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When home appreciation is low and investment returns are high, the renter who invests the down payment can build more wealth. In high-appreciation markets (Vancouver, Toronto), buying wins faster. In "
+      }
+    },    {
+      "@type": "Question",
+      "name": "What about rent control in Canada?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ontario: rent control applies to units first occupied before Nov 15, 2018 (max increase 2.5% in 2025). BC: max 3% in 2025. Quebec: set by Tribunal administratif du logement. New builds are often exemp"
+      }
+    },    {
+      "@type": "Question",
+      "name": "What additional costs does buying include?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "One-time: CMHC premium (if"
+      }
+    },    {
+      "@type": "Question",
+      "name": "Is my down payment money 'lost' in a house?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — this is opportunity cost. $130,000 invested in a diversified portfolio at 7%/yr becomes ~$255,000 in 10 years. That growth must be compared against home equity gains. This is why the calculator "
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Rent vs. Buy Calculator</h1>
+  <p>Is buying really better than renting? Compare total wealth after accounting for equity, appreciation, maintenance, and opportunity cost.</p>
+  <div class="country-toggle">
+      <button class="toggle-btn active" data-country="us" aria-label="Switch to USA calculator" onclick="setCountry('us')"><span class="flag">&#127482;&#127480;</span> USA</button>
+      <button class="toggle-btn" data-country="ca" aria-label="Switch to Canada calculator" onclick="setCountry('ca')"><span class="flag">&#127464;&#127462;</span> Canada</button>
+    </div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" ><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <h2>Your Situation</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Home Purchase Price</label><div class="input-prefix"><span>$</span><input type="number" id="price" value="650000" oninput="c()"></div></div>
+      <div class="form-row"><label>Down Payment</label><div class="input-prefix"><span>$</span><input type="number" id="down" value="130000" oninput="c()"></div></div>
+      <div class="form-row"><label>Mortgage Rate</label><div class="input-suffix"><span>%</span><input type="number" id="mortRate" value="5.49" step="0.01" oninput="c()"></div></div>
+      <div class="form-row"><label>Amortization (years)</label><input type="number" id="amort" value="25" oninput="c()"></div>
+      <div class="form-row"><label>Monthly Rent (alternative)</label><div class="input-prefix"><span>$</span><input type="number" id="rent" value="2800" oninput="c()"></div></div>
+      <div class="form-row"><label>Annual Rent Increase</label><div class="input-suffix"><span>%</span><input type="number" id="rentInc" value="3" step="0.5" oninput="c()"></div></div>
+      <div class="form-row"><label>Annual Home Appreciation</label><div class="input-suffix"><span>%</span><input type="number" id="appRate" value="4" step="0.5" oninput="c()"></div></div>
+      <div class="form-row"><label>Investment Return (if renting)</label><div class="input-suffix"><span>%</span><input type="number" id="invReturn" value="7" step="0.5" oninput="c()"></div></div>
+      <div class="form-row"><label>Annual Property Tax</label><div class="input-prefix"><span>$</span><input type="number" id="propTax" value="6000" oninput="c()"></div></div>
+      <div class="form-row"><label>Annual Home Insurance</label><div class="input-prefix"><span>$</span><input type="number" id="homeIns" value="1800" oninput="c()"></div></div>
+      <div class="form-row"><label>Annual Maintenance (% of value)</label><div class="input-suffix"><span>%</span><input type="number" id="maint" value="1" step="0.25" oninput="c()"></div></div>
+      <div class="form-row"><label>Comparison Period (years)</label><input type="number" id="years" value="10" min="1" max="30" oninput="c()"></div>
+    </div>
+    <button class="calc-btn" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Decision</div><div class="value teal" id="verdict">—</div></div>
+        <div class="result-item"><div class="label">Buy: Net Wealth</div><div class="value " id="buyNet">—</div></div>
+        <div class="result-item"><div class="label">Rent: Net Wealth</div><div class="value " id="rentNet">—</div></div>
+        <div class="result-item"><div class="label">Wealth Difference</div><div class="value teal" id="diff">—</div></div>
+        <div class="result-item"><div class="label">Break-Even Year</div><div class="value " id="breakEven">—</div></div>
+        <div class="result-item"><div class="label">Total Buy Costs</div><div class="value " id="totalBuyCost">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('line')">Wealth Over Time</button>
+        <button class="chart-tab-sm" onclick="showChart('bar')">Cost Comparison</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+
+<div class="content-card">
+  <h2>How This Calculator Works</h2><div class="info-grid"><div class="info-box"><h4>🏠 Buy Scenario</h4><p>Monthly P&I + tax + insurance + maintenance. Your net wealth = home value − remaining mortgage. Closing costs assumed at 2%.</p></div><div class="info-box"><h4>🏢 Rent Scenario</h4><p>Monthly rent (growing annually). Down payment and monthly savings vs. buying are invested in a portfolio. Net wealth = investment portfolio value.</p></div><div class="info-box"><h4>📈 Appreciation</h4><p>Canada long-run average: 4–6%/yr (varies widely by city). USA long-run average: 3–4%/yr. Recent peaks may not continue — use conservative estimates.</p></div><div class="info-box"><h4>💡 Opportunity Cost</h4><p>The biggest factor renters miss: if you invest the down payment and monthly savings vs. buying into stocks returning 7%/yr, how much do you have?</p></div></div></div>
+
+<div class="content-card">
+  <h2>Year-by-Year Comparison</h2>
+  <div style="overflow-x:auto"><table class="data-table" id="rvbTable">
+    <thead><tr><th>Year</th><th class="r">Home Value</th><th class="r">Mortgage Balance</th><th class="r">Buy Net Wealth</th><th class="r">Rent Portfolio</th><th class="r">Advantage</th></tr></thead>
+    <tbody id="rvbBody"></tbody>
+  </table></div>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">When does buying beat renting financially?</button><div class="faq-a">The break-even point is typically 4–8 years in most Canadian cities. Before that, transaction costs (land transfer tax, legal fees, realtor commissions on sale) make renting cheaper. After break-even, equity accumulation and appreciation typically favour buying — especially if you hold long-term.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Why does the calculator show renting winning sometimes?</button><div class="faq-a">When home appreciation is low and investment returns are high, the renter who invests the down payment can build more wealth. In high-appreciation markets (Vancouver, Toronto), buying wins faster. In flat markets, renting and investing the difference often wins over 10-year periods.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What about rent control in Canada?</button><div class="faq-a">Ontario: rent control applies to units first occupied before Nov 15, 2018 (max increase 2.5% in 2025). BC: max 3% in 2025. Quebec: set by Tribunal administratif du logement. New builds are often exempt — a key risk for long-term renters.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What additional costs does buying include?</button><div class="faq-a">One-time: CMHC premium (if <20% down), land transfer tax (1–2%), legal fees ($1,500–$3,000), home inspection ($400–600). Ongoing: property tax, home insurance, maintenance (budget 1% of home value/year), condo fees if applicable. These are all factored into this calculator.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is my down payment money 'lost' in a house?</button><div class="faq-a">Yes — this is opportunity cost. $130,000 invested in a diversified portfolio at 7%/yr becomes ~$255,000 in 10 years. That growth must be compared against home equity gains. This is why the calculator includes the investment return rate for the renting scenario.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; Projections assume constant appreciation and returns. Real estate markets vary significantly by location. Not financial advice.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div>
+    <div style="color:#d4001a;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Scotiabank</div>
+    <div style="color:#111827;font-size:1.1rem;font-weight:700;line-height:1.3;margin-bottom:8px;">The Passport® Visa Infinite — $0 foreign transaction fees</div>
+    <div style="color:#6b7280;font-size:0.78rem;line-height:1.5;">Earn 3x Scene+ points on groceries. Travel insurance included. Annual fee waived first year.</div>
+  </div>
+  <div>
+    <div style="background:#d4001a;color:white;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Apply Now →</div>
+    <div style="color:#9ca3af;font-size:0.6rem;margin-top:8px;">Min. income $60,000/yr. Subject to approval.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="mortgage-calculator.html">Mortgage Calculator</a></li><li><a href="cmhc-mortgage-insurance.html">CMHC Insurance</a></li><li><a href="mortgage-qualifier.html">Mortgage Qualifier</a></li><li><a href="net-worth.html">Net Worth Calculator</a></li><li><a href="compound-interest.html">Compound Interest</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:linear-gradient(180deg,#0d1f35 0%,#152a45 50%,#0d1f35 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);gap:0;">
+  <div style="color:#c9a84c;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">TD Canada Trust</div>
+  <div style="color:white;font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:12px;">Your first home<br>starts here.</div>
+  <div style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.65;margin-bottom:24px;">TD mortgage specialists are ready to help. Get pre-approved online in 3 minutes and lock in your rate for 120 days.</div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:24px;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">5-Year Fixed</div>
+    <div style="color:#c9a84c;font-size:2.2rem;font-weight:700;line-height:1;">4.94%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">APR 5.02% — as low as</div>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:auto;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Variable Rate</div>
+    <div style="color:white;font-size:2rem;font-weight:700;line-height:1;">Prime − 0.10%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">Currently 6.85%</div>
+  </div>
+  <div style="margin-top:24px;">
+    <div style="background:#c9a84c;color:#0d1f35;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Pre-Approved Today</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;text-align:center;line-height:1.5;">OAC. Rates subject to change. TD Bank Group.</div>
+  </div>
+</div></div>
+</div>
+</div>
+<script>function safeNum(v,fallback=0){
+  const n=parseFloat(v);
+  return(!isFinite(n)||isNaN(n))?fallback:n;
+}
+
+let country='us', ch=null, chartMode='line';
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+
+function setCountry(co){
+  country=co;
+  document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.toggle('active',b.dataset.country===co));
+  // Adjust defaults for CA vs US
+  if(co==='ca'){
+    document.getElementById('mortRate').value='5.49';
+    document.getElementById('appRate').value='4';
+    document.getElementById('propTax').value='6000';
+  } else {
+    document.getElementById('mortRate').value='6.75';
+    document.getElementById('appRate').value='3.5';
+    document.getElementById('propTax').value='5000';
+  }
+  c();
+}
+
+function c(){
+  const price    = parseFloat(document.getElementById('price').value)||650000;
+  const down     = parseFloat(document.getElementById('down').value)||130000;
+  const mortRate = (parseFloat(document.getElementById('mortRate').value)||0)/100.0549;
+  const amortYrs = parseInt(document.getElementById('amort').value)||25;
+  const rent0    = parseFloat(document.getElementById('rent').value)||2800;
+  const rentInc  = (parseFloat(document.getElementById('rentInc').value)||0)/100.03;
+  const appRate  = (parseFloat(document.getElementById('appRate').value)||0)/100.04;
+  const invRet   = (parseFloat(document.getElementById('invReturn').value)||0)/100.07;
+  const propTax  = parseFloat(document.getElementById('propTax').value)||6000;
+  const homeIns  = parseFloat(document.getElementById('homeIns').value)||1800;
+  const maintPct = (parseFloat(document.getElementById('maint').value)||0)/100.01;
+  const years    = parseInt(document.getElementById('years').value)||10;
+
+  // ── MORTGAGE setup ──────────────────────────────────────────────────────
+  const loan = price - down;
+  // Canada: semi-annual compounding; USA: monthly
+  const r = country==='ca'
+    ? Math.pow(1 + mortRate/2, 2/12) - 1
+    : mortRate/12;
+  const n = amortYrs * 12;
+  const pmt = r>0 ? loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1) : loan/ ((n)||1);
+
+  // Closing costs (land transfer + legal) ≈ 2% of price
+  const closingCosts = price * 0.02;
+
+  // ── SIMULATION ──────────────────────────────────────────────────────────
+  let mortBal = loan;
+  let homeVal = price;
+  let rentInvPort = down + closingCosts; // renter invests down + closing costs
+  let rentAnnualPort = 0;
+  let currentRent = rent0;
+
+  const buyWealth=[], rentWealth=[], labels=[], buyCosts=[], rentCosts=[];
+  let breakEvenYear = null;
+  let totalBuyCostSum = closingCosts + down; // initial outlay
+
+  for(let y=1; y<=years; y++){
+    // ── BUY year ───────────────────────────────────────────────────────
+    homeVal *= (1 + appRate);
+    let yearlyPI = 0, yearlyMaintCost = 0;
+    for(let m=0;m<12;m++){
+      const interest = mortBal * r;
+      const principal = pmt - interest;
+      mortBal = Math.max(0, mortBal - principal);
+      yearlyPI += pmt;
+    }
+    yearlyMaintCost = homeVal * maintPct;
+    const yearBuyCost = yearlyPI + propTax + homeIns + yearlyMaintCost;
+    totalBuyCostSum += yearBuyCost;
+    const buyNet = homeVal - mortBal;
+
+    // ── RENT year ──────────────────────────────────────────────────────
+    const yearlyRent = currentRent * 12;
+    // Renter's monthly savings vs buyer = buyer's total monthly cost minus rent
+    const buyerMonthly = pmt + (propTax + homeIns + yearlyMaintCost)/12;
+    const monthlySaving = Math.max(0, buyerMonthly - currentRent);
+    rentAnnualPort = monthlySaving * 12;
+    rentInvPort = rentInvPort * (1 + invRet) + rentAnnualPort;
+    currentRent *= (1 + rentInc);
+
+    const rentNet = rentInvPort;
+
+    labels.push('Yr ' + y);
+    buyWealth.push(Math.round(buyNet));
+    rentWealth.push(Math.round(rentNet));
+    buyCosts.push(Math.round(yearBuyCost));
+    rentCosts.push(Math.round(yearlyRent));
+
+    if(!breakEvenYear && buyNet >= rentNet) breakEvenYear = y;
+  }
+
+  const finalBuy  = buyWealth[buyWealth.length-1];
+  const finalRent = rentWealth[rentWealth.length-1];
+  const diff = finalBuy - finalRent;
+  const buyWins = diff >= 0;
+
+  // ── Update results ──────────────────────────────────────────────────
+  const vEl = document.getElementById('verdict');
+  vEl.textContent = buyWins ? '🏠 Buy' : '🏢 Rent';
+  vEl.style.color = buyWins ? 'var(--teal-light)' : '#f59e0b';
+
+  document.getElementById('buyNet').textContent  = '$' + Math.round(finalBuy).toLocaleString();
+  document.getElementById('rentNet').textContent = '$' + Math.round(finalRent).toLocaleString();
+
+  const dEl = document.getElementById('diff');
+  dEl.textContent = (diff>=0?'+$':'-$') + Math.abs(Math.round(diff)).toLocaleString();
+  dEl.style.color = diff>=0 ? 'var(--teal-light)' : '#fca5a5';
+
+  document.getElementById('breakEven').textContent = breakEvenYear ? 'Year ' + breakEvenYear : 'Beyond ' + years + ' yrs';
+  document.getElementById('totalBuyCost').textContent = '$' + Math.round(totalBuyCostSum).toLocaleString();
+
+  // ── Year-by-year table ──────────────────────────────────────────────
+  let bal2 = loan;
+  let hv2 = price;
+  document.getElementById('rvbBody').innerHTML = Array.from({length:years},(_,i)=>{
+    const y=i+1;
+    for(let m=0;m<12;m++){const int=bal2*r;const pr=pmt-int;bal2=Math.max(0,bal2-pr);}
+    hv2*=(1+appRate);
+    const bNet=hv2-bal2;
+    const rPort=rentWealth[i];
+    const adv=bNet-rPort;
+    return `<tr>
+      <td><strong>Year ${y}</strong></td>
+      <td class="r">$${Math.round(hv2).toLocaleString()}</td>
+      <td class="r">$${Math.round(bal2).toLocaleString()}</td>
+      <td class="r bold">$${Math.round(bNet).toLocaleString()}</td>
+      <td class="r">$${Math.round(rPort).toLocaleString()}</td>
+      <td class="r ${adv>=0?'teal':''}"><strong>${adv>=0?'+':'-'}$${Math.abs(Math.round(adv)).toLocaleString()}</strong></td>
+    </tr>`;
+  }).join('');
+
+  // ── Chart ───────────────────────────────────────────────────────────
+  try{if(ch)ch.destroy();}catch(e){ch=null;}
+  const ctx = document.getElementById('ch').getContext('2d');
+
+  if(chartMode==='line'){
+    ch = new window.Chart(ctx,{type:'line',data:{labels,datasets:[
+      {label:'Buy Net Wealth',data:buyWealth,borderColor:'#0ea5a0',backgroundColor:'rgba(14,165,160,0.08)',fill:true,tension:0.3,pointRadius:0,borderWidth:2.5},
+      {label:'Rent Net Wealth',data:rentWealth,borderColor:'#c9a84c',backgroundColor:'rgba(201,168,76,0.06)',fill:true,tension:0.3,pointRadius:0,borderWidth:2.5}
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false}}}}});
+    document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Buy Net Wealth</div><div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div>Rent Net Wealth</div>';
+  } else {
+    ch = new window.Chart(ctx,{type:'bar',data:{labels,datasets:[
+      {label:'Annual Buy Cost',data:buyCosts,backgroundColor:'rgba(14,165,160,0.7)',borderRadius:4},
+      {label:'Annual Rent Cost',data:rentCosts,backgroundColor:'rgba(201,168,76,0.65)',borderRadius:4}
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}}}}});
+    document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:rgba(14,165,160,0.7)"></div>Annual Buy Cost</div><div class="legend-item"><div class="legend-dot" style="background:rgba(201,168,76,0.65)"></div>Annual Rent</div>';
+  }
+}
+
+function showChart(mode){
+  chartMode=mode;
+  document.querySelectorAll('.chart-tab-sm').forEach((t,i)=>t.classList.toggle('active',['line','bar'][i]===mode));
+  c();
+}
+
+document.addEventListener('DOMContentLoaded',()=>{setCountry('us');});
+</script>
+<footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice. For informational purposes only.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="#">Privacy</a></div>
+</div></footer>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>

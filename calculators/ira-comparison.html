@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traditional vs Roth IRA Calculator 2026 — USA | CalcWise</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Traditional vs Roth IRA Calculator 2026 — USA | CalcWise",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/ira-comparison.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When does Roth win vs Traditional?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Roth wins when your retirement tax rate exceeds your current rate. Traditional wins when your current rate exceeds your retirement rate. If rates are equal, they produce identical after-tax results — "
+      }
+    },    {
+      "@type": "Question",
+      "name": "Can I contribute to both IRA and 401(k)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. IRA and 401(k) limits are separate. However, if you have a workplace 401(k), Traditional IRA deductibility phases out at $79,000–$89,000 (single, 2025). Even if non-deductible, a Traditional IRA "
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Traditional IRA vs Roth IRA</h1>
+  <p>Side-by-side after-tax comparison — which IRA is better for your tax situation?</p>
+  <div class="country-badge" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.25);color:#b45309;">&#127482;&#127480; USA only</div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" ><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></div>
+      <h2>IRA Comparison</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Annual IRA Contribution</label><div class="input-prefix"><span>$</span><input type="number" id="ann" value="7000" oninput="c()"></div></div>
+      <div class="form-row"><label>Current Age</label><input type="number" id="age" value="35" oninput="c()"></div>
+      <div class="form-row"><label>Retirement Age</label><input type="number" id="ret" value="65" oninput="c()"></div>
+      <div class="form-row"><label>Current Marginal Tax Rate</label><div class="input-suffix"><span>%</span><input type="number" id="curTax" value="22" step="0.5" oninput="c()"></div></div>
+      <div class="form-row"><label>Expected Retirement Tax Rate</label><div class="input-suffix"><span>%</span><input type="number" id="retTax" value="22" step="0.5" oninput="c()"></div></div>
+      <div class="form-row"><label>Expected Annual Return</label><div class="input-suffix"><span>%</span><input type="number" id="rate" value="7" step="0.1" oninput="c()"></div></div>
+    </div>
+    <button class="calc-btn" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Traditional IRA Balance</div><div class="value " id="tradBal">—</div></div>
+        <div class="result-item"><div class="label">Traditional After-Tax</div><div class="value " id="tradAfter">—</div></div>
+        <div class="result-item"><div class="label">Roth IRA Balance</div><div class="value teal" id="rothBal">—</div></div>
+        <div class="result-item"><div class="label">Roth After-Tax (same)</div><div class="value teal" id="rothAfter">—</div></div>
+        <div class="result-item"><div class="label">Winner</div><div class="value teal" id="winner">—</div></div>
+        <div class="result-item"><div class="label">Advantage</div><div class="value " id="advantage">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('line')">IRA Growth Comparison</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>2025 IRA Limits</h2>
+  <p>Annual contribution limit: <strong>$7,000</strong> (under 50), <strong>$8,000</strong> (age 50+).</p>
+  <p>Roth IRA income limit: $150,000 (single), $236,000 (married filing jointly). Phase-out: $150K–$165K single. Above $165K: use Backdoor Roth.</p>
+  <h3>The Backdoor Roth Strategy</h3>
+  <p>If income exceeds Roth limits: (1) Make a non-deductible Traditional IRA contribution ($7,000), (2) Immediately convert to Roth IRA. Since you contributed after-tax money, conversion is tax-free — if you have no other pre-tax IRA balances (watch the pro-rata rule).</p>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">When does Roth win vs Traditional?</button><div class="faq-a">Roth wins when your retirement tax rate exceeds your current rate. Traditional wins when your current rate exceeds your retirement rate. If rates are equal, they produce identical after-tax results — but Roth has added advantages: no RMDs, tax-free heirs, and flexibility.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I contribute to both IRA and 401(k)?</button><div class="faq-a">Yes. IRA and 401(k) limits are separate. However, if you have a workplace 401(k), Traditional IRA deductibility phases out at $79,000–$89,000 (single, 2025). Even if non-deductible, a Traditional IRA contribution can be used as a backdoor Roth.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; USA only. Income limits apply to Roth contributions. Consult a tax professional.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(79,70,229,0.3);">
+  <div>
+    <div style="color:rgba(255,255,255,0.7);font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Questrade</div>
+    <div style="color:white;font-size:1.15rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Buy ETFs free.<br>Stocks from $4.95.</div>
+    <div style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.5;">Canada's #1 online brokerage. Open a TFSA, RRSP, or FHSA in minutes.</div>
+  </div>
+  <div>
+    <div style="background:white;color:#4f46e5;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Open Account Free</div>
+    <div style="color:rgba(255,255,255,0.35);font-size:0.6rem;margin-top:8px;">IIROC regulated. CIPF member. 1M+ Canadians.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="401k-contribution.html">401k Contribution</a></li><li><a href="401k-save-max.html">401k Save Max</a></li><li><a href="retirement-planning.html">Retirement Planning</a></li><li><a href="roth-ira.html">Roth IRA Calculator</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:linear-gradient(180deg,#0d1f35 0%,#152a45 50%,#0d1f35 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);gap:0;">
+  <div style="color:#c9a84c;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">TD Canada Trust</div>
+  <div style="color:white;font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:12px;">Your first home<br>starts here.</div>
+  <div style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.65;margin-bottom:24px;">TD mortgage specialists are ready to help. Get pre-approved online in 3 minutes and lock in your rate for 120 days.</div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:24px;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">5-Year Fixed</div>
+    <div style="color:#c9a84c;font-size:2.2rem;font-weight:700;line-height:1;">4.94%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">APR 5.02% — as low as</div>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:auto;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Variable Rate</div>
+    <div style="color:white;font-size:2rem;font-weight:700;line-height:1;">Prime − 0.10%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">Currently 6.85%</div>
+  </div>
+  <div style="margin-top:24px;">
+    <div style="background:#c9a84c;color:#0d1f35;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Pre-Approved Today</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;text-align:center;line-height:1.5;">OAC. Rates subject to change. TD Bank Group.</div>
+  </div>
+</div></div>
+</div>
+</div>
+<script>
+let ch=null;
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function c(){
+  const ann=parseFloat(document.getElementById('ann').value)||0;
+  const age=parseInt(document.getElementById('age').value)||35;
+  const ret=parseInt(document.getElementById('ret').value)||65;
+  const yrs=Math.max(0,ret-age);
+  const curTax=(parseFloat(document.getElementById('curTax').value)||0)/100;
+  const retTax=(parseFloat(document.getElementById('retTax').value)||0)/100;
+  const rate=(parseFloat(document.getElementById('rate').value)||0)/100;
+  let tradBal=0,rothBal=0; const tradD=[],rothD=[];
+  const tradAnn=ann; const rothAnn=ann*(1-curTax);
+  for(let y=0;y<yrs;y++){tradBal=(tradBal+tradAnn)*(1+rate);rothBal=(rothBal+rothAnn)*(1+rate);tradD.push(Math.round(tradBal));rothD.push(Math.round(rothBal));}
+  const tradAfter=tradBal*(1-retTax); const rothAfter=rothBal;
+  const wEl=document.getElementById('winner'); const aEl=document.getElementById('advantage');
+  if(rothAfter>=tradAfter){wEl.textContent='🏆 Roth IRA';wEl.style.color='var(--teal-light)';aEl.textContent='$'+Math.round(rothAfter-tradAfter).toLocaleString()+' more after-tax';}
+  else{wEl.textContent='🏆 Traditional IRA';wEl.style.color='var(--gold-light)';aEl.textContent='$'+Math.round(tradAfter-rothAfter).toLocaleString()+' more after-tax';}
+  document.getElementById('tradBal').textContent='$'+Math.round(tradBal).toLocaleString();
+  document.getElementById('tradAfter').textContent='$'+Math.round(tradAfter).toLocaleString();
+  document.getElementById('rothBal').textContent='$'+Math.round(rothBal).toLocaleString();
+  document.getElementById('rothAfter').textContent='$'+Math.round(rothAfter).toLocaleString();
+  if(ch)ch.destroy();
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new Chart(ctx,{type:'line',data:{labels:Array.from({length:yrs},(_,i)=>'Age '+(age+i+1)),datasets:[
+    {label:'Traditional',data:tradD,borderColor:'#c9a84c',tension:0.3,pointRadius:0,borderWidth:2,backgroundColor:'transparent'},
+    {label:'Roth',data:rothD,borderColor:'#0ea5a0',tension:0.3,pointRadius:0,borderWidth:2,backgroundColor:'rgba(37,99,235,0.06)',fill:true}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false},ticks:{maxTicksLimit:10}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div>Traditional IRA</div><div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Roth IRA</div>';
+}
+function showChart(m){c();}
+</script>
+<footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice. For informational purposes only.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="#">Privacy</a></div>
+</div></footer>
+
+
+
+});
+<script>
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', c);
+</script>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>

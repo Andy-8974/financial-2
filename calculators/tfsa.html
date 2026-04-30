@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TFSA Calculator 2026 — Canada | CalcWise</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "TFSA Calculator 2026 — Canada | CalcWise",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/tfsa.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What investments can I hold in a TFSA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Almost any qualifying investment: Canadian and US stocks, ETFs, mutual funds, GICs, bonds, options, REITs. Note: US dividends inside a TFSA are subject to 15% withholding tax (not so in an RRSP due to"
+      }
+    },    {
+      "@type": "Question",
+      "name": "What happens if I over-contribute?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The CRA charges 1% per month on the excess amount until withdrawn — no grace buffer like RRSP. Withdrawals add back to room on January 1 of the following year (not immediately). Check your available r"
+      }
+    },    {
+      "@type": "Question",
+      "name": "TFSA vs RRSP — which is better?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use RRSP when your current marginal rate is higher than your expected retirement rate. Use TFSA when your rate is lower, you need flexibility, or RRSP is already maxed. Most Canadians benefit from usi"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>TFSA Calculator</h1>
+  <p>Project tax-free growth and track your contribution room by birth year. 2025 annual limit: $7,000.</p>
+  <div class="country-badge">&#127464;&#127462; Canada only</div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" ><path d="M17 8C8 10 5.9 16.17 3.82 22c4-2 8-4 12-4s7-2 9-5-2-9-7-5z"/></svg></div>
+      <h2>TFSA Growth Planner</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Birth Year</label><input type="number" id="by" value="1990" min="1971" max="2007" oninput="c()"></div>
+      <div class="form-row"><label>Current TFSA Balance</label><div class="input-prefix"><span>$</span><input type="number" id="bal" value="30000" oninput="c()"></div></div>
+      <div class="form-row"><label>Annual Contribution</label><div class="input-prefix"><span>$</span><input type="number" id="ann" value="7000" oninput="c()"></div></div>
+      <div class="form-row"><label>Expected Annual Return</label><div class="input-suffix"><span>%</span><input type="number" id="rate" value="7" step="0.1" oninput="c()"></div></div>
+      <div class="form-row"><label>Years to Grow</label><input type="number" id="yrs" value="25" min="1" max="50" oninput="c()"></div>
+      <div class="form-row"><label>Prior Withdrawals (adds back room)</label><div class="input-prefix"><span>$</span><input type="number" id="wd" value="0" oninput="c()"></div></div>
+    </div>
+    <button class="calc-btn" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Projected Value</div><div class="value teal" id="proj">—</div></div>
+        <div class="result-item"><div class="label">Tax-Free Growth</div><div class="value " id="growth">—</div></div>
+        <div class="result-item"><div class="label">Contribution Room 2025</div><div class="value teal" id="room">—</div></div>
+        <div class="result-item"><div class="label">Cumulative Limit Since 18</div><div class="value " id="cumRoom">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('line')">Growth Over Time</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>TFSA Annual Limits (2009–2025)</h2>
+  <table class="data-table"><thead><tr><th>Year</th><th class="r">Limit</th><th>Year</th><th class="r">Limit</th></tr></thead><tbody id="limitBody"></tbody></table>
+  <p style="margin-top:0.85rem;font-size:0.84rem;color:var(--text-mid)">2025 limit: <strong>$7,000</strong>. Cumulative since 2009 (for those 18+ in 2009): <strong>$102,000</strong>.</p>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What investments can I hold in a TFSA?</button><div class="faq-a">Almost any qualifying investment: Canadian and US stocks, ETFs, mutual funds, GICs, bonds, options, REITs. Note: US dividends inside a TFSA are subject to 15% withholding tax (not so in an RRSP due to the Canada-US tax treaty). Hold US dividend stocks in your RRSP and Canadian ETFs in your TFSA for maximum efficiency.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What happens if I over-contribute?</button><div class="faq-a">The CRA charges 1% per month on the excess amount until withdrawn — no grace buffer like RRSP. Withdrawals add back to room on January 1 of the following year (not immediately). Check your available room at CRA My Account.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">TFSA vs RRSP — which is better?</button><div class="faq-a">Use RRSP when your current marginal rate is higher than your expected retirement rate. Use TFSA when your rate is lower, you need flexibility, or RRSP is already maxed. Most Canadians benefit from using both. Strategy: contribute to RRSP at peak income, use the refund to fund your TFSA.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; Verify your exact room at CRA My Account. Limits are indexed annually.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div>
+    <div style="color:#d4001a;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Scotiabank</div>
+    <div style="color:#111827;font-size:1.1rem;font-weight:700;line-height:1.3;margin-bottom:8px;">The Passport® Visa Infinite — $0 foreign transaction fees</div>
+    <div style="color:#6b7280;font-size:0.78rem;line-height:1.5;">Earn 3x Scene+ points on groceries. Travel insurance included. Annual fee waived first year.</div>
+  </div>
+  <div>
+    <div style="background:#d4001a;color:white;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Apply Now →</div>
+    <div style="color:#9ca3af;font-size:0.6rem;margin-top:8px;">Min. income $60,000/yr. Subject to approval.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="rrsp-savings.html">RRSP Savings</a></li><li><a href="compound-interest.html">Compound Interest</a></li><li><a href="income-tax.html">Income Tax</a></li><li><a href="fire.html">FIRE Calculator</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:linear-gradient(180deg,#0d1f35 0%,#152a45 50%,#0d1f35 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);gap:0;">
+  <div style="color:#c9a84c;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">TD Canada Trust</div>
+  <div style="color:white;font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:12px;">Your first home<br>starts here.</div>
+  <div style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.65;margin-bottom:24px;">TD mortgage specialists are ready to help. Get pre-approved online in 3 minutes and lock in your rate for 120 days.</div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:24px;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">5-Year Fixed</div>
+    <div style="color:#c9a84c;font-size:2.2rem;font-weight:700;line-height:1;">4.94%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">APR 5.02% — as low as</div>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:auto;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Variable Rate</div>
+    <div style="color:white;font-size:2rem;font-weight:700;line-height:1;">Prime − 0.10%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">Currently 6.85%</div>
+  </div>
+  <div style="margin-top:24px;">
+    <div style="background:#c9a84c;color:#0d1f35;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Pre-Approved Today</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;text-align:center;line-height:1.5;">OAC. Rates subject to change. TD Bank Group.</div>
+  </div>
+</div></div>
+</div>
+</div>
+<script>
+const limits={2009:5000,2010:5000,2011:5000,2012:5000,2013:5500,2014:5500,2015:10000,2016:5500,2017:5500,2018:5500,2019:6000,2020:6000,2021:6000,2022:6000,2023:6500,2024:7000,2025:7000,2026:7000};
+let ch=null;
+let country='ca';
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function c(){
+  const by=parseInt(document.getElementById('by').value)||1990;
+  const bal=parseFloat(document.getElementById('bal').value)||0;
+  const ann=parseFloat(document.getElementById('ann').value)||0;
+  const rate=(parseFloat(document.getElementById('rate').value)||0)/100;
+  const yrs=parseInt(document.getElementById('yrs').value)||25;
+  const wd=parseFloat(document.getElementById('wd').value)||0;
+  const eligible=Math.max(by+18,2009);
+  let room=wd,cumRoom=0;
+  const entries=Object.entries(limits);
+  const rows=[];
+  for(let i=0;i<entries.length;i+=2){
+    const [y1,l1]=entries[i];const [y2,l2]=entries[i+1]||['',''];
+    if(parseInt(y1)>=eligible){room+=l1;cumRoom+=l1;}
+    if(y2&&parseInt(y2)>=eligible){room+=l2;cumRoom+=l2;}
+    rows.push('<tr><td>'+y1+'</td><td class="r">$'+l1.toLocaleString()+'</td><td>'+y2+'</td><td class="r">'+(y2?'$'+l2.toLocaleString():'')+'</td></tr>');
+  }
+  document.getElementById('limitBody').innerHTML=rows.join('');
+  document.getElementById('room').textContent='$'+Math.round(room).toLocaleString();
+  document.getElementById('cumRoom').textContent='$'+Math.round(cumRoom).toLocaleString();
+  let v=bal; const balData=[]; const cData=[];
+  for(let y=0;y<yrs;y++){v=(v+ann)*(1+rate);balData.push(Math.round(v));cData.push(Math.round(bal+ann*(y+1)));}
+  const growth=Math.max(0,v-(bal+ann*yrs));
+  document.getElementById('proj').textContent='$'+Math.round(v).toLocaleString();
+  document.getElementById('growth').textContent='$'+Math.round(growth).toLocaleString();
+  try{if(ch)ch.destroy();}catch(e){ch=null;}
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new window.Chart(ctx,{type:'line',data:{labels:Array.from({length:yrs},(_,i)=>'Yr '+(i+1)),datasets:[
+    {label:'Portfolio',data:balData,borderColor:'#0ea5a0',backgroundColor:'rgba(14,165,160,0.1)',fill:true,tension:0.3,pointRadius:0,borderWidth:2},
+    {label:'Contributions',data:cData,borderColor:'#c9a84c',backgroundColor:'transparent',tension:0.3,pointRadius:0,borderWidth:1.5,borderDash:[5,3]}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false},ticks:{maxTicksLimit:10}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Portfolio Value</div><div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div>Total Contributions</div>';
+}
+function showChart(m){c();}
+document.addEventListener('DOMContentLoaded',()=>{c();});
+</script>
+<footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice. For informational purposes only.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="#">Privacy</a></div>
+</div></footer>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>

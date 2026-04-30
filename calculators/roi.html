@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Return on Investment (ROI) Calculator | CalcWise Pro</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Return on Investment (ROI) Calculator | CalcWise Pro",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/roi.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is CAGR and why does it matter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CAGR (Compound Annual Growth Rate) normalizes returns to an annual rate, making different-length investments comparable. A 50% gain over 2 years = 22.5% CAGR. The same 50% gain over 5 years = only 8.4"
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do taxes affect my real ROI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In Canada, capital gains are 50% included in income (2/3 for gains over $250K, though this is subject to ongoing political debate). Dividends get favorable treatment via the dividend tax credit. Inter"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Return on Investment (ROI) Calculator</h1>
+  <p>Calculate total return, annualized CAGR, and compare investment performance on any asset.</p>
+  <div class="country-toggle">
+      <button class="toggle-btn active" data-country="us" aria-label="Switch to USA calculator" onclick="setCountry('us')"><span class="flag">&#127482;&#127480;</span> USA</button>
+      <button class="toggle-btn" data-country="ca" aria-label="Switch to Canada calculator" onclick="setCountry('ca')"><span class="flag">&#127464;&#127462;</span> Canada</button>
+    </div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" ><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
+      <h2>Investment Details</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Initial Investment</label><div class="input-prefix"><span>$</span><input type="number" id="initial" value="10000" oninput="c()"></div></div>
+      <div class="form-row"><label>Final / Current Value</label><div class="input-prefix"><span>$</span><input type="number" id="final" value="18500" oninput="c()"></div></div>
+      <div class="form-row"><label>Investment Period</label><input type="number" id="years" value="5" step="0.5" min="0.1" oninput="c()"></div>
+      <div class="form-row"><label>Time Unit</label>
+        <select id="unit" onchange="c()"><option value="1" selected>Years</option><option value="0.0833">Months</option><option value="0.00274">Days</option></select>
+      </div>
+      <div class="form-row"><label>Additional Income (dividends, rent)</label><div class="input-prefix"><span>$</span><input type="number" id="income" value="0" oninput="c()"></div></div>
+      <div class="form-row"><label>Total Fees / Costs</label><div class="input-prefix"><span>$</span><input type="number" id="fees" value="0" oninput="c()"></div></div>
+    </div>
+    <button class="calc-btn" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Total ROI</div><div class="value teal" id="roi">—</div></div>
+        <div class="result-item"><div class="label">Net Gain / Loss</div><div class="value " id="gain">—</div></div>
+        <div class="result-item"><div class="label">Annualized Return (CAGR)</div><div class="value teal" id="cagr">—</div></div>
+        <div class="result-item"><div class="label">Return Incl. Income</div><div class="value " id="totalReturn">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('bar')">Return vs Benchmarks</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>ROI Formulas</h2><div class="formula-box">Simple ROI = (Final − Initial) / Initial × 100
+
+CAGR = (Final / Initial)^(1/Years) − 1
+
+Total Return (incl. income) = (Final + Income − Initial − Fees) / Initial × 100</div>
+  <h3>Benchmark Comparisons</h3>
+  <table class="data-table"><thead><tr><th>Benchmark</th><th class="r">Historical CAGR</th></tr></thead><tbody>
+    <tr><td>S&amp;P 500 (30yr nominal)</td><td class="r teal">~10.7%</td></tr>
+    <tr><td>TSX Composite (30yr)</td><td class="r teal">~8.5%</td></tr>
+    <tr><td>Canadian HISAs (2025)</td><td class="r">~3.5% – 5%</td></tr>
+    <tr><td>GICs 5-yr (2025)</td><td class="r">~3.5% – 4.5%</td></tr>
+  </tbody></table>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is CAGR and why does it matter?</button><div class="faq-a">CAGR (Compound Annual Growth Rate) normalizes returns to an annual rate, making different-length investments comparable. A 50% gain over 2 years = 22.5% CAGR. The same 50% gain over 5 years = only 8.45% CAGR. Always use CAGR when comparing investments of different durations.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do taxes affect my real ROI?</button><div class="faq-a">In Canada, capital gains are 50% included in income (2/3 for gains over $250K, though this is subject to ongoing political debate). Dividends get favorable treatment via the dividend tax credit. Interest income is taxed at your full marginal rate. Holding investments inside a TFSA eliminates all of this tax drag.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; Past returns do not guarantee future results. Not investment advice.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:linear-gradient(160deg,#1c1c1e 0%,#2d2d2f 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+  <div>
+    <div style="color:#f5a623;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">BMO SmartMortgage™</div>
+    <div style="color:white;font-size:1.2rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Lock in your rate today.<br><span style="color:#f5a623;">From 4.89%</span></div>
+    <div style="color:rgba(255,255,255,0.6);font-size:0.78rem;line-height:1.5;">5-year fixed rate. Pre-qualify online in minutes. First-time buyer discounts available.</div>
+  </div>
+  <div>
+    <div style="background:#f5a623;color:#1c1c1e;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Get Pre-Approved →</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;margin-top:8px;">OAC. Rates subject to change without notice.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="investment-fees.html">Investment Fees</a></li><li><a href="compound-interest.html">Compound Interest</a></li><li><a href="rule-of-72.html">Rule of 72</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div style="color:#0066cc;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">Sun Life Financial</div>
+  <div style="color:#111827;font-size:1.4rem;font-weight:700;line-height:1.25;margin-bottom:12px;">Protect what<br>matters most.</div>
+  <div style="color:#6b7280;font-size:0.82rem;line-height:1.65;margin-bottom:22px;">Term life insurance from $20/month. Get a quote in 60 seconds — no medical exam required for coverage up to $1M.</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px;">
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:14px;">
+      <div style="color:#0369a1;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 10-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $18/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;">
+      <div style="color:#15803d;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 20-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $29/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:9px;padding:14px;">
+      <div style="color:#7c3aed;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ Whole Life</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">Builds cash value</div>
+      <div style="color:#6b7280;font-size:0.72rem;">Lifelong protection</div>
+    </div>
+  </div>
+  <div style="background:#0066cc;color:white;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Free Quote →</div>
+  <div style="color:#9ca3af;font-size:0.6rem;text-align:center;line-height:1.5;">Sun Life Assurance Company of Canada. Subject to underwriting.</div>
+</div></div>
+</div>
+</div>
+<script>function safeNum(v,fallback=0){
+  const n=parseFloat(v);
+  return(!isFinite(n)||isNaN(n))?fallback:n;
+}
+
+let ch=null;
+let country = 'us';
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function setCountry(cc) {
+  country = cc;
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.country === cc));
+  if (typeof c === 'function') c();
+}
+
+function c(){
+  const init=parseFloat(document.getElementById('initial').value)||0;
+  const fin=parseFloat(document.getElementById('final').value)||0;
+  const t=parseFloat(document.getElementById('years').value)||1;
+  const unit=parseFloat(document.getElementById('unit').value)||1;
+  const income=parseFloat(document.getElementById('income').value)||0;
+  const fees=parseFloat(document.getElementById('fees').value)||0;
+  const years=t*unit;
+  const gain=fin-init+income-fees;
+  const roi=init>0?(gain/init*100):0;
+  const cagr=init>0&&years>0?(Math.pow(fin/init,1/ ((years)||1))-1)*100:0;
+  const totalRet=init>0?((fin+income-init-fees)/init*100):0;
+  const gainEl=document.getElementById('gain');
+  gainEl.textContent=(gain>=0?'+$':'-$')+Math.abs(Math.round(gain)).toLocaleString();
+  gainEl.style.color=gain>=0?'var(--teal-light)':'#fca5a5';
+  document.getElementById('roi').textContent=roi.toFixed(2)+'%';
+  document.getElementById('cagr').textContent=cagr.toFixed(2)+'%';
+  document.getElementById('totalReturn').textContent=totalRet.toFixed(2)+'%';
+  const benchmarks=[{l:'Your CAGR',v:cagr},{l:'S&P 500',v:10.7},{l:'TSX',v:8.5},{l:'HISA',v:4.0}];
+  if(ch)ch.destroy();
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new Chart(ctx,{type:'bar',data:{labels:benchmarks.map(b=>b.l),datasets:[{data:benchmarks.map(b=>parseFloat(b.v.toFixed(2))),backgroundColor:benchmarks.map((b,i)=>i===0?'#0ea5a0':'rgba(21,42,69,0.4)'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Your Return vs Benchmarks</div>';
+}
+function showChart(m){c();}
+</script>
+<footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice. For informational purposes only.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="#">Privacy</a></div>
+</div></footer>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => { setCountry('us'); });
+</script>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>

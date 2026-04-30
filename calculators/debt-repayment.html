@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debt Repayment Calculator — Avalanche vs Snowball | CalcWise Pro</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Debt Repayment Calculator — Avalanche vs Snowball | CalcWise Pro",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/debt-repayment.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is debt consolidation and does it help?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Debt consolidation combines multiple debts into one loan, ideally at a lower rate. It can save significant interest if you can get a personal loan below your average credit card rate. Key: don't run t"
+      }
+    },    {
+      "@type": "Question",
+      "name": "Should I pay off debt or invest?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pay off any debt above ~7% interest before investing beyond your employer match. Below 7%, the math favors investing (historical stock returns ~7–10%). Exception: always get your full 401(k)/RRSP empl"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Debt Repayment Calculator</h1>
+  <p>Compare avalanche (highest rate first) vs snowball (smallest balance first) strategies.</p>
+  <div class="country-toggle">
+      <button class="toggle-btn active" data-country="us" aria-label="Switch to USA calculator" onclick="setCountry('us')"><span class="flag">&#127482;&#127480;</span> USA</button>
+      <button class="toggle-btn" data-country="ca" aria-label="Switch to Canada calculator" onclick="setCountry('ca')"><span class="flag">&#127464;&#127462;</span> Canada</button>
+    </div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" ><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5l-5 5-5-5"/><path d="M17 19l-5-5-5 5"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M5 7l5 5-5 5"/><path d="M19 7l-5 5 5 5"/></svg></div>
+      <h2>Your Debts</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Debt 1 Name</label><input type="text" id="d1n" value="Credit Card A" oninput="c()"></div>
+      <div class="form-row"><label>Balance</label><div class="input-prefix"><span>$</span><input type="number" id="d1b" value="8000" oninput="c()"></div></div>
+      <div class="form-row"><label>APR</label><div class="input-suffix"><span>%</span><input type="number" id="d1r" value="22" step="0.5" oninput="c()"></div></div>
+      <div class="form-row"><label>Min Payment</label><div class="input-prefix"><span>$</span><input type="number" id="d1p" value="200" oninput="c()"></div></div>
+      <div class="form-row"><label>Debt 2 Name</label><input type="text" id="d2n" value="Car Loan" oninput="c()"></div>
+      <div class="form-row"><label>Balance</label><div class="input-prefix"><span>$</span><input type="number" id="d2b" value="15000" oninput="c()"></div></div>
+      <div class="form-row"><label>APR</label><div class="input-suffix"><span>%</span><input type="number" id="d2r" value="7.5" step="0.5" oninput="c()"></div></div>
+      <div class="form-row"><label>Min Payment</label><div class="input-prefix"><span>$</span><input type="number" id="d2p" value="350" oninput="c()"></div></div>
+      <div class="form-row"><label>Debt 3 Name (optional)</label><input type="text" id="d3n" value="Student Loan" oninput="c()"></div>
+      <div class="form-row"><label>Balance</label><div class="input-prefix"><span>$</span><input type="number" id="d3b" value="12000" oninput="c()"></div></div>
+      <div class="form-row"><label>APR</label><div class="input-suffix"><span>%</span><input type="number" id="d3r" value="5.5" step="0.5" oninput="c()"></div></div>
+      <div class="form-row"><label>Min Payment</label><div class="input-prefix"><span>$</span><input type="number" id="d3p" value="250" oninput="c()"></div></div>
+      <div class="form-row"><label>Extra Monthly Payment</label><div class="input-prefix"><span>$</span><input type="number" id="extra" value="300" oninput="c()"></div></div>
+    </div>
+    <button class="calc-btn" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Total Debt</div><div class="value " id="totalDebt">—</div></div>
+        <div class="result-item"><div class="label">Avalanche: Payoff Time</div><div class="value teal" id="avaMonths">—</div></div>
+        <div class="result-item"><div class="label">Avalanche: Total Interest</div><div class="value " id="avaInt">—</div></div>
+        <div class="result-item"><div class="label">Snowball: Payoff Time</div><div class="value teal" id="snowMonths">—</div></div>
+        <div class="result-item"><div class="label">Snowball: Total Interest</div><div class="value " id="snowInt">—</div></div>
+        <div class="result-item"><div class="label">Interest Saved (Avalanche)</div><div class="value teal" id="intSaved">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('line')">Balance Over Time</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>Avalanche vs Snowball Strategy</h2><div class="info-grid"><div class="info-box"><h4>&#128293; Debt Avalanche</h4><p>Pay minimums on all debts, put every extra dollar toward the highest-APR debt first. Mathematically optimal — minimizes total interest paid. Best for those motivated by numbers and cost savings.</p></div><div class="info-box"><h4>&#10052; Debt Snowball</h4><p>Pay minimums on all debts, put every extra dollar toward the smallest balance first. More motivating wins — each paid-off account builds momentum. Best for those who need psychological wins to stay on track.</p></div></div>
+  <p style="margin-top:0.85rem;font-size:0.84rem;color:var(--text-mid)">Research (Harvard Business Review) shows the snowball method leads to higher overall debt repayment completion rates despite costing more in interest — because motivation matters. Choose the strategy you'll actually stick with.</p>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is debt consolidation and does it help?</button><div class="faq-a">Debt consolidation combines multiple debts into one loan, ideally at a lower rate. It can save significant interest if you can get a personal loan below your average credit card rate. Key: don't run the credit cards back up after consolidating — consolidation solves a rate problem, not a spending problem.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Should I pay off debt or invest?</button><div class="faq-a">Pay off any debt above ~7% interest before investing beyond your employer match. Below 7%, the math favors investing (historical stock returns ~7–10%). Exception: always get your full 401(k)/RRSP employer match first — it's a guaranteed 50–100% return.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; Simulations assume fixed minimum payments and constant rates. Not financial advice.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+  <div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+      <div style="width:32px;height:32px;background:#e8f5e9;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <span style="color:#1b5e20;font-weight:700;font-size:0.95rem;">EQ Bank</span>
+    </div>
+    <div style="color:#111827;font-size:1.1rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Earn 4.00%* on your savings</div>
+    <div style="color:#6b7280;font-size:0.78rem;line-height:1.6;">Canada's leading digital bank. No monthly fees. No minimum balance. CDIC insured deposits.</div>
+  </div>
+  <div>
+    <div style="background:#2e7d32;color:white;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Open a Free Account</div>
+    <div style="color:#9ca3af;font-size:0.6rem;margin-top:8px;">*Rate subject to change. Conditions apply.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="personal-loan.html">Personal Loan</a></li><li><a href="compound-interest.html">Compound Interest</a></li><li><a href="net-worth.html">Net Worth Calculator</a></li><li><a href="credit-card-payoff.html">Credit Card Payoff</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div style="color:#0066cc;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">Sun Life Financial</div>
+  <div style="color:#111827;font-size:1.4rem;font-weight:700;line-height:1.25;margin-bottom:12px;">Protect what<br>matters most.</div>
+  <div style="color:#6b7280;font-size:0.82rem;line-height:1.65;margin-bottom:22px;">Term life insurance from $20/month. Get a quote in 60 seconds — no medical exam required for coverage up to $1M.</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px;">
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:14px;">
+      <div style="color:#0369a1;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 10-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $18/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;">
+      <div style="color:#15803d;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 20-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $29/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:9px;padding:14px;">
+      <div style="color:#7c3aed;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ Whole Life</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">Builds cash value</div>
+      <div style="color:#6b7280;font-size:0.72rem;">Lifelong protection</div>
+    </div>
+  </div>
+  <div style="background:#0066cc;color:white;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Free Quote →</div>
+  <div style="color:#9ca3af;font-size:0.6rem;text-align:center;line-height:1.5;">Sun Life Assurance Company of Canada. Subject to underwriting.</div>
+</div></div>
+</div>
+</div>
+<script>
+let ch=null;
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function simulate(debts,extra){
+  let ds=debts.map(d=>({...d,bal:d.bal})); let months=0,totalInt=0;
+  while(ds.some(d=>d.bal>0)&&months<600){
+    months++;
+    let extraLeft=extra;
+    ds.forEach(d=>{if(d.bal<=0)return;const int=d.bal*d.r/12;totalInt+=int;const p=Math.min(d.pmt,d.bal+int);d.bal=Math.max(0,d.bal+int-p);});
+    for(const d of ds){if(d.bal>0&&extraLeft>0){const pay=Math.min(extraLeft,d.bal);d.bal=Math.max(0,d.bal-pay);extraLeft-=pay;}}
+  }
+  return{months,totalInt};
+}
+let country = 'us';
+function setCountry(cc) {
+  country = cc;
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.country === cc));
+  if (typeof c === 'function') c();
+}
+
+function c(){
+  const getD=(n,b,r,p)=>({name:document.getElementById(n).value,bal:parseFloat(document.getElementById(b).value)||0,r:parseFloat(document.getElementById(r).value)/100||0,pmt:parseFloat(document.getElementById(p).value)||0});
+  const d1=getD('d1n','d1b','d1r','d1p'),d2=getD('d2n','d2b','d2r','d2p'),d3=getD('d3n','d3b','d3r','d3p');
+  const extra=parseFloat(document.getElementById('extra').value)||0;
+  const allDebts=[d1,d2,d3].filter(d=>d.bal>0);
+  const totalDebt=allDebts.reduce((s,d)=>s+d.bal,0);
+  const avaDebts=JSON.parse(JSON.stringify(allDebts)).sort((a,b)=>b.r-a.r);
+  const snowDebts=JSON.parse(JSON.stringify(allDebts)).sort((a,b)=>a.bal-b.bal);
+  const ava=simulate(avaDebts,extra), snow=simulate(snowDebts,extra);
+  document.getElementById('totalDebt').textContent='$'+Math.round(totalDebt).toLocaleString();
+  document.getElementById('avaMonths').textContent=ava.months+' months ('+Math.ceil(ava.months/12)+' yrs)';
+  document.getElementById('avaInt').textContent='$'+Math.round(ava.totalInt).toLocaleString();
+  document.getElementById('snowMonths').textContent=snow.months+' months ('+Math.ceil(snow.months/12)+' yrs)';
+  document.getElementById('snowInt').textContent='$'+Math.round(snow.totalInt).toLocaleString();
+  const saved=Math.max(0,snow.totalInt-ava.totalInt);
+  document.getElementById('intSaved').textContent='$'+Math.round(saved).toLocaleString();
+  // chart: balance over time for avalanche
+  const avaC=JSON.parse(JSON.stringify(allDebts)).sort((a,b)=>b.r-a.r);
+  const labels=[],data=[]; let m=0;
+  while(avaC.some(d=>d.bal>0)&&m<ava.months){
+    m++;let ex=extra;
+    avaC.forEach(d=>{if(d.bal<=0)return;const int=d.bal*d.r/12;const p=Math.min(d.pmt,d.bal+int);d.bal=Math.max(0,d.bal+int-p);});
+    for(const d of avaC){if(d.bal>0&&ex>0){const pay=Math.min(ex,d.bal);d.bal=Math.max(0,d.bal-pay);ex-=pay;}}
+    if(m%3===0||m===ava.months){labels.push('M'+m);data.push(Math.round(avaC.reduce((s,d)=>s+d.bal,0)));}
+  }
+  if(ch)ch.destroy();
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new Chart(ctx,{type:'line',data:{labels,datasets:[{label:'Total Balance',data,borderColor:'#0ea5a0',backgroundColor:'rgba(14,165,160,0.1)',fill:true,tension:0.3,pointRadius:0,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false},ticks:{maxTicksLimit:12}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Total Debt Balance (Avalanche)</div>';
+}
+function showChart(m){c();}
+</script>
+<footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice. For informational purposes only.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="#">Privacy</a></div>
+</div></footer>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => { setCountry('us'); });
+</script>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>

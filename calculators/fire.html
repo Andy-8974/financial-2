@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Calculate your FIRE number, timeline to financial independence, Coast FIRE, and Barista FIRE. Includes Monte Carlo simulation for USA and Canada.">
+<title>FIRE Calculator 2026 — Financial Independence | CalcWise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "FIRE Calculator 2026 — Financial Independence | CalcWise",
+  "description": "Calculate your FIRE number, timeline to financial independence, Coast FIRE, and Barista FIRE. Includes Monte Carlo simulation for USA and Canada.",
+  "url": "https://calcwise.pro/calculators/fire.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does Monte Carlo success rate mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Monte Carlo runs 500 simulated retirement scenarios with randomized annual returns. It tells you the percentage of scenarios where your portfolio lasts your full retirement. 90%+ is generally consider"
+      }
+    },    {
+      "@type": "Question",
+      "name": "How does FIRE work differently in Canada vs USA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Canadian FIRE uses TFSA (tax-free withdrawals) and strategic RRSP drawdown in low-income years. US FIRE uses the Roth IRA conversion ladder to access 401k funds early penalty-free. Both offer signific"
+      }
+    }
+  ]
+}
+</script>
+</head><body><script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>F.I.R.E. Calculator</h1><p>Financial Independence, Retire Early. Monte Carlo simulation (500 runs), inflation-adjusted, Coast FIRE and Barista FIRE modes.</p>
+  <div class="country-toggle">
+    <button class="toggle-btn active" data-country="us" aria-label="Switch to USA calculator" onclick="setCountry('us')"><span class="flag">&#127482;&#127480;</span> USA</button>
+    <button class="toggle-btn" data-country="ca" aria-label="Switch to Canada calculator" onclick="setCountry('ca')"><span class="flag">&#127464;&#127462;</span> Canada</button>
+  </div>
+</div></div>
+<div class="calc-wrapper"><div class="calc-main"><div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header"><div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div><h2>FIRE Plan</h2></div>
+  <div class="form-grid">
+    <div class="form-row"><label>Current Age</label><input type="number" id="age" value="32" oninput="c()"></div>
+    <div class="form-row"><label>Target Retirement Age</label><input type="number" id="retAge" value="50" oninput="c()"></div>
+    <div class="form-row"><label>Current Savings</label><div class="input-prefix"><span>$</span><input type="number" id="savings" value="120000" oninput="c()"></div></div>
+    <div class="form-row"><label>Annual Savings</label><div class="input-prefix"><span>$</span><input type="number" id="annualSave" value="36000" oninput="c()"></div></div>
+    <div class="form-row"><label>Annual Expenses in Retirement</label><div class="input-prefix"><span>$</span><input type="number" id="expenses" value="48000" oninput="c()"></div></div>
+    <div class="form-row"><label>Safe Withdrawal Rate</label><div class="input-suffix"><span>%</span><input type="number" id="swr" value="4" step="0.1" oninput="c()"></div></div>
+    <div class="form-row"><label>Pre-retirement Return</label><div class="input-suffix"><span>%</span><input type="number" id="retRate" value="7" step="0.1" oninput="c()"></div></div>
+    <div class="form-row"><label>Retirement Return</label><div class="input-suffix"><span>%</span><input type="number" id="postRate" value="5" step="0.1" oninput="c()"></div></div>
+    <div class="form-row"><label>Inflation Rate</label><div class="input-suffix"><span>%</span><input type="number" id="inf" value="2.5" step="0.1" oninput="c()"></div></div>
+    <div class="form-row" id="cppRow"><label>Annual CPP + OAS (CA) / SS (US)</label><div class="input-prefix"><span>$</span><input type="number" id="gov" value="12000" oninput="c()"></div></div>
+  </div>
+    <button class="calc-btn" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid"><div class="result-item"><div class="label" id="_">FIRE Number</div><div class="value teal" id="fireNum">—</div></div><div class="result-item"><div class="label" id="_2">Years to FIRE</div><div class="value " id="yrsFire">—</div></div><div class="result-item"><div class="label" id="_3">FIRE Age</div><div class="value teal" id="fireAge">—</div></div><div class="result-item"><div class="label" id="_4">Savings Rate</div><div class="value " id="saveRate">—</div></div><div class="result-item"><div class="label" id="_5">Coast FIRE Number</div><div class="value " id="coastFire">—</div></div><div class="result-item"><div class="label" id="_6">Monte Carlo Success</div><div class="value teal" id="mcSuccess">—</div></div></div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm"><button class="chart-tab-sm active" onclick="showChart('path')">Path</button><button class="chart-tab-sm" onclick="showChart('retire')">Retirement</button><button class="chart-tab-sm" onclick="showChart('monte')">Monte Carlo</button></div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card"><h2>FIRE Strategy Guide</h2>
+<div class="info-grid">
+  <div class="info-box"><h4>&#128293; Traditional FIRE</h4><p>Accumulate 25&times; annual expenses (4% SWR), then retire fully. The most conservative approach.</p></div>
+  <div class="info-box"><h4>&#127958;&#65039; Barista FIRE</h4><p>Semi-retire with part-time work. Investments cover the rest. Reduces FIRE number significantly.</p></div>
+  <div class="info-box"><h4>&#127754; Coast FIRE</h4><p>Save enough that compound growth alone reaches your number by 65. Stop saving, just cover expenses.</p></div>
+  <div class="info-box"><h4>&#9889; Lean FIRE</h4><p>Retire early on a frugal budget (typically &lt;$40k/yr). Achievable sooner but with higher withdrawal risk.</p></div>
+</div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What does Monte Carlo success rate mean?</button><div class="faq-a">Monte Carlo runs 500 simulated retirement scenarios with randomized annual returns. It tells you the percentage of scenarios where your portfolio lasts your full retirement. 90%+ is generally considered safe. Below 80% means you should increase savings, reduce expenses, or delay retirement.</div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does FIRE work differently in Canada vs USA?</button><div class="faq-a">Canadian FIRE uses TFSA (tax-free withdrawals) and strategic RRSP drawdown in low-income years. US FIRE uses the Roth IRA conversion ladder to access 401k funds early penalty-free. Both offer significant tax-advantaged space. TFSA withdrawals don't affect OAS/GIS clawbacks — a key planning advantage for Canadian early retirees.</div></div>
+</div>
+<div class="disclaimer">&#9888;&#65039; FIRE projections are estimates. Monte Carlo uses simplified return distributions. Not financial advice.</div>
+</div><div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(79,70,229,0.3);">
+  <div>
+    <div style="color:rgba(255,255,255,0.7);font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Questrade</div>
+    <div style="color:white;font-size:1.15rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Buy ETFs free.<br>Stocks from $4.95.</div>
+    <div style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.5;">Canada's #1 online brokerage. Open a TFSA, RRSP, or FHSA in minutes.</div>
+  </div>
+  <div>
+    <div style="background:white;color:#4f46e5;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Open Account Free</div>
+    <div style="color:rgba(255,255,255,0.35);font-size:0.6rem;margin-top:8px;">IIROC regulated. CIPF member. 1M+ Canadians.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="retirement-planning.html">Retirement Planning</a></li><li><a href="retirement-withdrawal.html">Retirement Withdrawal</a></li><li><a href="asset-allocation.html">Asset Allocation</a></li><li><a href="tfsa.html">TFSA Calculator</a></li><li><a href="compound-interest.html">Compound Interest</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div style="color:#0066cc;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">Sun Life Financial</div>
+  <div style="color:#111827;font-size:1.4rem;font-weight:700;line-height:1.25;margin-bottom:12px;">Protect what<br>matters most.</div>
+  <div style="color:#6b7280;font-size:0.82rem;line-height:1.65;margin-bottom:22px;">Term life insurance from $20/month. Get a quote in 60 seconds — no medical exam required for coverage up to $1M.</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px;">
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:14px;">
+      <div style="color:#0369a1;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 10-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $18/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;">
+      <div style="color:#15803d;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 20-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $29/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:9px;padding:14px;">
+      <div style="color:#7c3aed;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ Whole Life</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">Builds cash value</div>
+      <div style="color:#6b7280;font-size:0.72rem;">Lifelong protection</div>
+    </div>
+  </div>
+  <div style="background:#0066cc;color:white;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Free Quote →</div>
+  <div style="color:#9ca3af;font-size:0.6rem;text-align:center;line-height:1.5;">Sun Life Assurance Company of Canada. Subject to underwriting.</div>
+</div></div>
+</div></div>
+<script>function safeNum(v,fallback=0){
+  const n=parseFloat(v);
+  return(!isFinite(n)||isNaN(n))?fallback:n;
+}
+
+let country='us', ch=null, fireMode='path';
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function setCountry(co){country=co;document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.toggle('active',b.dataset.country===co));c();}
+function c(){
+  const age=parseInt(document.getElementById('age').value)||32;
+  const retAge=parseInt(document.getElementById('retAge').value)||50;
+  const savings=parseFloat(document.getElementById('savings').value)||0;
+  const annualSave=parseFloat(document.getElementById('annualSave').value)||0;
+  const expenses=parseFloat(document.getElementById('expenses').value)||0;
+  const swr=(parseFloat(document.getElementById('swr').value)||0)/100||.04;
+  const retRate=(parseFloat(document.getElementById('retRate').value)||0)/100||.07;
+  const postRate=(parseFloat(document.getElementById('postRate').value)||0)/100||.05;
+  const inf=(parseFloat(document.getElementById('inf').value)||0)/100||.025;
+  const gov=parseFloat(document.getElementById('gov').value)||0;
+  const fireNum=Math.max(0,(expenses-gov)/swr);
+  let bal=savings; let yrsFire=null; const accPath=[];
+  for(let y=0;y<50;y++){bal=(bal+annualSave)*(1+retRate);accPath.push({age:age+y+1,bal:Math.round(bal)});if(bal>=fireNum&&yrsFire===null)yrsFire=y+1;}
+  const coastFire=fireNum/Math.pow(1+retRate,Math.max(0,65-age));
+  const income=annualSave+expenses; const saveRate=income>0?(annualSave/income*100):0;
+  // Monte Carlo
+  const needFromSavings=Math.max(0,expenses-gov); const retYears=90-retAge; const stdDev=0.15;
+  let successes=0;
+  for(let s=0;s<500;s++){
+    let b=fireNum,ok=true;
+    for(let y=0;y<retYears;y++){
+      const r=postRate+(Math.random()+Math.random()+Math.random()+Math.random()-2)*stdDev*0.866;
+      b=b*(1+r)-needFromSavings*Math.pow(1+inf,y);
+      if(b<=0){ok=false;break;}
+    }
+    if(ok)successes++;
+  }
+  document.getElementById('fireNum').textContent='$'+Math.round(fireNum).toLocaleString();
+  document.getElementById('yrsFire').textContent=yrsFire?yrsFire+' years':'40+ years';
+  document.getElementById('fireAge').textContent=yrsFire?'Age '+(age+yrsFire):'40+ yrs';
+  document.getElementById('saveRate').textContent=saveRate.toFixed(1)+'%';
+  document.getElementById('coastFire').textContent='$'+Math.round(coastFire).toLocaleString();
+  document.getElementById('mcSuccess').textContent=(successes/5).toFixed(0)+'%';
+  // Snapshot
+  // Retirement drawdown
+  const retPath=[]; let rb=fireNum;
+  for(let y=0;y<Math.min(50,90-(retAge||50));y++){rb=rb*(1+postRate)-needFromSavings*Math.pow(1+inf,y);retPath.push({yr:y+1,bal:Math.max(0,Math.round(rb))});if(rb<=0)break;}
+  window._facc=accPath; window._fret=retPath; window._fNum=fireNum;
+  window._fAge=age; window._fRetAge=retAge; window._fPost=postRate; window._fInf=inf; window._fNeed=needFromSavings;
+  showChart(fireMode);
+}
+function showChart(mode){
+  fireMode=mode;
+  document.querySelectorAll('.chart-tab-sm').forEach((t,i)=>t.classList.toggle('active',['path','retire','monte'][i]===mode));
+  if(ch)ch.destroy();
+  const ctx=document.getElementById('ch').getContext('2d');
+  if(mode==='path'){
+    const acc=window._facc||[]; const fn=window._fNum||0;
+    ch=new Chart(ctx,{type:'line',data:{labels:acc.map(r=>'Age '+r.age),datasets:[
+      {label:'Portfolio',data:acc.map(r=>r.bal),borderColor:'#0ea5a0',backgroundColor:'rgba(14,165,160,0.1)',fill:true,tension:0.3,pointRadius:0,borderWidth:2},
+      {label:'FIRE Target',data:acc.map(()=>Math.round(fn)),borderColor:'#ef4444',borderDash:[5,3],pointRadius:0,borderWidth:1.5,backgroundColor:'transparent'}
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false},ticks:{maxTicksLimit:8}}}}});
+    document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Portfolio</div><div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>FIRE Target</div>';
+  } else if(mode==='retire'){
+    const ret=window._fret||[];
+    ch=new Chart(ctx,{type:'line',data:{labels:ret.map(r=>'Year '+r.yr),datasets:[{label:'Portfolio',data:ret.map(r=>r.bal),borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.08)',fill:true,tension:0.3,pointRadius:0,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false},ticks:{maxTicksLimit:8}}}}});
+    document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Retirement Portfolio</div>';
+  } else {
+    const retAge=window._fRetAge||50; const postRate=window._fPost||.05; const inf=window._fInf||.025; const need=window._fNeed||0; const fn=window._fNum||0;
+    const years=Math.min(40,90-retAge); const runs=[];
+    for(let s=0;s<200;s++){const path=[];let b=fn;for(let y=0;y<years;y++){const r=postRate+(Math.random()+Math.random()-1)*.22;b=b*(1+r)-need*Math.pow(1+inf,y);path.push(Math.max(0,Math.round(b)));if(b<=0){for(let i=y+1;i<years;i++)path.push(0);break;}}runs.push(path);}
+    runs.sort((a,b)=>b[b.length-1]-a[a.length-1]);
+    const p10=runs[Math.floor(runs.length*.9)];const p50=runs[Math.floor(runs.length*.5)];const p90=runs[Math.floor(runs.length*.1)];
+    ch=new Chart(ctx,{type:'line',data:{labels:Array.from({length:years},(_,i)=>'Yr '+(i+1)),datasets:[
+      {label:'Best 10%',data:p90,borderColor:'#0ea5a0',tension:0.3,pointRadius:0,borderWidth:1.5,backgroundColor:'transparent'},
+      {label:'Median',data:p50,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.07)',fill:true,tension:0.3,pointRadius:0,borderWidth:2.5},
+      {label:'Worst 10%',data:p10,borderColor:'#ef4444',tension:0.3,pointRadius:0,borderWidth:1.5,backgroundColor:'transparent'}
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false},ticks:{maxTicksLimit:8}}}}});
+    document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Best 10%</div><div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Median</div><div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Worst 10%</div>';
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>{c();});
+</script><footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="../privacy.html">Privacy Policy</a></div>
+</div></footer>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>

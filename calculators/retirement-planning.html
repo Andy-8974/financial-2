@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retirement Planning Calculator 2026 — USA & Canada | CalcWise</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Retirement Planning Calculator 2026 — USA & Canada | CalcWise",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/retirement-planning.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When should I start CPP — at 60, 65, or 70?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CPP break-even for delaying 65→70 is approximately age 82. If you expect to live past 82, delaying is usually better. At 70 you receive 42% more than at 65. If health is a concern or you need income e"
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the 4% safe withdrawal rule?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The 4% rule (Trinity Study, 1994, updated many times) found a 4% initial withdrawal rate adjusted annually for inflation has a 95%+ success rate over 30-year retirements. For early retirees with 40-50"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Retirement Planning Calculator</h1>
+  <p>Are you on track? Project savings, CPP/Social Security, and identify your retirement income gap.</p>
+  <div class="country-toggle">
+      <button class="toggle-btn active" data-country="us" aria-label="Switch to USA calculator" onclick="setCountry('us')"><span class="flag">&#127482;&#127480;</span> USA</button>
+      <button class="toggle-btn" data-country="ca" aria-label="Switch to Canada calculator" onclick="setCountry('ca')"><span class="flag">&#127464;&#127462;</span> Canada</button>
+    </div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" ><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <h2>Retirement Plan</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Current Age</label><input type="number" id="age" value="35" oninput="c()"></div>
+      <div class="form-row"><label>Retirement Age</label><input type="number" id="ret" value="65" oninput="c()"></div>
+      <div class="form-row"><label>Current Savings</label><div class="input-prefix"><span>$</span><input type="number" id="bal" value="100000" oninput="c()"></div></div>
+      <div class="form-row"><label>Annual Savings Contribution</label><div class="input-prefix"><span>$</span><input type="number" id="ann" value="15000" oninput="c()"></div></div>
+      <div class="form-row"><label>Expected Annual Return</label><div class="input-suffix"><span>%</span><input type="number" id="preR" value="7" step="0.1" oninput="c()"></div></div>
+      <div class="form-row"><label>Desired Annual Retirement Income</label><div class="input-prefix"><span>$</span><input type="number" id="inc" value="70000" oninput="c()"></div></div>
+      <div class="form-row" id="govRow"><label>Annual CPP + OAS (CA) / SS (US)</label><div class="input-prefix"><span>$</span><input type="number" id="gov" value="14000" oninput="c()"></div></div>
+      <div class="form-row"><label>Safe Withdrawal Rate</label><div class="input-suffix"><span>%</span><input type="number" id="swr" value="4" step="0.1" oninput="c()"></div></div>
+    </div>
+    <button class="calc-btn" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Projected Nest Egg</div><div class="value teal" id="nest">—</div></div>
+        <div class="result-item"><div class="label">Target Needed</div><div class="value " id="tgt">—</div></div>
+        <div class="result-item"><div class="label">Surplus / Shortfall</div><div class="value teal" id="gap">—</div></div>
+        <div class="result-item"><div class="label">On Track?</div><div class="value " id="onTrack">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('line')">Savings vs Target</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>2025 Government Benefit Estimates</h2><div class="info-grid"><div class="info-box"><h4>&#127464;&#127462; CPP Max 2025</h4><p>~$1,433/month ($17,196/yr). Delayed to 70: +42% ($2,415/mo). Reduced from 60: -36%.</p></div><div class="info-box"><h4>&#127464;&#127462; OAS 2025</h4><p>~$727/month ($8,724/yr). Starts at 65. Clawed back above $90,997 income. Delay to 70 for +36%.</p></div><div class="info-box"><h4>&#127482;&#127480; Social Security</h4><p>Average $1,927/month ($23,124/yr) in 2025. Full retirement age: 67 (born 1960+). Delay to 70 for maximum benefit.</p></div><div class="info-box"><h4>&#127482;&#127480; 401(k) Limit 2025</h4><p>$23,500 employee contribution. +$7,500 catch-up (50+). +$11,250 super catch-up (ages 60–63). Total with employer: $70,000.</p></div></div></div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">When should I start CPP — at 60, 65, or 70?</button><div class="faq-a">CPP break-even for delaying 65→70 is approximately age 82. If you expect to live past 82, delaying is usually better. At 70 you receive 42% more than at 65. If health is a concern or you need income early, taking at 65 or even 60 may be wise.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the 4% safe withdrawal rule?</button><div class="faq-a">The 4% rule (Trinity Study, 1994, updated many times) found a 4% initial withdrawal rate adjusted annually for inflation has a 95%+ success rate over 30-year retirements. For early retirees with 40-50 year horizons, consider 3–3.5%. Morningstar's 2024 research suggests 3.7–4% remains reasonable.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; Projections assume constant returns. Monte Carlo simulation (FIRE calculator) gives a more complete picture.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:linear-gradient(135deg,#0a2540 0%,#1a4b7a 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.15);position:relative;">
+  <div style="position:absolute;right:-20px;top:-20px;width:120px;height:120px;background:rgba(0,119,182,0.2);border-radius:50%;"></div>
+  <div>
+    <div style="color:#60b4ff;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Wealthsimple</div>
+    <div style="color:white;font-size:1.25rem;font-weight:700;line-height:1.25;margin-bottom:8px;">Invest smarter.<br>Start with $1.</div>
+    <div style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.5;">No-fee investing in stocks, ETFs, and crypto. Auto-rebalanced portfolios built for Canadians.</div>
+  </div>
+  <div>
+    <div style="background:#00c853;color:white;font-size:0.82rem;font-weight:700;padding:10px 20px;border-radius:8px;display:inline-block;cursor:pointer;">Get Started Free →</div>
+    <div style="color:rgba(255,255,255,0.35);font-size:0.62rem;margin-top:8px;">Commission-free trading. CIPF protected.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="retirement-withdrawal.html">Retirement Withdrawal</a></li><li><a href="fire.html">FIRE Calculator</a></li><li><a href="asset-allocation.html">Asset Allocation</a></li><li><a href="401k-contribution.html">401k Contribution</a></li><li><a href="roth-ira.html">Roth IRA Calculator</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div style="color:#0066cc;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">Sun Life Financial</div>
+  <div style="color:#111827;font-size:1.4rem;font-weight:700;line-height:1.25;margin-bottom:12px;">Protect what<br>matters most.</div>
+  <div style="color:#6b7280;font-size:0.82rem;line-height:1.65;margin-bottom:22px;">Term life insurance from $20/month. Get a quote in 60 seconds — no medical exam required for coverage up to $1M.</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px;">
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:14px;">
+      <div style="color:#0369a1;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 10-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $18/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;">
+      <div style="color:#15803d;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 20-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $29/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:9px;padding:14px;">
+      <div style="color:#7c3aed;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ Whole Life</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">Builds cash value</div>
+      <div style="color:#6b7280;font-size:0.72rem;">Lifelong protection</div>
+    </div>
+  </div>
+  <div style="background:#0066cc;color:white;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Free Quote →</div>
+  <div style="color:#9ca3af;font-size:0.6rem;text-align:center;line-height:1.5;">Sun Life Assurance Company of Canada. Subject to underwriting.</div>
+</div></div>
+</div>
+</div>
+<script>
+let country='us', ch=null;
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function setCountry(co){country=co;document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.toggle('active',b.dataset.country===co));c();}
+function c(){
+  const age=parseInt(document.getElementById('age').value)||35;
+  const ret=parseInt(document.getElementById('ret').value)||65;
+  const yrs=Math.max(0,ret-age);
+  const bal=parseFloat(document.getElementById('bal').value)||0;
+  const ann=parseFloat(document.getElementById('ann').value)||0;
+  const preR=(parseFloat(document.getElementById('preR').value)||0)/100;
+  const inc=parseFloat(document.getElementById('inc').value)||0;
+  const gov=parseFloat(document.getElementById('gov').value)||0;
+  const swr=(parseFloat(document.getElementById('swr').value)||0)/100||.04;
+  let v=bal; const data=[];
+  for(let y=0;y<yrs;y++){v=(v+ann)*(1+preR);data.push(Math.round(v));}
+  const need=Math.max(0,inc-gov); const tgt=swr>0?need/swr:0; const gap=v-tgt;
+  const ot=document.getElementById('onTrack');
+  ot.textContent=gap>=0?'✓ On track':'✗ Shortfall'; ot.style.color=gap>=0?'var(--teal-light)':'#fca5a5';
+  document.getElementById('nest').textContent='$'+Math.round(v).toLocaleString();
+  document.getElementById('tgt').textContent='$'+Math.round(tgt).toLocaleString();
+  const gEl=document.getElementById('gap');
+  gEl.textContent=(gap>=0?'+$':'-$')+Math.abs(Math.round(gap)).toLocaleString();
+  gEl.style.color=gap>=0?'var(--teal-light)':'#fca5a5';
+  try{if(ch)ch.destroy();}catch(e){ch=null;}
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new window.Chart(ctx,{type:'line',data:{labels:Array.from({length:yrs},(_,i)=>'Age '+(age+i+1)),datasets:[
+    {label:'Portfolio',data,borderColor:'#0ea5a0',backgroundColor:'rgba(14,165,160,0.1)',fill:true,tension:0.3,pointRadius:0,borderWidth:2},
+    {label:'Target',data:data.map(()=>Math.round(tgt)),borderColor:'#ef4444',borderDash:[5,3],pointRadius:0,borderWidth:1.5,backgroundColor:'transparent'}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false},ticks:{maxTicksLimit:10}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Projected Portfolio</div><div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Target Needed</div>';
+}
+function showChart(m){c();}
+document.addEventListener('DOMContentLoaded',()=>{c();});
+</script>
+<footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice. For informational purposes only.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="#">Privacy</a></div>
+</div></footer>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>401(k) Contribution Calculator 2026 — USA | CalcWise</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "401(k) Contribution Calculator 2026 — USA | CalcWise",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/401k-contribution.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Traditional vs Roth 401(k) — which should I choose?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Traditional: contributions are pre-tax (reduces current taxes), withdrawals taxed in retirement. Best if you're in a higher bracket now than you expect in retirement. Roth: contributions are after-tax"
+      }
+    },    {
+      "@type": "Question",
+      "name": "What happens to my 401(k) if I change jobs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Four options: (1) Leave it with old employer if balance > $7,000, (2) Roll to new employer's plan, (3) Roll to Traditional IRA (most investment options), (4) Cash out — not recommended (10% penalty + "
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>401(k) Contribution Calculator</h1>
+  <p>Project your 401(k) balance with employer match and compound growth over your career.</p>
+  <div class="country-badge" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.25);color:#b45309;">&#127482;&#127480; USA only</div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" ><rect x="3" y="9" width="18" height="13"/><path d="M3 9l9-7 9 7"/><line x1="9" y1="22" x2="9" y2="13"/><line x1="15" y1="22" x2="15" y2="13"/></svg></div>
+      <h2>401(k) Details</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Current Age</label><input type="number" id="age" value="35" oninput="c()"></div>
+      <div class="form-row"><label>Retirement Age</label><input type="number" id="ret" value="65" oninput="c()"></div>
+      <div class="form-row"><label>Current 401(k) Balance</label><div class="input-prefix"><span>$</span><input type="number" id="bal" value="85000" oninput="c()"></div></div>
+      <div class="form-row"><label>Annual Salary</label><div class="input-prefix"><span>$</span><input type="number" id="salary" value="90000" oninput="c()"></div></div>
+      <div class="form-row"><label>Your Contribution Rate</label><div class="input-suffix"><span>%</span><input type="number" id="contPct" value="10" step="0.5" oninput="c()"></div></div>
+      <div class="form-row"><label>Employer Match Rate</label><div class="input-suffix"><span>%</span><input type="number" id="matchPct" value="4" step="0.5" oninput="c()"></div></div>
+      <div class="form-row"><label>Expected Annual Return</label><div class="input-suffix"><span>%</span><input type="number" id="rate" value="7" step="0.1" oninput="c()"></div></div>
+      <div class="form-row"><label>Annual Salary Increase</label><div class="input-suffix"><span>%</span><input type="number" id="raise" value="3" step="0.5" oninput="c()"></div></div>
+    </div>
+    <button class="calc-btn" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Your Annual Contribution</div><div class="value " id="yourAnn">—</div></div>
+        <div class="result-item"><div class="label">Employer Match</div><div class="value teal" id="matchAnn">—</div></div>
+        <div class="result-item"><div class="label">Total Year 1</div><div class="value teal" id="totalAnn">—</div></div>
+        <div class="result-item"><div class="label">Projected Balance</div><div class="value " id="proj">—</div></div>
+        <div class="result-item"><div class="label">2026 Limit Status</div><div class="value " id="limit">—</div></div>
+        <div class="result-item"><div class="label">Total Match Value</div><div class="value teal" id="totalMatch">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('stacked')">Balance Over Career</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>2025 401(k) Contribution Limits</h2>
+  <table class="data-table"><thead><tr><th>Contribution Type</th><th class="r">2026 Limit</th></tr></thead><tbody>
+    <tr><td>Employee contribution (under 50)</td><td class="r teal">$23,500</td></tr>
+    <tr><td>Catch-up (age 50–59 and 64+)</td><td class="r">+$7,500 = $31,000 total</td></tr>
+    <tr><td>Super catch-up (age 60–63)</td><td class="r">+$11,250 = $34,750 total</td></tr>
+    <tr><td>Total including employer (all ages)</td><td class="r">$70,000</td></tr>
+  </tbody></table>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Traditional vs Roth 401(k) — which should I choose?</button><div class="faq-a">Traditional: contributions are pre-tax (reduces current taxes), withdrawals taxed in retirement. Best if you're in a higher bracket now than you expect in retirement. Roth: contributions are after-tax, all growth and qualified withdrawals are tax-free. Best if you expect higher taxes in retirement. You can contribute to both in the same year — total can't exceed the annual limit.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What happens to my 401(k) if I change jobs?</button><div class="faq-a">Four options: (1) Leave it with old employer if balance > $7,000, (2) Roll to new employer's plan, (3) Roll to Traditional IRA (most investment options), (4) Cash out — not recommended (10% penalty + income taxes if under 59½). Rolling to IRA typically gives the most flexibility.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; USA only. 2025 limits apply. Not financial advice.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:linear-gradient(135deg,#0a2540 0%,#1a4b7a 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.15);position:relative;">
+  <div style="position:absolute;right:-20px;top:-20px;width:120px;height:120px;background:rgba(0,119,182,0.2);border-radius:50%;"></div>
+  <div>
+    <div style="color:#60b4ff;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Wealthsimple</div>
+    <div style="color:white;font-size:1.25rem;font-weight:700;line-height:1.25;margin-bottom:8px;">Invest smarter.<br>Start with $1.</div>
+    <div style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.5;">No-fee investing in stocks, ETFs, and crypto. Auto-rebalanced portfolios built for Canadians.</div>
+  </div>
+  <div>
+    <div style="background:#00c853;color:white;font-size:0.82rem;font-weight:700;padding:10px 20px;border-radius:8px;display:inline-block;cursor:pointer;">Get Started Free →</div>
+    <div style="color:rgba(255,255,255,0.35);font-size:0.62rem;margin-top:8px;">Commission-free trading. CIPF protected.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="401k-save-max.html">401k Save Max</a></li><li><a href="ira-comparison.html">IRA Comparison</a></li><li><a href="retirement-planning.html">Retirement Planning</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:linear-gradient(180deg,#0d1f35 0%,#152a45 50%,#0d1f35 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);gap:0;">
+  <div style="color:#c9a84c;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">TD Canada Trust</div>
+  <div style="color:white;font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:12px;">Your first home<br>starts here.</div>
+  <div style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.65;margin-bottom:24px;">TD mortgage specialists are ready to help. Get pre-approved online in 3 minutes and lock in your rate for 120 days.</div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:24px;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">5-Year Fixed</div>
+    <div style="color:#c9a84c;font-size:2.2rem;font-weight:700;line-height:1;">4.94%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">APR 5.02% — as low as</div>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:auto;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Variable Rate</div>
+    <div style="color:white;font-size:2rem;font-weight:700;line-height:1;">Prime − 0.10%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">Currently 6.85%</div>
+  </div>
+  <div style="margin-top:24px;">
+    <div style="background:#c9a84c;color:#0d1f35;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Pre-Approved Today</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;text-align:center;line-height:1.5;">OAC. Rates subject to change. TD Bank Group.</div>
+  </div>
+</div></div>
+</div>
+</div>
+<script>function safeNum(v,fallback=0){
+  const n=parseFloat(v);
+  return(!isFinite(n)||isNaN(n))?fallback:n;
+}
+
+
+let country = 'us';
+let ch=null;
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function c(){
+  const age=parseInt(document.getElementById('age').value)||35;
+  const ret=parseInt(document.getElementById('ret').value)||65;
+  const yrs=Math.max(0,ret-age);
+  const bal=parseFloat(document.getElementById('bal').value)||0;
+  const salary=parseFloat(document.getElementById('salary').value)||0;
+  const contPct=(parseFloat(document.getElementById('contPct').value)||0)/100;
+  const matchPct=(parseFloat(document.getElementById('matchPct').value)||0)/100;
+  const rate=(parseFloat(document.getElementById('rate').value)||0)/100;
+  const raise=(parseFloat(document.getElementById('raise').value)||0)/100;
+  const yourAnn=Math.min(salary*contPct,24500); const matchAnn=salary*matchPct;
+  const lEl=document.getElementById('limit');
+  lEl.textContent=salary*contPct>24500?'⚠ Over $24,500 limit':'✓ Within limit';
+  lEl.style.color=salary*contPct>24500?'#fca5a5':'var(--teal-light)';
+  document.getElementById('yourAnn').textContent='$'+Math.round(yourAnn).toLocaleString();
+  document.getElementById('matchAnn').textContent='$'+Math.round(matchAnn).toLocaleString();
+  document.getElementById('totalAnn').textContent='$'+Math.round(yourAnn+matchAnn).toLocaleString();
+  let v=bal; const data=[]; let totalMatch=0;
+  for(let y=0;y<yrs;y++){
+    const s=salary*Math.pow(1+raise,y);
+    const yc=Math.min(s*contPct,24500); const ym=s*matchPct;
+    v=(v+yc+ym)*(1+rate); totalMatch+=ym; data.push(Math.round(v));
+  }
+  document.getElementById('proj').textContent='$'+Math.round(v).toLocaleString();
+  document.getElementById('totalMatch').textContent='$'+Math.round(totalMatch).toLocaleString();
+  try{if(ch)ch.destroy();}catch(e){ch=null;}
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new window.Chart(ctx,{type:'line',data:{labels:Array.from({length:yrs},(_,i)=>'Age '+(age+i+1)),datasets:[{label:'401(k) Balance',data,borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,0.08)',fill:true,tension:0.3,pointRadius:0,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false},ticks:{maxTicksLimit:10}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div>401(k) Balance</div>';
+}
+function showChart(m){c();}
+document.addEventListener('DOMContentLoaded',()=>{c();});
+</script>
+<footer><div class="footer-inner">
+  <div class="footer-logo">CalcWise<span style="color:var(--gold)">.</span></div>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.35)">Not financial advice. For informational purposes only.</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="#">Privacy</a></div>
+</div></footer>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+</body></html>
