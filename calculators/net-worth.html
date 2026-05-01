@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Net Worth Calculator — USA & Canada | CalcWise Pro</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Net Worth Calculator — USA & Canada | CalcWise Pro",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/net-worth.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Should I include RRSP at full value?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your RRSP balance will be taxed on withdrawal. For a more accurate picture, reduce your RRSP by your expected marginal rate in retirement (e.g., 30% rate → $100,000 RRSP = ~$70,000 after-tax net worth"
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is a good net worth at my age?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A common rule: net worth should equal your age × your annual income ÷ 10. So at age 40 earning $100K, target is $400K. This is a rough guide — real estate values, city of residence, and life stage mat"
+      }
+    },    {
+      "@type": "Question",
+      "name": "How do I grow my net worth fastest?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Three levers: (1) Increase income, (2) Decrease liabilities (debt payoff), (3) Let investments compound. Eliminating high-interest debt (credit cards at 20%+) is the highest guaranteed return availabl"
+      }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style id="cw-body-font">body,body *{font-family:'Plus Jakarta Sans',sans-serif!important}</style>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Net Worth Calculator</h1>
+  <p>Total assets minus liabilities — the fundamental measure of your financial health.</p>
+  <div class="country-toggle">
+      <div class="cw-toggle"><button class="cw-tbtn on" data-mode="us"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/><circle cx="1.3" cy="1.1" r=".55" fill="#fff"/><circle cx="2.65" cy="1.1" r=".55" fill="#fff"/><circle cx="4" cy="1.1" r=".55" fill="#fff"/><circle cx="5.35" cy="1.1" r=".55" fill="#fff"/><circle cx="6.7" cy="1.1" r=".55" fill="#fff"/><circle cx="1.97" cy="2.32" r=".55" fill="#fff"/><circle cx="3.32" cy="2.32" r=".55" fill="#fff"/><circle cx="4.67" cy="2.32" r=".55" fill="#fff"/><circle cx="6.02" cy="2.32" r=".55" fill="#fff"/><circle cx="1.3" cy="3.54" r=".55" fill="#fff"/><circle cx="2.65" cy="3.54" r=".55" fill="#fff"/><circle cx="4" cy="3.54" r=".55" fill="#fff"/><circle cx="5.35" cy="3.54" r=".55" fill="#fff"/><circle cx="6.7" cy="3.54" r=".55" fill="#fff"/><circle cx="1.97" cy="4.77" r=".55" fill="#fff"/><circle cx="3.32" cy="4.77" r=".55" fill="#fff"/><circle cx="4.67" cy="4.77" r=".55" fill="#fff"/><circle cx="6.02" cy="4.77" r=".55" fill="#fff"/><circle cx="1.3" cy="6" r=".55" fill="#fff"/><circle cx="2.65" cy="6" r=".55" fill="#fff"/><circle cx="4" cy="6" r=".55" fill="#fff"/><circle cx="5.35" cy="6" r=".55" fill="#fff"/><circle cx="6.7" cy="6" r=".55" fill="#fff"/></svg>&nbsp;USA</button><button class="cw-tbtn" data-mode="ca"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#D52B1E"/><rect x="15" width="5" height="14" fill="#D52B1E"/><path d="M10 2.8L10.9 5.5H13.6L11.4 7.1L12.3 9.8L10 8.2L7.7 9.8L8.6 7.1L6.4 5.5H9.1Z" fill="#D52B1E"/></svg>&nbsp;Canada</button></div>
+    </div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+      <h2>Assets & Liabilities</h2>
+    </div>
+    <div class="section-divider">Assets</div>
+    <div class="form-grid">
+      <div class="form-row"><label>Home Value</label><div class="input-prefix"><span>$</span><input type="number" id="home" value="700000" oninput="c()"></div></div>
+      <div class="form-row"><label>Other Real Estate</label><div class="input-prefix"><span>$</span><input type="number" id="re" value="0" oninput="c()"></div></div>
+      <div class="form-row"><label>Cash / Savings / HISA</label><div class="input-prefix"><span>$</span><input type="number" id="cash" value="20000" oninput="c()"></div></div>
+      <div class="form-row"><label id="lbl_tfsa">TFSA / Roth IRA</label><div class="input-prefix"><span>$</span><input type="number" id="tfsa" value="55000" oninput="c()"></div></div>
+      <div class="form-row"><label id="lbl_rrsp">RRSP / 401(k) / Pension</label><div class="input-prefix"><span>$</span><input type="number" id="rrsp" value="90000" oninput="c()"></div></div>
+      <div class="form-row"><label>Non-Registered Investments</label><div class="input-prefix"><span>$</span><input type="number" id="inv" value="25000" oninput="c()"></div></div>
+      <div class="form-row"><label>Vehicles</label><div class="input-prefix"><span>$</span><input type="number" id="cars" value="25000" oninput="c()"></div></div>
+      <div class="form-row"><label>Business / Other Assets</label><div class="input-prefix"><span>$</span><input type="number" id="other" value="5000" oninput="c()"></div></div>
+    </div>
+    <div class="section-divider" style="color:#ef4444;border-color:#fecaca">Liabilities</div>
+    <div class="form-grid">
+      <div class="form-row"><label>Mortgage Balance</label><div class="input-prefix"><span>$</span><input type="number" id="mort" value="450000" oninput="c()"></div></div>
+      <div class="form-row"><label>HELOC Balance</label><div class="input-prefix"><span>$</span><input type="number" id="heloc" value="0" oninput="c()"></div></div>
+      <div class="form-row"><label>Car Loans</label><div class="input-prefix"><span>$</span><input type="number" id="carLoan" value="15000" oninput="c()"></div></div>
+      <div class="form-row"><label>Student Loans</label><div class="input-prefix"><span>$</span><input type="number" id="student" value="0" oninput="c()"></div></div>
+      <div class="form-row"><label>Credit Card Debt</label><div class="input-prefix"><span>$</span><input type="number" id="cc" value="4000" oninput="c()"></div></div>
+      <div class="form-row"><label>Other Liabilities</label><div class="input-prefix"><span>$</span><input type="number" id="otherL" value="0" oninput="c()"></div></div>
+    </div>
+    <button class="calc-btn span-2" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Total Assets</div><div class="value teal" id="totA">—</div></div>
+        <div class="result-item"><div class="label">Total Liabilities</div><div class="value " id="totL">—</div></div>
+        <div class="result-item"><div class="label">Net Worth</div><div class="value teal" id="nw">—</div></div>
+        <div class="result-item"><div class="label">Debt-to-Asset Ratio</div><div class="value " id="dta">—</div></div>
+        <div class="result-item"><div class="label">Financial Assets</div><div class="value " id="finAssets">—</div></div>
+        <div class="result-item"><div class="label">Home Equity</div><div class="value " id="equity">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('doughnut')">Breakdown</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>Understanding Net Worth</h2>
+  <p>Net Worth = Total Assets − Total Liabilities. Track it annually — consistent growth means you're building wealth. Negative net worth is common early in life (student loans, new mortgage) but should improve over time.</p>
+  <h3>Median Net Worth by Age (Canada 2023)</h3>
+  <table class="data-table"><thead><tr><th>Age Group</th><th class="r">Median Net Worth</th></tr></thead><tbody>
+    <tr><td>Under 35</td><td class="r">~$82,000</td></tr>
+    <tr><td>35–44</td><td class="r">~$340,000</td></tr>
+    <tr><td>45–54</td><td class="r">~$561,000</td></tr>
+    <tr><td>55–64</td><td class="r">~$782,000</td></tr>
+  </tbody></table>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Should I include RRSP at full value?</button><div class="faq-a">Your RRSP balance will be taxed on withdrawal. For a more accurate picture, reduce your RRSP by your expected marginal rate in retirement (e.g., 30% rate → $100,000 RRSP = ~$70,000 after-tax net worth). TFSA and Roth IRA can be counted at full face value since withdrawals are tax-free.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is a good net worth at my age?</button><div class="faq-a">A common rule: net worth should equal your age × your annual income ÷ 10. So at age 40 earning $100K, target is $400K. This is a rough guide — real estate values, city of residence, and life stage matter enormously.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do I grow my net worth fastest?</button><div class="faq-a">Three levers: (1) Increase income, (2) Decrease liabilities (debt payoff), (3) Let investments compound. Eliminating high-interest debt (credit cards at 20%+) is the highest guaranteed return available.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; RRSP/401k values are pre-tax. Actual after-tax net worth is lower. Not financial advice.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:linear-gradient(160deg,#1c1c1e 0%,#2d2d2f 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+  <div>
+    <div style="color:#f5a623;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">BMO SmartMortgage™</div>
+    <div style="color:white;font-size:1.2rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Lock in your rate today.<br><span style="color:#f5a623;">From 4.89%</span></div>
+    <div style="color:rgba(255,255,255,0.6);font-size:0.78rem;line-height:1.5;">5-year fixed rate. Pre-qualify online in minutes. First-time buyer discounts available.</div>
+  </div>
+  <div>
+    <div style="background:#f5a623;color:#1c1c1e;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Get Pre-Approved →</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;margin-top:8px;">OAC. Rates subject to change without notice.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="tfsa.html">TFSA Calculator</a></li><li><a href="rrsp-savings.html">RRSP Savings</a></li><li><a href="fire.html">FIRE Calculator</a></li><li><a href="debt-repayment.html">Debt Repayment</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:linear-gradient(180deg,#0d1f35 0%,#152a45 50%,#0d1f35 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);gap:0;">
+  <div style="color:#c9a84c;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">TD Canada Trust</div>
+  <div style="color:white;font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:12px;">Your first home<br>starts here.</div>
+  <div style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.65;margin-bottom:24px;">TD mortgage specialists are ready to help. Get pre-approved online in 3 minutes and lock in your rate for 120 days.</div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:24px;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">5-Year Fixed</div>
+    <div style="color:#c9a84c;font-size:2.2rem;font-weight:700;line-height:1;">4.94%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">APR 5.02% — as low as</div>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:auto;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Variable Rate</div>
+    <div style="color:white;font-size:2rem;font-weight:700;line-height:1;">Prime − 0.10%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">Currently 6.85%</div>
+  </div>
+  <div style="margin-top:24px;">
+    <div style="background:#c9a84c;color:#0d1f35;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Pre-Approved Today</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;text-align:center;line-height:1.5;">OAC. Rates subject to change. TD Bank Group.</div>
+  </div>
+</div></div>
+</div>
+</div>
+<script>
+// ── State ────────────────────────────────────────────────────────────────────
+let country = 'us';   // MUST be declared — was missing, causing ReferenceError
+let ch = null;        // Chart.js instance
+
+// ── Region toggle ─────────────────────────────────────────────────────────────
+function setCountry(co) {
+  country = co;
+
+  // Update active button state
+  document.querySelectorAll('.toggle-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.country === co)
+  );
+
+  // Swap region-specific labels
+  const isCA = co === 'ca';
+  const tfsaLbl = document.getElementById('lbl_tfsa');
+  const rrspLbl = document.getElementById('lbl_rrsp');
+  if (tfsaLbl) tfsaLbl.textContent = isCA ? 'TFSA' : 'Roth IRA';
+  if (rrspLbl) rrspLbl.textContent = isCA ? 'RRSP / Pension' : '401(k) / Pension';
+
+  // Re-run calculation with updated labels
+  c();
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function g(id) { return parseFloat(document.getElementById(id).value) || 0; }
+function fmt(n) { return '$' + Math.abs(Math.round(n)).toLocaleString(); }
+
+// ── Main calculation ─────────────────────────────────────────────────────────
+function c() {
+  const home  = g('home');
+  const re    = g('re');
+  const cash  = g('cash');
+  const tfsa  = g('tfsa');
+  const rrsp  = g('rrsp');
+  const inv   = g('inv');
+  const cars  = g('cars');
+  const other = g('other');
+
+  const mort    = g('mort');
+  const heloc   = g('heloc');
+  const carLoan = g('carLoan');
+  const student = g('student');
+  const cc      = g('cc');
+  const otherL  = g('otherL');
+
+  const assets = home + re + cash + tfsa + rrsp + inv + cars + other;
+  const liab   = mort + heloc + carLoan + student + cc + otherL;
+  const nw     = assets - liab;
+  const equity = home - mort;
+  const finA   = cash + tfsa + rrsp + inv;
+
+  // ── Update result tiles ───────────────────────────────────────────────────
+  document.getElementById('totA').textContent = fmt(assets);
+  document.getElementById('totL').textContent = fmt(liab);
+
+  const nwEl = document.getElementById('nw');
+  nwEl.textContent = (nw < 0 ? '-' : '') + fmt(nw);
+  nwEl.style.color = nw >= 0 ? 'var(--teal-light)' : '#fca5a5';
+
+  document.getElementById('dta').textContent =
+    assets > 0 ? (liab / assets * 100).toFixed(1) + '%' : '0%';
+  document.getElementById('finAssets').textContent = fmt(finA);
+  document.getElementById('equity').textContent    = fmt(equity);
+
+  // ── Save snapshot ─────────────────────────────────────────────────────────
+
+  // ── Chart.js doughnut ─────────────────────────────────────────────────────
+  // Destroy previous instance before getting new context
+  try{if(ch){ch.destroy();ch=null;}}catch(e){ch=null;}
+
+  const canvas = document.getElementById('ch');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const chartData = [
+    Math.max(0, Math.round(equity)),   // Real Estate Equity
+    Math.round(finA),                  // Financial Assets
+    Math.round(cars + other),          // Other Assets
+    Math.round(liab),                  // Liabilities
+  ];
+
+  // ── Chart matches Mortgage Calculator visual language ───────────────────
+  ch = new window.Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Real Estate Equity', 'Financial Assets', 'Other Assets', 'Liabilities'],
+      datasets: [{
+        data: chartData,
+        backgroundColor: ['#0ea5a0', '#152a45', '#c9a84c', '#ef4444'],
+        borderWidth: 3,
+        borderColor: '#ffffff',   // white gap between segments (matches mortgage breakdown chart)
+        hoverBorderColor: '#ffffff',
+        hoverBorderWidth: 3,
+        hoverOffset: 6,           // segment lifts on hover like mortgage chart
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '60%',             // matches mortgage breakdown doughnut cutout
+      animation: { duration: 350, easing: 'easeInOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(13,31,53,0.92)',   // --navy matches mortgage tooltips
+          titleColor: 'rgba(255,255,255,0.5)',
+          bodyColor: '#ffffff',
+          titleFont: { family: "'Plus Jakarta Sans', sans-serif", size: 11, weight: '600' },
+          bodyFont: { family: "'Plus Jakarta Sans', sans-serif", size: 13, weight: '700' },
+          padding: 10,
+          cornerRadius: 8,
+          displayColors: true,
+          boxWidth: 8,
+          boxHeight: 8,
+          callbacks: {
+            label: ctx => '  $' + Math.round(ctx.raw).toLocaleString()
+          }
+        }
+      }
+    }
+  });
+
+  // Legend — matches Mortgage Calculator style with values
+  const colors = ['#0ea5a0','#152a45','#c9a84c','#ef4444'];
+  const lgLabels = ['RE Equity','Financial','Other','Liabilities'];
+  document.getElementById('leg').innerHTML = lgLabels
+    .map((l,i) => `<div class="legend-item"><div class="legend-dot" style="background:${colors[i]}"></div>${l}: $${Math.round(chartData[i]).toLocaleString()}</div>`)
+    .join('');
+}
+
+function showChart(m) { c(); }
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+   // sets active button, labels, then calls c()
+</script>
+
+<script>
+ });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => { setCountry('us'); });
+</script>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+<script src="../shared.js"></script>
+</body></html>

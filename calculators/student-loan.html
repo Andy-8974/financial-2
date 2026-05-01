@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Loan Calculator 2026 — USA & Canada | CalcWise</title>
+<meta name="description" content="Free student loan calculator for USA and Canada. Calculate monthly payments, total interest, and payoff timeline for OSAP, federal, and private loans. Updated 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style id="cw-body-font">body,body *{font-family:'Plus Jakarta Sans',sans-serif!important}</style>
+</head>
+<body>
+<script src="../nav.js"></script>
+
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Student Loan Calculator</h1>
+  <p>Monthly payments, total interest, and payoff timeline. Canada: OSAP & prime-based rates. USA: federal & private loan options.</p>
+  <div class="country-toggle">
+    <div class="cw-toggle">
+      <button class="cw-tbtn on" data-mode="ca"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#D52B1E"/><rect x="15" width="5" height="14" fill="#D52B1E"/><path d="M10 2.8L10.9 5.5H13.6L11.4 7.1L12.3 9.8L10 8.2L7.7 9.8L8.6 7.1L6.4 5.5H9.1Z" fill="#D52B1E"/></svg>&nbsp;Canada</button>
+      <button class="cw-tbtn" data-mode="us"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/><circle cx="1.3" cy="1.1" r=".55" fill="#fff"/><circle cx="2.65" cy="1.1" r=".55" fill="#fff"/><circle cx="4" cy="1.1" r=".55" fill="#fff"/><circle cx="5.35" cy="1.1" r=".55" fill="#fff"/><circle cx="6.7" cy="1.1" r=".55" fill="#fff"/><circle cx="1.97" cy="2.32" r=".55" fill="#fff"/><circle cx="3.32" cy="2.32" r=".55" fill="#fff"/><circle cx="4.67" cy="2.32" r=".55" fill="#fff"/><circle cx="6.02" cy="2.32" r=".55" fill="#fff"/><circle cx="1.3" cy="3.54" r=".55" fill="#fff"/><circle cx="2.65" cy="3.54" r=".55" fill="#fff"/><circle cx="4" cy="3.54" r=".55" fill="#fff"/><circle cx="5.35" cy="3.54" r=".55" fill="#fff"/><circle cx="6.7" cy="3.54" r=".55" fill="#fff"/><circle cx="1.97" cy="4.77" r=".55" fill="#fff"/><circle cx="3.32" cy="4.77" r=".55" fill="#fff"/><circle cx="4.67" cy="4.77" r=".55" fill="#fff"/><circle cx="6.02" cy="4.77" r=".55" fill="#fff"/><circle cx="1.3" cy="6" r=".55" fill="#fff"/><circle cx="2.65" cy="6" r=".55" fill="#fff"/><circle cx="4" cy="6" r=".55" fill="#fff"/><circle cx="5.35" cy="6" r=".55" fill="#fff"/><circle cx="6.7" cy="6" r=".55" fill="#fff"/></svg>&nbsp;USA</button>
+    </div>
+  </div>
+</div></div>
+
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <!-- INPUTS -->
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+      <h2>Loan Details</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label>Total Loan Amount</label>
+        <div class="input-prefix"><span>$</span><input type="number" id="loanAmount" value="35000" oninput="calc()"></div>
+      </div>
+      <div class="form-row">
+        <label>Annual Interest Rate</label>
+        <div class="input-suffix"><input type="number" id="interestRate" value="6.5" step="0.01" oninput="calc()"><span>%</span></div>
+      </div>
+      <div class="form-row">
+        <label>Repayment Period (years)</label>
+        <select id="repayYears" onchange="calc()">
+          <option value="5">5 years</option>
+          <option value="10" selected>10 years</option>
+          <option value="15">15 years</option>
+          <option value="20">20 years</option>
+          <option value="25">25 years</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Grace Period (months)</label>
+        <select id="gracePeriod" onchange="calc()">
+          <option value="0">No grace period</option>
+          <option value="6" selected>6 months</option>
+          <option value="12">12 months</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Extra Monthly Payment</label>
+        <div class="input-prefix"><span>$</span><input type="number" id="extraPayment" value="0" oninput="calc()"></div>
+      </div>
+      <!-- Canada specific -->
+      <div data-ca class="form-row" style="">
+        <label>Loan Type</label>
+        <select id="loanTypeCA" onchange="calc()">
+          <option value="federal">Canada Student Loan (federal)</option>
+          <option value="provincial">Provincial (OSAP, StudentAid BC, etc.)</option>
+          <option value="private">Private / Bank Loan</option>
+        </select>
+      </div>
+      <!-- USA specific -->
+      <div data-us class="form-row" style="display:none">
+        <label>Loan Type</label>
+        <select id="loanTypeUS" onchange="calc()">
+          <option value="federal">Federal Direct Subsidized</option>
+          <option value="unsubsidized">Federal Direct Unsubsidized</option>
+          <option value="plus">PLUS Loan</option>
+          <option value="private">Private Loan</option>
+        </select>
+      </div>
+    </div>
+    <button class="calc-btn span-2" onclick="calc()">Calculate Payments</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Monthly Payment</div><div class="value teal" id="monthlyPayment">—</div></div>
+        <div class="result-item"><div class="label">Total Interest</div><div class="value" id="totalInterest">—</div></div>
+        <div class="result-item"><div class="label">Total Cost</div><div class="value" id="totalCost">—</div></div>
+        <div class="result-item"><div class="label">Payoff Date</div><div class="value" id="payoffDate">—</div></div>
+        <div class="result-item" id="extraRow" style="display:none"><div class="label">Early Payoff</div><div class="value teal" id="earlyPayoff">—</div></div>
+        <div class="result-item" id="savedRow" style="display:none"><div class="label">Interest Saved</div><div class="value teal" id="interestSaved">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('balance',this)">Balance</button>
+        <button class="chart-tab-sm" onclick="showChart('breakdown',this)">Breakdown</button>
+      </div>
+      <div class="chart-container"><canvas id="loanChart"></canvas></div>
+      <div class="chart-legend" id="chartLegend"></div>
+    </div>
+  </div>
+</div>
+
+<!-- AMORTIZATION TABLE -->
+<div class="content-card">
+  <h2>Repayment Schedule (Annual)</h2>
+  <div style="overflow-x:auto">
+    <table class="data-table">
+      <thead><tr><th>Year</th><th class="r">Principal</th><th class="r">Interest</th><th class="r">Balance</th><th class="r">Total Paid</th></tr></thead>
+      <tbody id="schedBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- INFO -->
+<div class="content-card">
+  <h2>Canada vs USA Student Loan Differences</h2>
+  <div class="info-grid">
+    <div class="info-box">
+      <h4><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#D52B1E"/><rect x="15" width="5" height="14" fill="#D52B1E"/><path d="M10 2.8L10.9 5.5H13.6L11.4 7.1L12.3 9.8L10 8.2L7.7 9.8L8.6 7.1L6.4 5.5H9.1Z" fill="#D52B1E"/></svg> Canada — OSAP & Federal</h4>
+      <p>Canada Student Loans charge <strong>prime + 1%</strong> (variable) or <strong>prime + 2%</strong> (fixed). No interest accrues during school (full-time) or the 6-month non-repayment period after graduation. Repayment Assistance Plan (RAP) available for low income. Canada Student Grant does not need to be repaid.</p>
+    </div>
+    <div class="info-box">
+      <h4><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/><circle cx="1.3" cy="1.1" r=".55" fill="#fff"/><circle cx="2.65" cy="1.1" r=".55" fill="#fff"/><circle cx="4" cy="1.1" r=".55" fill="#fff"/><circle cx="5.35" cy="1.1" r=".55" fill="#fff"/><circle cx="6.7" cy="1.1" r=".55" fill="#fff"/><circle cx="1.97" cy="2.32" r=".55" fill="#fff"/><circle cx="3.32" cy="2.32" r=".55" fill="#fff"/><circle cx="4.67" cy="2.32" r=".55" fill="#fff"/><circle cx="6.02" cy="2.32" r=".55" fill="#fff"/><circle cx="1.3" cy="3.54" r=".55" fill="#fff"/><circle cx="2.65" cy="3.54" r=".55" fill="#fff"/><circle cx="4" cy="3.54" r=".55" fill="#fff"/><circle cx="5.35" cy="3.54" r=".55" fill="#fff"/><circle cx="6.7" cy="3.54" r=".55" fill="#fff"/><circle cx="1.97" cy="4.77" r=".55" fill="#fff"/><circle cx="3.32" cy="4.77" r=".55" fill="#fff"/><circle cx="4.67" cy="4.77" r=".55" fill="#fff"/><circle cx="6.02" cy="4.77" r=".55" fill="#fff"/><circle cx="1.3" cy="6" r=".55" fill="#fff"/><circle cx="2.65" cy="6" r=".55" fill="#fff"/><circle cx="4" cy="6" r=".55" fill="#fff"/><circle cx="5.35" cy="6" r=".55" fill="#fff"/><circle cx="6.7" cy="6" r=".55" fill="#fff"/></svg> USA — Federal & Private</h4>
+      <p>Federal Direct Subsidized: 6.53% (2025–26), no interest during school. Unsubsidized: 6.53%, interest accrues immediately. PLUS: 9.08%. Income-Driven Repayment (IDR) plans cap payments at 5–10% of discretionary income. Public Service Loan Forgiveness (PSLF) after 10 years of qualifying payments.</p>
+    </div>
+  </div>
+  <h3>Repayment Assistance Programs</h3>
+  <div class="info-grid">
+    <div class="info-box">
+      <h4><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#D52B1E"/><rect x="15" width="5" height="14" fill="#D52B1E"/><path d="M10 2.8L10.9 5.5H13.6L11.4 7.1L12.3 9.8L10 8.2L7.7 9.8L8.6 7.1L6.4 5.5H9.1Z" fill="#D52B1E"/></svg> Canada RAP</h4>
+      <p>If your income is below the threshold, the government covers interest. After 10 years, remaining balance may be forgiven. Apply through NSLSC.</p>
+    </div>
+    <div class="info-box">
+      <h4><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/><circle cx="1.3" cy="1.1" r=".55" fill="#fff"/><circle cx="2.65" cy="1.1" r=".55" fill="#fff"/><circle cx="4" cy="1.1" r=".55" fill="#fff"/><circle cx="5.35" cy="1.1" r=".55" fill="#fff"/><circle cx="6.7" cy="1.1" r=".55" fill="#fff"/><circle cx="1.97" cy="2.32" r=".55" fill="#fff"/><circle cx="3.32" cy="2.32" r=".55" fill="#fff"/><circle cx="4.67" cy="2.32" r=".55" fill="#fff"/><circle cx="6.02" cy="2.32" r=".55" fill="#fff"/><circle cx="1.3" cy="3.54" r=".55" fill="#fff"/><circle cx="2.65" cy="3.54" r=".55" fill="#fff"/><circle cx="4" cy="3.54" r=".55" fill="#fff"/><circle cx="5.35" cy="3.54" r=".55" fill="#fff"/><circle cx="6.7" cy="3.54" r=".55" fill="#fff"/><circle cx="1.97" cy="4.77" r=".55" fill="#fff"/><circle cx="3.32" cy="4.77" r=".55" fill="#fff"/><circle cx="4.67" cy="4.77" r=".55" fill="#fff"/><circle cx="6.02" cy="4.77" r=".55" fill="#fff"/><circle cx="1.3" cy="6" r=".55" fill="#fff"/><circle cx="2.65" cy="6" r=".55" fill="#fff"/><circle cx="4" cy="6" r=".55" fill="#fff"/><circle cx="5.35" cy="6" r=".55" fill="#fff"/><circle cx="6.7" cy="6" r=".55" fill="#fff"/></svg> USA IDR / PSLF</h4>
+      <p>SAVE plan caps payments at 5% of discretionary income for undergrad loans. After 10 years of public service, remaining federal loan balance is forgiven tax-free.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does the 6-month grace period work in Canada?</button><div class="faq-a">After leaving school, you have a 6-month non-repayment period before loan payments begin. Since November 2023, no interest accrues on federal Canada Student Loans during this period or while enrolled full-time — a major change that saves graduates thousands. Provincial loans vary by province.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the current Canada Student Loan interest rate?</button><div class="faq-a">As of April 2026, Canada Student Loans charge prime + 1% (variable) or prime + 2% (fixed). With the Bank of Canada prime rate around 5.2%, the variable rate is approximately 6.2%. The federal government eliminated interest on Canada Student Loans in 2023 — you only pay principal. Provincial portions may still accrue interest.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Should I make extra payments on my student loan?</button><div class="faq-a">Generally yes — extra payments reduce the principal faster, which cuts total interest dramatically. There are no prepayment penalties on Canadian or US federal student loans. However, if your loan rate is below 5%, investing the difference in a TFSA or Roth IRA may generate better returns long-term.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is OSAP and who qualifies?</button><div class="faq-a">OSAP (Ontario Student Assistance Program) provides grants and loans to Ontario students attending eligible post-secondary schools. Eligibility is based on family income, school attendance, and program type. OSAP includes both federal Canada Student Loans and Ontario provincial grants/loans. In 2024, Ontario eliminated interest on the provincial portion.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I deduct student loan interest on my taxes?</button><div class="faq-a">Canada: You can claim a 15% federal tax credit on interest paid on eligible government student loans (not private loans) on line 31900 of your T1 return. You can carry forward unused amounts for 5 years. USA: You can deduct up to $2,500 of student loan interest paid (federal and private) if your income is below $90,000 (single) / $185,000 (married).</div></div>
+</div>
+
+<div class="disclaimer">&#9888;&#65039; Results are estimates. Canada Student Loan rates are based on prime rate and may change. USA rates reflect 2025–26 federal rates. Not financial advice — consult a licensed financial advisor or your provincial/federal student aid office.</div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="calc-sidebar">
+  <div class="related-card">
+    <h4>Related Calculators</h4>
+    <ul class="related-list">
+      <li><a href="personal-loan.html">Personal Loan Calculator</a></li>
+      <li><a href="compound-interest.html">Compound Interest</a></li>
+      <li><a href="debt-repayment.html">Debt Repayment</a></li>
+      <li><a href="income-tax.html">Income Tax Calculator</a></li>
+      <li><a href="salary.html">Salary Calculator</a></li>
+      <li><a href="net-worth.html">Net Worth Calculator</a></li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<script>
+var chart=null;
+var schedData=[];
+
+function fmt(n){return '$'+Math.round(n).toLocaleString('en-CA');}
+function fmtDec(n){return '$'+n.toLocaleString('en-CA',{minimumFractionDigits:0,maximumFractionDigits:0});}
+
+function calc(){
+  var P=parseFloat(document.getElementById('loanAmount').value)||35000;
+  var annual=parseFloat(document.getElementById('interestRate').value)||6.5;
+  var years=parseInt(document.getElementById('repayYears').value)||10;
+  var grace=parseInt(document.getElementById('gracePeriod').value)||6;
+  var extra=parseFloat(document.getElementById('extraPayment').value)||0;
+  var r=annual/100/12;
+  var n=years*12;
+
+  // Standard payment
+  var payment=r===0?P/n:P*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+
+  // Build amortization with extra payment
+  var bal=P;
+  var totalInt=0;
+  var totalPaid=0;
+  var months=0;
+  schedData=[];
+
+  for(var y=1;y<=years+5;y++){
+    if(bal<=0)break;
+    var yrPrin=0,yrInt=0;
+    for(var m=0;m<12;m++){
+      if(bal<=0)break;
+      var intCharge=bal*r;
+      var prin=Math.min(payment+extra-intCharge,bal);
+      if(prin<0){prin=0;}
+      bal-=prin;
+      yrPrin+=prin;
+      yrInt+=intCharge;
+      totalInt+=intCharge;
+      totalPaid+=prin+intCharge;
+      months++;
+      if(bal<0.01){bal=0;break;}
+    }
+    schedData.push({y:y,prin:yrPrin,int:yrInt,bal:Math.max(0,bal),paid:totalPaid});
+    if(bal<=0)break;
+  }
+
+  // Without extra
+  var totalIntStd=0;
+  var balStd=P;
+  var monthsStd=0;
+  for(var i=0;i<years*12;i++){
+    if(balStd<=0)break;
+    var ic=balStd*r;
+    var pn=Math.min(payment-ic,balStd);
+    balStd-=pn;totalIntStd+=ic;monthsStd++;
+  }
+
+  document.getElementById('monthlyPayment').textContent=fmt(payment+extra);
+  document.getElementById('totalInterest').textContent=fmt(totalInt);
+  document.getElementById('totalCost').textContent=fmt(P+totalInt);
+
+  var payoffDate=new Date();
+  payoffDate.setMonth(payoffDate.getMonth()+grace+months);
+  document.getElementById('payoffDate').textContent=payoffDate.toLocaleDateString('en-CA',{month:'short',year:'numeric'});
+
+  if(extra>0){
+    document.getElementById('earlyPayoff').textContent=(Math.round((monthsStd-months)/12*10)/10)+' yrs early';
+    document.getElementById('interestSaved').textContent=fmt(totalIntStd-totalInt);
+    document.getElementById('extraRow').style.display='';
+    document.getElementById('savedRow').style.display='';
+  } else {
+    document.getElementById('extraRow').style.display='none';
+    document.getElementById('savedRow').style.display='none';
+  }
+
+  buildTable();
+  buildChart('balance');
+}
+
+function buildTable(){
+  var tbody=document.getElementById('schedBody');
+  tbody.innerHTML='';
+  schedData.forEach(function(r){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td>Yr '+r.y+'</td>'
+      +'<td class="r">'+fmt(r.prin)+'</td>'
+      +'<td class="r teal">'+fmt(r.int)+'</td>'
+      +'<td class="r bold">'+fmt(r.bal)+'</td>'
+      +'<td class="r">'+fmt(r.paid)+'</td>';
+    tbody.appendChild(tr);
+  });
+}
+
+function buildChart(type){
+  var canvas=document.getElementById('loanChart');
+  if(chart){chart.destroy();chart=null;}
+  var legend=document.getElementById('chartLegend');
+  if(type==='balance'){
+    var labels=schedData.map(function(r){return 'Yr '+r.y;});
+    var balances=schedData.map(function(r){return r.bal;});
+    var paid=schedData.map(function(r){return r.paid;});
+    chart=new Chart(canvas,{type:'line',data:{labels:labels,datasets:[
+      {label:'Balance',data:balances,borderColor:'#1DB584',backgroundColor:'rgba(29,181,132,0.08)',fill:true,tension:0.3,borderWidth:2,pointRadius:2},
+      {label:'Total Paid',data:paid,borderColor:'#C9A84C',backgroundColor:'rgba(201,168,76,0.08)',fill:false,tension:0.3,borderWidth:2,pointRadius:2}
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:function(v){return '$'+Math.round(v/1000)+'k';}},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}});
+    legend.innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#1DB584"></div>Balance</div><div class="legend-item"><div class="legend-dot" style="background:#C9A84C"></div>Total Paid</div>';
+  } else {
+    var totalPrin=schedData.reduce(function(s,r){return s+r.prin;},0);
+    var totalInt=schedData.reduce(function(s,r){return s+r.int;},0);
+    chart=new Chart(canvas,{type:'doughnut',data:{labels:['Principal','Interest'],datasets:[{data:[totalPrin,totalInt],backgroundColor:['#1DB584','#C9A84C'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},cutout:'65%'}});
+    legend.innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#1DB584"></div>Principal: '+fmt(totalPrin)+'</div><div class="legend-item"><div class="legend-dot" style="background:#C9A84C"></div>Interest: '+fmt(totalInt)+'</div>';
+  }
+}
+
+function showChart(type,btn){
+  document.querySelectorAll('.chart-tab-sm').forEach(function(b){b.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+  buildChart(type);
+}
+
+// Run on load
+window.addEventListener('DOMContentLoaded',function(){calc();});
+</script>
+<script src="../shared.js"></script>
+</body>
+</html>

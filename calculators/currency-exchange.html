@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Currency Exchange Rate Calculator | CalcWise Pro</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Currency Exchange Rate Calculator | CalcWise Pro",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/currency-exchange.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is DCC (Dynamic Currency Conversion)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "DCC occurs when a foreign merchant offers to charge you in your home currency instead of local currency. Always decline — the merchant's DCC rate is typically 5–8% worse than your card's rate. Always "
+      }
+    },    {
+      "@type": "Question",
+      "name": "What is the best way to send money to Canada from the USA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Wise (formerly TransferWise) typically offers the lowest fees for CAD/USD transfers — near the mid-market rate plus 0.4–0.7%. RBC, Scotiabank, and TD all have US affiliates for wire transfers, but the"
+      }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style id="cw-body-font">body,body *{font-family:'Plus Jakarta Sans',sans-serif!important}</style>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Currency Exchange Calculator</h1>
+  <p>Convert currencies and estimate bank fees vs interbank mid-market rate.</p>
+  <div class="country-toggle">
+      <div class="cw-toggle"><button class="cw-tbtn on" data-mode="us"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/><circle cx="1.3" cy="1.1" r=".55" fill="#fff"/><circle cx="2.65" cy="1.1" r=".55" fill="#fff"/><circle cx="4" cy="1.1" r=".55" fill="#fff"/><circle cx="5.35" cy="1.1" r=".55" fill="#fff"/><circle cx="6.7" cy="1.1" r=".55" fill="#fff"/><circle cx="1.97" cy="2.32" r=".55" fill="#fff"/><circle cx="3.32" cy="2.32" r=".55" fill="#fff"/><circle cx="4.67" cy="2.32" r=".55" fill="#fff"/><circle cx="6.02" cy="2.32" r=".55" fill="#fff"/><circle cx="1.3" cy="3.54" r=".55" fill="#fff"/><circle cx="2.65" cy="3.54" r=".55" fill="#fff"/><circle cx="4" cy="3.54" r=".55" fill="#fff"/><circle cx="5.35" cy="3.54" r=".55" fill="#fff"/><circle cx="6.7" cy="3.54" r=".55" fill="#fff"/><circle cx="1.97" cy="4.77" r=".55" fill="#fff"/><circle cx="3.32" cy="4.77" r=".55" fill="#fff"/><circle cx="4.67" cy="4.77" r=".55" fill="#fff"/><circle cx="6.02" cy="4.77" r=".55" fill="#fff"/><circle cx="1.3" cy="6" r=".55" fill="#fff"/><circle cx="2.65" cy="6" r=".55" fill="#fff"/><circle cx="4" cy="6" r=".55" fill="#fff"/><circle cx="5.35" cy="6" r=".55" fill="#fff"/><circle cx="6.7" cy="6" r=".55" fill="#fff"/></svg>&nbsp;USA</button><button class="cw-tbtn" data-mode="ca"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#D52B1E"/><rect x="15" width="5" height="14" fill="#D52B1E"/><path d="M10 2.8L10.9 5.5H13.6L11.4 7.1L12.3 9.8L10 8.2L7.7 9.8L8.6 7.1L6.4 5.5H9.1Z" fill="#D52B1E"/></svg>&nbsp;Canada</button></div>
+    </div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+      <h2>Currency Conversion</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Amount to Convert</label><input type="number" id="amt" value="1000" oninput="c()"></div>
+      <div class="form-row"><label>From Currency</label>
+        <select id="from" onchange="c()">
+          <option value="CAD" selected>CAD — Canadian Dollar</option>
+          <option value="USD">USD — US Dollar</option>
+          <option value="EUR">EUR — Euro</option>
+          <option value="GBP">GBP — British Pound</option>
+          <option value="JPY">JPY — Japanese Yen</option>
+          <option value="AUD">AUD — Australian Dollar</option>
+          <option value="CHF">CHF — Swiss Franc</option>
+          <option value="MXN">MXN — Mexican Peso</option>
+          <option value="INR">INR — Indian Rupee</option>
+          <option value="CNY">CNY — Chinese Yuan</option>
+        </select>
+      </div>
+      <div class="form-row"><label>To Currency</label>
+        <select id="to" onchange="c()">
+          <option value="USD" selected>USD — US Dollar</option>
+          <option value="CAD">CAD — Canadian Dollar</option>
+          <option value="EUR">EUR — Euro</option>
+          <option value="GBP">GBP — British Pound</option>
+          <option value="JPY">JPY — Japanese Yen</option>
+          <option value="AUD">AUD — Australian Dollar</option>
+          <option value="CHF">CHF — Swiss Franc</option>
+          <option value="MXN">MXN — Mexican Peso</option>
+          <option value="INR">INR — Indian Rupee</option>
+          <option value="CNY">CNY — Chinese Yuan</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Exchange Spread / Bank Fee</label><div class="input-suffix"><span>%</span><input type="number" id="spread" value="2.5" step="0.5" oninput="c()"></div></div>
+    </div>
+    <div style="background:var(--teal-pale);border-radius:8px;padding:0.65rem 0.85rem;font-size:0.77rem;color:var(--text-mid);margin-bottom:0.75rem;">
+      &#128161; Rates shown are approximate reference rates for illustration. For live rates, use a bank or Google Finance.
+    </div>
+    <button class="calc-btn span-2" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Converted Amount</div><div class="value teal" id="result">—</div></div>
+        <div class="result-item"><div class="label">Reference Rate</div><div class="value " id="rate">—</div></div>
+        <div class="result-item"><div class="label">After Bank Spread</div><div class="value " id="bankRate">—</div></div>
+        <div class="result-item"><div class="label">Fee Cost</div><div class="value " id="feeCost">—</div></div>
+        <div class="result-item"><div class="label">Inverse Rate</div><div class="value " id="inverse">—</div></div>
+        <div class="result-item"><div class="label">Per Unit</div><div class="value teal" id="perUnit">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('bar')">Conversion Breakdown</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>Ways to Exchange Currency</h2><div class="info-grid"><div class="info-box"><h4>&#10003; Best: Credit card (no FX fee)</h4><p>Cards like Scotiabank Passport Visa, Chase Sapphire, or Wise give near-interbank rates. Pay in local currency (decline DCC offers).</p></div><div class="info-box"><h4>&#10003; Good: Wise / Revolut</h4><p>Near-interbank rates with small transparent fees. Best for large transfers or frequent travel.</p></div><div class="info-box"><h4>&#10007; Expensive: Airport kiosks</h4><p>Spreads of 8–12%. Avoid entirely. Even ATMs with 2–3% fees are far better than airport exchange.</p></div><div class="info-box"><h4>&#10007; Watch: Bank wire transfer</h4><p>Typically 2–3% spread plus $10–$25 fixed fee. For large amounts, compare wire to Wise or Knightsbridge FX.</p></div></div></div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is DCC (Dynamic Currency Conversion)?</button><div class="faq-a">DCC occurs when a foreign merchant offers to charge you in your home currency instead of local currency. Always decline — the merchant's DCC rate is typically 5–8% worse than your card's rate. Always pay in local currency when abroad.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the best way to send money to Canada from the USA?</button><div class="faq-a">Wise (formerly TransferWise) typically offers the lowest fees for CAD/USD transfers — near the mid-market rate plus 0.4–0.7%. RBC, Scotiabank, and TD all have US affiliates for wire transfers, but their spread is typically 1.5–2.5% plus fixed fees.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; Rates are approximate reference values for illustration only. Verify live rates before any transaction.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:linear-gradient(135deg,#0a2540 0%,#1a4b7a 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.15);position:relative;">
+  <div style="position:absolute;right:-20px;top:-20px;width:120px;height:120px;background:rgba(0,119,182,0.2);border-radius:50%;"></div>
+  <div>
+    <div style="color:#60b4ff;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Wealthsimple</div>
+    <div style="color:white;font-size:1.25rem;font-weight:700;line-height:1.25;margin-bottom:8px;">Invest smarter.<br>Start with $1.</div>
+    <div style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.5;">No-fee investing in stocks, ETFs, and crypto. Auto-rebalanced portfolios built for Canadians.</div>
+  </div>
+  <div>
+    <div style="background:#00c853;color:white;font-size:0.82rem;font-weight:700;padding:10px 20px;border-radius:8px;display:inline-block;cursor:pointer;">Get Started Free →</div>
+    <div style="color:rgba(255,255,255,0.35);font-size:0.62rem;margin-top:8px;">Commission-free trading. CIPF protected.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="sales-tax.html">Sales Tax</a></li><li><a href="vacation-savings.html">Vacation Savings</a></li><li><a href="salary.html">Salary Calculator</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:linear-gradient(180deg,#0d1f35 0%,#152a45 50%,#0d1f35 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);gap:0;">
+  <div style="color:#c9a84c;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">TD Canada Trust</div>
+  <div style="color:white;font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:12px;">Your first home<br>starts here.</div>
+  <div style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.65;margin-bottom:24px;">TD mortgage specialists are ready to help. Get pre-approved online in 3 minutes and lock in your rate for 120 days.</div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:24px;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">5-Year Fixed</div>
+    <div style="color:#c9a84c;font-size:2.2rem;font-weight:700;line-height:1;">4.94%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">APR 5.02% — as low as</div>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:auto;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Variable Rate</div>
+    <div style="color:white;font-size:2rem;font-weight:700;line-height:1;">Prime − 0.10%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">Currently 6.85%</div>
+  </div>
+  <div style="margin-top:24px;">
+    <div style="background:#c9a84c;color:#0d1f35;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Pre-Approved Today</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;text-align:center;line-height:1.5;">OAC. Rates subject to change. TD Bank Group.</div>
+  </div>
+</div></div>
+</div>
+</div>
+<script>
+// Approximate mid-market rates vs USD (illustrative, updated periodically)
+const rates={USD:1,CAD:1.36,EUR:0.92,GBP:0.79,JPY:149.5,AUD:1.53,CHF:0.90,MXN:17.2,INR:83.1,CNY:7.24};
+let ch=null;
+let country = 'us';
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function setCountry(cc) {
+  country = cc;
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.country === cc));
+  if (typeof c === 'function') c();
+}
+
+function c(){
+  const amt=parseFloat(document.getElementById('amt').value)||0;
+  const from=document.getElementById('from').value;
+  const to=document.getElementById('to').value;
+  const spread=(parseFloat(document.getElementById('spread').value)||0)/100;
+  const rateFrom=rates[from]||1, rateTo=rates[to]||1;
+  const midRate=rateTo/rateFrom;
+  const bankRate=midRate*(1-spread);
+  const result=amt*midRate, bankResult=amt*bankRate;
+  const feeCost=result-bankResult;
+  document.getElementById('result').textContent=to==='JPY'?Math.round(result).toLocaleString():result.toFixed(2)+' '+to;
+  document.getElementById('rate').textContent='1 '+from+' = '+midRate.toFixed(4)+' '+to;
+  document.getElementById('bankRate').textContent='1 '+from+' = '+bankRate.toFixed(4)+' '+to+' (after spread)';
+  document.getElementById('feeCost').textContent=(feeCost).toFixed(2)+' '+to;
+  document.getElementById('inverse').textContent='1 '+to+' = '+(1/midRate).toFixed(4)+' '+from;
+  document.getElementById('perUnit').textContent=midRate.toFixed(4)+' '+to+' per 1 '+from;
+  if(ch)ch.destroy();
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new Chart(ctx,{type:'bar',data:{
+    labels:['Mid-market','After '+Math.round(spread*100)+'% spread','Fee Cost'],
+    datasets:[{data:[parseFloat(result.toFixed(2)),parseFloat(bankResult.toFixed(2)),parseFloat(feeCost.toFixed(2))],backgroundColor:['#0ea5a0','#152a45','#ef4444'],borderRadius:6}]
+  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v.toFixed(2)}},x:{grid:{display:false}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Mid-Market</div><div class="legend-item"><div class="legend-dot" style="background:#152a45"></div>After Spread</div><div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>Fee Cost</div>';
+}
+function showChart(m){c();}
+</script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => { setCountry('us'); });
+</script>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+<script src="../shared.js"></script>
+</body></html>

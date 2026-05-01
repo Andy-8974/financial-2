@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Fund Calculator — USA & Canada | CalcWise Pro</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Emergency Fund Calculator — USA & Canada | CalcWise Pro",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/emergency-fund.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Should my emergency fund be in a TFSA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — this is a popular Canadian strategy. A TFSA HISA earns tax-free interest and remains accessible within 1–3 business days. Any withdrawals add back to your TFSA room on January 1 the following ye"
+      }
+    },    {
+      "@type": "Question",
+      "name": "How much is enough for an emergency fund?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "3 months: dual income, stable job, low debts. 6 months: single income or one variable-income earner. 9–12 months: self-employed, freelancer, or commission-based. Homeowners and parents with dependents"
+      }
+    },    {
+      "@type": "Question",
+      "name": "Best HISAs for emergency funds in 2025?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Canada: EQ Bank, Oaken Financial, Simplii (3.5–4.5% in 2025). USA: Marcus, Ally, SoFi, Discover (4–5%). Using a TFSA for your emergency fund combines accessibility with tax-free growth."
+      }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style id="cw-body-font">body,body *{font-family:'Plus Jakarta Sans',sans-serif!important}</style>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Emergency Fund Calculator</h1>
+  <p>Calculate your ideal emergency fund size and build a monthly savings plan.</p>
+  <div class="country-toggle">
+      <div class="cw-toggle"><button class="cw-tbtn on" data-mode="us"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/><circle cx="1.3" cy="1.1" r=".55" fill="#fff"/><circle cx="2.65" cy="1.1" r=".55" fill="#fff"/><circle cx="4" cy="1.1" r=".55" fill="#fff"/><circle cx="5.35" cy="1.1" r=".55" fill="#fff"/><circle cx="6.7" cy="1.1" r=".55" fill="#fff"/><circle cx="1.97" cy="2.32" r=".55" fill="#fff"/><circle cx="3.32" cy="2.32" r=".55" fill="#fff"/><circle cx="4.67" cy="2.32" r=".55" fill="#fff"/><circle cx="6.02" cy="2.32" r=".55" fill="#fff"/><circle cx="1.3" cy="3.54" r=".55" fill="#fff"/><circle cx="2.65" cy="3.54" r=".55" fill="#fff"/><circle cx="4" cy="3.54" r=".55" fill="#fff"/><circle cx="5.35" cy="3.54" r=".55" fill="#fff"/><circle cx="6.7" cy="3.54" r=".55" fill="#fff"/><circle cx="1.97" cy="4.77" r=".55" fill="#fff"/><circle cx="3.32" cy="4.77" r=".55" fill="#fff"/><circle cx="4.67" cy="4.77" r=".55" fill="#fff"/><circle cx="6.02" cy="4.77" r=".55" fill="#fff"/><circle cx="1.3" cy="6" r=".55" fill="#fff"/><circle cx="2.65" cy="6" r=".55" fill="#fff"/><circle cx="4" cy="6" r=".55" fill="#fff"/><circle cx="5.35" cy="6" r=".55" fill="#fff"/><circle cx="6.7" cy="6" r=".55" fill="#fff"/></svg>&nbsp;USA</button><button class="cw-tbtn" data-mode="ca"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#D52B1E"/><rect x="15" width="5" height="14" fill="#D52B1E"/><path d="M10 2.8L10.9 5.5H13.6L11.4 7.1L12.3 9.8L10 8.2L7.7 9.8L8.6 7.1L6.4 5.5H9.1Z" fill="#D52B1E"/></svg>&nbsp;Canada</button></div>
+    </div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <h2>Monthly Expenses</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Monthly Rent / Mortgage</label><div class="input-prefix"><span>$</span><input type="number" id="housing" value="2200" oninput="c()"></div></div>
+      <div class="form-row"><label>Food & Groceries</label><div class="input-prefix"><span>$</span><input type="number" id="food" value="700" oninput="c()"></div></div>
+      <div class="form-row"><label>Utilities & Phone</label><div class="input-prefix"><span>$</span><input type="number" id="util" value="350" oninput="c()"></div></div>
+      <div class="form-row"><label>Transportation</label><div class="input-prefix"><span>$</span><input type="number" id="trans" value="450" oninput="c()"></div></div>
+      <div class="form-row"><label>Insurance Premiums</label><div class="input-prefix"><span>$</span><input type="number" id="ins" value="300" oninput="c()"></div></div>
+      <div class="form-row"><label>Other Essential Costs</label><div class="input-prefix"><span>$</span><input type="number" id="other" value="250" oninput="c()"></div></div>
+      <div class="form-row"><label>Months of Coverage</label>
+        <select id="mos" onchange="c()"><option value="3">3 months (minimum)</option><option value="6" selected>6 months (recommended)</option><option value="9">9 months</option><option value="12">12 months (self-employed)</option></select>
+      </div>
+      <div class="form-row"><label>Current Emergency Savings</label><div class="input-prefix"><span>$</span><input type="number" id="current" value="5000" oninput="c()"></div></div>
+      <div class="form-row"><label>Monthly Savings Capacity</label><div class="input-prefix"><span>$</span><input type="number" id="cap" value="600" oninput="c()"></div></div>
+      <div class="form-row"><label>HISA Interest Rate</label><div class="input-suffix"><span>%</span><input type="number" id="rate" value="3.5" step="0.1" oninput="c()"></div></div>
+    </div>
+    <button class="calc-btn span-2" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Monthly Essentials</div><div class="value " id="monthly">—</div></div>
+        <div class="result-item"><div class="label">Target Fund Size</div><div class="value teal" id="target">—</div></div>
+        <div class="result-item"><div class="label">Still Need to Save</div><div class="value " id="remain">—</div></div>
+        <div class="result-item"><div class="label">Months to Full Fund</div><div class="value teal" id="time">—</div></div>
+        <div class="result-item"><div class="label">Progress</div><div class="value " id="pct">—</div></div>
+        <div class="result-item"><div class="label">Interest Earned</div><div class="value " id="intEarned">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('line')">Savings Timeline</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Should my emergency fund be in a TFSA?</button><div class="faq-a">Yes — this is a popular Canadian strategy. A TFSA HISA earns tax-free interest and remains accessible within 1–3 business days. Any withdrawals add back to your TFSA room on January 1 the following year. Keep 1–2 months in a regular HISA for instant access, rest in TFSA HISA for better interest.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How much is enough for an emergency fund?</button><div class="faq-a">3 months: dual income, stable job, low debts. 6 months: single income or one variable-income earner. 9–12 months: self-employed, freelancer, or commission-based. Homeowners and parents with dependents should hold more.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Best HISAs for emergency funds in 2025?</button><div class="faq-a">Canada: EQ Bank, Oaken Financial, Simplii (3.5–4.5% in 2025). USA: Marcus, Ally, SoFi, Discover (4–5%). Using a TFSA for your emergency fund combines accessibility with tax-free growth.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; Interest rate estimates based on 2025 rates. Verify current rates with your institution.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:linear-gradient(160deg,#1c1c1e 0%,#2d2d2f 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+  <div>
+    <div style="color:#f5a623;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">BMO SmartMortgage™</div>
+    <div style="color:white;font-size:1.2rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Lock in your rate today.<br><span style="color:#f5a623;">From 4.89%</span></div>
+    <div style="color:rgba(255,255,255,0.6);font-size:0.78rem;line-height:1.5;">5-year fixed rate. Pre-qualify online in minutes. First-time buyer discounts available.</div>
+  </div>
+  <div>
+    <div style="background:#f5a623;color:#1c1c1e;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Get Pre-Approved →</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;margin-top:8px;">OAC. Rates subject to change without notice.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="net-worth.html">Net Worth Calculator</a></li><li><a href="vacation-savings.html">Vacation Savings</a></li><li><a href="tfsa.html">TFSA Calculator</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:linear-gradient(180deg,#0d1f35 0%,#152a45 50%,#0d1f35 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);gap:0;">
+  <div style="color:#c9a84c;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">TD Canada Trust</div>
+  <div style="color:white;font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:12px;">Your first home<br>starts here.</div>
+  <div style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.65;margin-bottom:24px;">TD mortgage specialists are ready to help. Get pre-approved online in 3 minutes and lock in your rate for 120 days.</div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:24px;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">5-Year Fixed</div>
+    <div style="color:#c9a84c;font-size:2.2rem;font-weight:700;line-height:1;">4.94%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">APR 5.02% — as low as</div>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:18px;margin-bottom:auto;">
+    <div style="color:rgba(255,255,255,0.45);font-size:0.67rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Variable Rate</div>
+    <div style="color:white;font-size:2rem;font-weight:700;line-height:1;">Prime − 0.10%</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:0.7rem;margin-top:4px;">Currently 6.85%</div>
+  </div>
+  <div style="margin-top:24px;">
+    <div style="background:#c9a84c;color:#0d1f35;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Pre-Approved Today</div>
+    <div style="color:rgba(255,255,255,0.3);font-size:0.6rem;text-align:center;line-height:1.5;">OAC. Rates subject to change. TD Bank Group.</div>
+  </div>
+</div></div>
+</div>
+</div>
+<script>
+let ch=null;
+let country = 'us';
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function setCountry(cc) {
+  country = cc;
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.country === cc));
+  if (typeof c === 'function') c();
+}
+
+function c(){
+  const g=id=>parseFloat(document.getElementById(id).value)||0;
+  const monthly=g('housing')+g('food')+g('util')+g('trans')+g('ins')+g('other');
+  const mos=parseInt(document.getElementById('mos').value)||6;
+  const target=monthly*mos; const current=g('current'); const cap=g('cap');
+  const rate=g('rate')/100/12; const remain=Math.max(0,target-current);
+  let time=0,b=current;
+  if(cap>0&&b<target){while(b<target&&time<360){b=b*(1+rate)+cap;time++;}}
+  const pct=target>0?Math.min(100,current/target*100):100;
+  document.getElementById('monthly').textContent='$'+Math.round(monthly).toLocaleString();
+  document.getElementById('target').textContent='$'+Math.round(target).toLocaleString();
+  document.getElementById('remain').textContent='$'+Math.round(remain).toLocaleString();
+  document.getElementById('time').textContent=time<=0?'Already funded!':time+' months';
+  document.getElementById('pct').textContent=pct.toFixed(1)+'%';
+  const intEarned=Math.max(0,b-current-cap*time);
+  document.getElementById('intEarned').textContent='$'+Math.round(intEarned).toLocaleString();
+  const steps=Math.min(time||12,24); const labels=[]; const data=[]; let bv=current;
+  for(let m=0;m<=steps;m++){labels.push('M'+m);data.push(Math.round(Math.min(bv,target)));if(m<steps)bv=Math.min(bv*(1+rate)+cap,target);}
+  if(ch)ch.destroy();
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new Chart(ctx,{type:'line',data:{labels,datasets:[
+    {label:'Savings',data,borderColor:'#0ea5a0',backgroundColor:'rgba(14,165,160,0.1)',fill:true,tension:0.3,pointRadius:3,borderWidth:2},
+    {label:'Goal',data:labels.map(()=>Math.round(target)),borderColor:'#c9a84c',borderDash:[5,3],pointRadius:0,borderWidth:1.5,backgroundColor:'transparent'}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}},x:{grid:{display:false}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Your Savings</div><div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div>Goal</div>';
+}
+function showChart(m){c();}
+</script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => { setCountry('us'); });
+</script>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+<script src="../shared.js"></script>
+</body></html>

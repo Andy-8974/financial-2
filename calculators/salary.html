@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salary Calculator — USA & Canada | CalcWise Pro</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Salary Calculator — USA & Canada | CalcWise Pro",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/salary.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between gross and net salary?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gross salary is your total pay before deductions. Net (take-home) pay is after income tax, CPP/EI (Canada) or FICA/Medicare (USA). In Canada at $85,000 in Ontario, net pay is typically 68–72% of gross"
+      }
+    },    {
+      "@type": "Question",
+      "name": "How is overtime calculated in Canada?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most provinces require 1.5× for hours over 44/week. Alberta: 1.5× over 8 hrs/day or 44 hrs/week. BC: 1.5× over 8 hrs/day, 2× over 12 hrs/day. USA: 1.5× for all hours over 40/week under FLSA."
+      }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style id="cw-body-font">body,body *{font-family:'Plus Jakarta Sans',sans-serif!important}</style>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Salary Calculator</h1>
+  <p>Convert between annual, monthly, bi-weekly, weekly, and hourly pay rates.</p>
+  <div class="country-toggle">
+      <div class="cw-toggle"><button class="cw-tbtn on" data-mode="us"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/><circle cx="1.3" cy="1.1" r=".55" fill="#fff"/><circle cx="2.65" cy="1.1" r=".55" fill="#fff"/><circle cx="4" cy="1.1" r=".55" fill="#fff"/><circle cx="5.35" cy="1.1" r=".55" fill="#fff"/><circle cx="6.7" cy="1.1" r=".55" fill="#fff"/><circle cx="1.97" cy="2.32" r=".55" fill="#fff"/><circle cx="3.32" cy="2.32" r=".55" fill="#fff"/><circle cx="4.67" cy="2.32" r=".55" fill="#fff"/><circle cx="6.02" cy="2.32" r=".55" fill="#fff"/><circle cx="1.3" cy="3.54" r=".55" fill="#fff"/><circle cx="2.65" cy="3.54" r=".55" fill="#fff"/><circle cx="4" cy="3.54" r=".55" fill="#fff"/><circle cx="5.35" cy="3.54" r=".55" fill="#fff"/><circle cx="6.7" cy="3.54" r=".55" fill="#fff"/><circle cx="1.97" cy="4.77" r=".55" fill="#fff"/><circle cx="3.32" cy="4.77" r=".55" fill="#fff"/><circle cx="4.67" cy="4.77" r=".55" fill="#fff"/><circle cx="6.02" cy="4.77" r=".55" fill="#fff"/><circle cx="1.3" cy="6" r=".55" fill="#fff"/><circle cx="2.65" cy="6" r=".55" fill="#fff"/><circle cx="4" cy="6" r=".55" fill="#fff"/><circle cx="5.35" cy="6" r=".55" fill="#fff"/><circle cx="6.7" cy="6" r=".55" fill="#fff"/></svg>&nbsp;USA</button><button class="cw-tbtn" data-mode="ca"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#D52B1E"/><rect x="15" width="5" height="14" fill="#D52B1E"/><path d="M10 2.8L10.9 5.5H13.6L11.4 7.1L12.3 9.8L10 8.2L7.7 9.8L8.6 7.1L6.4 5.5H9.1Z" fill="#D52B1E"/></svg>&nbsp;Canada</button></div>
+    </div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+      <h2>Your Compensation</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Salary Amount</label><div class="input-prefix"><span>$</span><input type="number" id="amt" value="85000" oninput="c()"></div></div>
+      <div class="form-row"><label>Per</label>
+        <select id="per" onchange="c()">
+          <option value="year" selected>Year</option>
+          <option value="month">Month</option>
+          <option value="biweek">Bi-Weekly (26/yr)</option>
+          <option value="week">Week</option>
+          <option value="day">Day</option>
+          <option value="hour">Hour</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Hours Per Week</label><input type="number" id="hrs" value="40" oninput="c()"></div>
+      <div class="form-row"><label>Weeks Per Year</label><input type="number" id="wks" value="52" oninput="c()"></div>
+    </div>
+    <button class="calc-btn span-2" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Annual Salary</div><div class="value teal" id="annual">—</div></div>
+        <div class="result-item"><div class="label">Monthly</div><div class="value " id="monthly">—</div></div>
+        <div class="result-item"><div class="label">Bi-Weekly</div><div class="value " id="biweekly">—</div></div>
+        <div class="result-item"><div class="label">Weekly</div><div class="value " id="weekly">—</div></div>
+        <div class="result-item"><div class="label">Daily</div><div class="value " id="daily">—</div></div>
+        <div class="result-item"><div class="label">Hourly Rate</div><div class="value teal" id="hourly">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('bar')">Pay Period Comparison</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>2025 Minimum Wages</h2>
+  <table class="data-table"><thead><tr><th>Jurisdiction</th><th class="r">Min Wage/hr</th><th>Jurisdiction</th><th class="r">Min Wage/hr</th></tr></thead>
+  <tbody>
+    <tr><td><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#D52B1E"/><rect x="15" width="5" height="14" fill="#D52B1E"/><path d="M10 2.8L10.9 5.5H13.6L11.4 7.1L12.3 9.8L10 8.2L7.7 9.8L8.6 7.1L6.4 5.5H9.1Z" fill="#D52B1E"/></svg> Federal (CA)</td><td class="r">$17.30</td><td><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/><circle cx="1.3" cy="1.1" r=".55" fill="#fff"/><circle cx="2.65" cy="1.1" r=".55" fill="#fff"/><circle cx="4" cy="1.1" r=".55" fill="#fff"/><circle cx="5.35" cy="1.1" r=".55" fill="#fff"/><circle cx="6.7" cy="1.1" r=".55" fill="#fff"/><circle cx="1.97" cy="2.32" r=".55" fill="#fff"/><circle cx="3.32" cy="2.32" r=".55" fill="#fff"/><circle cx="4.67" cy="2.32" r=".55" fill="#fff"/><circle cx="6.02" cy="2.32" r=".55" fill="#fff"/><circle cx="1.3" cy="3.54" r=".55" fill="#fff"/><circle cx="2.65" cy="3.54" r=".55" fill="#fff"/><circle cx="4" cy="3.54" r=".55" fill="#fff"/><circle cx="5.35" cy="3.54" r=".55" fill="#fff"/><circle cx="6.7" cy="3.54" r=".55" fill="#fff"/><circle cx="1.97" cy="4.77" r=".55" fill="#fff"/><circle cx="3.32" cy="4.77" r=".55" fill="#fff"/><circle cx="4.67" cy="4.77" r=".55" fill="#fff"/><circle cx="6.02" cy="4.77" r=".55" fill="#fff"/><circle cx="1.3" cy="6" r=".55" fill="#fff"/><circle cx="2.65" cy="6" r=".55" fill="#fff"/><circle cx="4" cy="6" r=".55" fill="#fff"/><circle cx="5.35" cy="6" r=".55" fill="#fff"/><circle cx="6.7" cy="6" r=".55" fill="#fff"/></svg> Federal (US)</td><td class="r">$7.25</td></tr>
+    <tr><td>Ontario</td><td class="r">$17.55</td><td>California</td><td class="r">$16.50</td></tr>
+    <tr><td>BC</td><td class="r">$17.85</td><td>New York</td><td class="r">$16.00</td></tr>
+    <tr><td>Alberta</td><td class="r">$15.00</td><td>Washington</td><td class="r">$16.28</td></tr>
+    <tr><td>Quebec</td><td class="r">$16.10</td><td>Texas</td><td class="r">$7.25</td></tr>
+  </tbody></table>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the difference between gross and net salary?</button><div class="faq-a">Gross salary is your total pay before deductions. Net (take-home) pay is after income tax, CPP/EI (Canada) or FICA/Medicare (USA). In Canada at $85,000 in Ontario, net pay is typically 68–72% of gross. Use our Income Tax Calculator for a detailed breakdown.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How is overtime calculated in Canada?</button><div class="faq-a">Most provinces require 1.5× for hours over 44/week. Alberta: 1.5× over 8 hrs/day or 44 hrs/week. BC: 1.5× over 8 hrs/day, 2× over 12 hrs/day. USA: 1.5× for all hours over 40/week under FLSA.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; Minimum wage rates as of 2025. Verify with official government sources.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+  <div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+      <div style="width:32px;height:32px;background:#e8f5e9;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <span style="color:#1b5e20;font-weight:700;font-size:0.95rem;">EQ Bank</span>
+    </div>
+    <div style="color:#111827;font-size:1.1rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Earn 4.00%* on your savings</div>
+    <div style="color:#6b7280;font-size:0.78rem;line-height:1.6;">Canada's leading digital bank. No monthly fees. No minimum balance. CDIC insured deposits.</div>
+  </div>
+  <div>
+    <div style="background:#2e7d32;color:white;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Open a Free Account</div>
+    <div style="color:#9ca3af;font-size:0.6rem;margin-top:8px;">*Rate subject to change. Conditions apply.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="hourly-to-salary.html">Hourly to Salary</a></li><li><a href="income-tax.html">Income Tax</a></li><li><a href="net-worth.html">Net Worth Calculator</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div style="color:#0066cc;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">Sun Life Financial</div>
+  <div style="color:#111827;font-size:1.4rem;font-weight:700;line-height:1.25;margin-bottom:12px;">Protect what<br>matters most.</div>
+  <div style="color:#6b7280;font-size:0.82rem;line-height:1.65;margin-bottom:22px;">Term life insurance from $20/month. Get a quote in 60 seconds — no medical exam required for coverage up to $1M.</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px;">
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:14px;">
+      <div style="color:#0369a1;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 10-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $18/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;">
+      <div style="color:#15803d;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 20-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $29/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:9px;padding:14px;">
+      <div style="color:#7c3aed;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ Whole Life</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">Builds cash value</div>
+      <div style="color:#6b7280;font-size:0.72rem;">Lifelong protection</div>
+    </div>
+  </div>
+  <div style="background:#0066cc;color:white;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Free Quote →</div>
+  <div style="color:#9ca3af;font-size:0.6rem;text-align:center;line-height:1.5;">Sun Life Assurance Company of Canada. Subject to underwriting.</div>
+</div></div>
+</div>
+</div>
+<script>
+let country='us', ch=null;
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function setCountry(co){country=co;document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.toggle('active',b.dataset.country===co));;c();}
+function c(){
+  const amt=parseFloat(document.getElementById('amt').value)||0;
+  const per=document.getElementById('per').value;
+  const hrs=parseFloat(document.getElementById('hrs').value)||40;
+  const wks=parseFloat(document.getElementById('wks').value)||52;
+  const hpy=hrs*wks;
+  let annual;
+  switch(per){case'year':annual=amt;break;case'month':annual=amt*12;break;case'biweek':annual=amt*26;break;case'week':annual=amt*wks;break;case'day':annual=amt*5*wks;break;case'hour':annual=amt*hpy;break;default:annual=amt;}
+  const monthly=annual/12,biweekly=annual/26,weekly=annual/wks,daily=annual/(5*wks),hourly=annual/hpy;
+  document.getElementById('annual').textContent='$'+Math.round(annual).toLocaleString();
+  document.getElementById('monthly').textContent='$'+Math.round(monthly).toLocaleString();
+  document.getElementById('biweekly').textContent='$'+Math.round(biweekly).toLocaleString();
+  document.getElementById('weekly').textContent='$'+Math.round(weekly).toLocaleString();
+  document.getElementById('daily').textContent='$'+daily.toFixed(2);
+  document.getElementById('hourly').textContent='$'+hourly.toFixed(2);
+  if(ch)ch.destroy();
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new Chart(ctx,{type:'bar',data:{labels:['Annual','Monthly','Bi-Weekly','Weekly'],datasets:[{data:[Math.round(annual),Math.round(monthly),Math.round(biweekly),Math.round(weekly)],backgroundColor:['#0ea5a0','rgba(14,165,160,0.75)','rgba(14,165,160,0.55)','rgba(14,165,160,0.35)'],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'$'+Math.round(v).toLocaleString()}},x:{grid:{display:false}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Pay by Period</div>';
+}
+function showChart(m){c();}
+</script>
+
+
+
+
+});
+<script>
+ });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => { setCountry('us'); });
+</script>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+<script src="../shared.js"></script>
+</body></html>

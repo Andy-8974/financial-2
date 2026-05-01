@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asset Allocation Calculator — USA & Canada | CalcWise Pro</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Asset Allocation Calculator — USA & Canada | CalcWise Pro",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/asset-allocation.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the 'age in bonds' rule still valid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The old rule — hold your age as a % in bonds — is outdated for most people. With longer lifespans, even retirees need growth. Modern guidance: use a target-date fund or all-in-one ETF aligned to your "
+      }
+    },    {
+      "@type": "Question",
+      "name": "What are all-in-one ETFs in Canada?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Single-fund global portfolios that auto-rebalance: VEQT (100% stocks, 0.24%), VGRO (80/20, 0.24%), VBAL (60/40, 0.24%), VCNS (40/60, 0.24%). iShares equivalents: XEQT, XGRO, XBAL. Ideal for investors "
+      }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style id="cw-body-font">body,body *{font-family:'Plus Jakarta Sans',sans-serif!important}</style>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>Asset Allocation Calculator</h1>
+  <p>Find your ideal stock/bond/cash mix based on age, risk tolerance, and horizon.</p>
+  <div class="country-toggle">
+      <div class="cw-toggle"><button class="cw-tbtn on" data-mode="us"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/><circle cx="1.3" cy="1.1" r=".55" fill="#fff"/><circle cx="2.65" cy="1.1" r=".55" fill="#fff"/><circle cx="4" cy="1.1" r=".55" fill="#fff"/><circle cx="5.35" cy="1.1" r=".55" fill="#fff"/><circle cx="6.7" cy="1.1" r=".55" fill="#fff"/><circle cx="1.97" cy="2.32" r=".55" fill="#fff"/><circle cx="3.32" cy="2.32" r=".55" fill="#fff"/><circle cx="4.67" cy="2.32" r=".55" fill="#fff"/><circle cx="6.02" cy="2.32" r=".55" fill="#fff"/><circle cx="1.3" cy="3.54" r=".55" fill="#fff"/><circle cx="2.65" cy="3.54" r=".55" fill="#fff"/><circle cx="4" cy="3.54" r=".55" fill="#fff"/><circle cx="5.35" cy="3.54" r=".55" fill="#fff"/><circle cx="6.7" cy="3.54" r=".55" fill="#fff"/><circle cx="1.97" cy="4.77" r=".55" fill="#fff"/><circle cx="3.32" cy="4.77" r=".55" fill="#fff"/><circle cx="4.67" cy="4.77" r=".55" fill="#fff"/><circle cx="6.02" cy="4.77" r=".55" fill="#fff"/><circle cx="1.3" cy="6" r=".55" fill="#fff"/><circle cx="2.65" cy="6" r=".55" fill="#fff"/><circle cx="4" cy="6" r=".55" fill="#fff"/><circle cx="5.35" cy="6" r=".55" fill="#fff"/><circle cx="6.7" cy="6" r=".55" fill="#fff"/></svg>&nbsp;USA</button><button class="cw-tbtn" data-mode="ca"><svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;vertical-align:middle;flex-shrink:0"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#D52B1E"/><rect x="15" width="5" height="14" fill="#D52B1E"/><path d="M10 2.8L10.9 5.5H13.6L11.4 7.1L12.3 9.8L10 8.2L7.7 9.8L8.6 7.1L6.4 5.5H9.1Z" fill="#D52B1E"/></svg>&nbsp;Canada</button></div>
+    </div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div>
+      <h2>Your Profile</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Your Age</label><input type="number" id="age" value="35" oninput="c()"></div>
+      <div class="form-row"><label>Retirement Age</label><input type="number" id="ret" value="65" oninput="c()"></div>
+      <div class="form-row"><label>Risk Tolerance</label>
+        <select id="risk" onchange="c()"><option value="conservative">Conservative</option><option value="moderate" selected>Moderate</option><option value="aggressive">Aggressive</option></select>
+      </div>
+      <div class="form-row"><label>Investment Horizon</label>
+        <select id="horizon" onchange="c()"><option value="short">Short-term (&lt;5 yrs)</option><option value="medium" selected>Medium (5–15 yrs)</option><option value="long">Long-term (15+ yrs)</option></select>
+      </div>
+      <div class="form-row"><label>Income Stability</label>
+        <select id="income" onchange="c()"><option value="stable" selected>Stable (gov/corporate)</option><option value="variable">Variable (self-employed)</option><option value="retired">Retired / Fixed income</option></select>
+      </div>
+      <div class="form-row"><label>Total Portfolio Value</label><div class="input-prefix"><span>$</span><input type="number" id="port" value="200000" oninput="c()"></div></div>
+    </div>
+    <button class="calc-btn span-2" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">Stocks (Equity)</div><div class="value teal" id="stocks">—</div></div>
+        <div class="result-item"><div class="label">Bonds (Fixed Income)</div><div class="value " id="bonds">—</div></div>
+        <div class="result-item"><div class="label">Cash / GICs</div><div class="value " id="cash">—</div></div>
+        <div class="result-item"><div class="label">Expected Annual Return</div><div class="value teal" id="expRet">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('doughnut')">Your Allocation</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>Recommended Funds for Your Allocation</h2>
+  <div id="allocDetail"></div>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is the 'age in bonds' rule still valid?</button><div class="faq-a">The old rule — hold your age as a % in bonds — is outdated for most people. With longer lifespans, even retirees need growth. Modern guidance: use a target-date fund or all-in-one ETF aligned to your retirement year. Vanguard's VGRO (80/20) and VBAL (60/40) reflect contemporary thinking.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What are all-in-one ETFs in Canada?</button><div class="faq-a">Single-fund global portfolios that auto-rebalance: VEQT (100% stocks, 0.24%), VGRO (80/20, 0.24%), VBAL (60/40, 0.24%), VCNS (40/60, 0.24%). iShares equivalents: XEQT, XGRO, XBAL. Ideal for investors who want simplicity — buy one ETF and never worry about rebalancing.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; Suggested allocations are guidelines only, not personalized financial advice.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 4px 20px rgba(79,70,229,0.3);">
+  <div>
+    <div style="color:rgba(255,255,255,0.7);font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Questrade</div>
+    <div style="color:white;font-size:1.15rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Buy ETFs free.<br>Stocks from $4.95.</div>
+    <div style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.5;">Canada's #1 online brokerage. Open a TFSA, RRSP, or FHSA in minutes.</div>
+  </div>
+  <div>
+    <div style="background:white;color:#4f46e5;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Open Account Free</div>
+    <div style="color:rgba(255,255,255,0.35);font-size:0.6rem;margin-top:8px;">IIROC regulated. CIPF member. 1M+ Canadians.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="retirement-planning.html">Retirement Planning</a></li><li><a href="fire.html">FIRE Calculator</a></li><li><a href="investment-fees.html">Investment Fees</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div style="color:#0066cc;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">Sun Life Financial</div>
+  <div style="color:#111827;font-size:1.4rem;font-weight:700;line-height:1.25;margin-bottom:12px;">Protect what<br>matters most.</div>
+  <div style="color:#6b7280;font-size:0.82rem;line-height:1.65;margin-bottom:22px;">Term life insurance from $20/month. Get a quote in 60 seconds — no medical exam required for coverage up to $1M.</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px;">
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:14px;">
+      <div style="color:#0369a1;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 10-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $18/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;">
+      <div style="color:#15803d;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 20-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $29/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:9px;padding:14px;">
+      <div style="color:#7c3aed;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ Whole Life</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">Builds cash value</div>
+      <div style="color:#6b7280;font-size:0.72rem;">Lifelong protection</div>
+    </div>
+  </div>
+  <div style="background:#0066cc;color:white;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Free Quote →</div>
+  <div style="color:#9ca3af;font-size:0.6rem;text-align:center;line-height:1.5;">Sun Life Assurance Company of Canada. Subject to underwriting.</div>
+</div></div>
+</div>
+</div>
+<script>
+let country='us', ch=null;
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function setCountry(co){country=co;document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.toggle('active',b.dataset.country===co));;c();}
+function c(){
+  const age=parseInt(document.getElementById('age').value)||35;
+  const ret=parseInt(document.getElementById('ret').value)||65;
+  const risk=document.getElementById('risk').value;
+  const horizon=document.getElementById('horizon').value;
+  const income=document.getElementById('income').value;
+  const port=parseFloat(document.getElementById('port').value)||0;
+  let stocks=80,bonds=15,cash=5;
+  if(risk==='conservative'){stocks=40;bonds=45;cash=15;}
+  else if(risk==='aggressive'){stocks=95;bonds=4;cash=1;}
+  if(horizon==='short'){stocks=Math.max(20,stocks-30);bonds+=20;cash+=10;}
+  else if(horizon==='long'){stocks=Math.min(99,stocks+5);bonds-=5;}
+  if(income==='variable'){stocks=Math.max(20,stocks-10);cash+=10;}
+  if(income==='retired'){stocks=Math.max(30,stocks-20);bonds+=15;cash+=5;}
+  const ageAdj=Math.max(0,Math.min(20,(age-40)*0.5));
+  stocks=Math.max(10,Math.round(stocks-ageAdj));bonds=Math.round(Math.min(85,bonds+ageAdj*0.7));cash=Math.max(1,100-stocks-bonds);
+  const expRet=(stocks*.07+bonds*.03+cash*.04).toFixed(1);
+  document.getElementById('stocks').textContent=stocks+'%';
+  document.getElementById('bonds').textContent=bonds+'%';
+  document.getElementById('cash').textContent=cash+'%';
+  document.getElementById('expRet').textContent=expRet+'%';
+  const ca=country==='ca'; const etfs=ca?'XGRO / VGRO':'VTI + BND';
+  document.getElementById('allocDetail').innerHTML=`<div class="info-grid">
+    <div class="info-box"><h4>Stocks — ${stocks}%</h4><p>$${Math.round(port*stocks/100).toLocaleString()}. Recommend: ${ca?'60% Canada (XIC), 40% International (XEQT)':'60% US (VTI), 40% International (VXUS)'}.</p></div>
+    <div class="info-box"><h4>Bonds — ${bonds}%</h4><p>$${Math.round(port*bonds/100).toLocaleString()}. Recommend: ${ca?'XBB (Canadian bonds) or ZAG':'BND (total bond market) or AGG'}.</p></div>
+    <div class="info-box"><h4>Cash / Short-Term — ${cash}%</h4><p>$${Math.round(port*cash/100).toLocaleString()}. ${ca?'EQ Bank TFSA HISA or GICs (3.5–4.5%)':'HYSA or T-Bills (4–5%)'}.</p></div>
+    <div class="info-box"><h4>All-in-One Option</h4><p>Consider ${ca?`VGRO (${stocks > 70?'80':'60'}/20, 0.24% MER) for simplicity — automatic global diversification and rebalancing.`:'a target-date fund matching your retirement year for automatic rebalancing.'}.</p></div>
+  </div>`;
+  if(ch)ch.destroy();
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new Chart(ctx,{type:'doughnut',data:{labels:['Stocks','Bonds','Cash'],datasets:[{data:[stocks,bonds,cash],backgroundColor:['#0ea5a0','#152a45','#c9a84c'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'right'},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.raw+'%'}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Stocks '+stocks+'%</div><div class="legend-item"><div class="legend-dot" style="background:#152a45"></div>Bonds '+bonds+'%</div><div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div>Cash '+cash+'%</div>';
+}
+function showChart(m){c();}
+</script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => { setCountry('us'); });
+</script>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+<script src="../shared.js"></script>
+</body></html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>401(k) Save the Max Calculator 2026 — USA | CalcWise</title>
+<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "401(k) Save the Max Calculator 2026 — USA | CalcWise",
+  "description": "",
+  "url": "https://calcwise.pro/calculators/401k-save-max.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "CalcWise"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the super catch-up for ages 60–63?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Starting in 2025 under SECURE 2.0, workers aged 60, 61, 62, or 63 can contribute an additional $11,250 (instead of the standard $7,500 catch-up for 50+), totaling $34,750. This is a significant planni"
+      }
+    },    {
+      "@type": "Question",
+      "name": "What if I can't max the 401(k)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "At minimum, contribute enough to get the full employer match — it's an immediate 50–100% return. After the match, prioritize: max TFSA/Roth IRA (tax-free growth), then return to 401(k)/RRSP for additi"
+      }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style id="cw-body-font">body,body *{font-family:'Plus Jakarta Sans',sans-serif!important}</style>
+</head>
+<body>
+<script src="../nav.js"></script>
+<div class="calc-hero"><div class="calc-hero-inner">
+  <h1>401(k) Save the Max Calculator</h1>
+  <p>Calculate the exact per-paycheck contribution needed to max your 401(k) by year-end.</p>
+  <div class="country-badge cw-usa-badge"><svg width="18" height="13" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0;vertical-align:middle"><rect width="20" height="14" fill="#B22234"/><rect y="1.08" width="20" height="1.08" fill="#fff"/><rect y="3.23" width="20" height="1.08" fill="#fff"/><rect y="5.38" width="20" height="1.08" fill="#fff"/><rect y="7.54" width="20" height="1.08" fill="#fff"/><rect y="9.69" width="20" height="1.08" fill="#fff"/><rect y="11.85" width="20" height="1.08" fill="#fff"/><rect width="8" height="7.54" fill="#3C3B6E"/></svg>&nbsp;USA only</div>
+</div></div>
+<div class="calc-wrapper">
+<div class="calc-main">
+<div class="calc-split">
+  <div class="calc-inputs">
+    <div class="calc-inputs-header">
+      <div class="icon-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8m-4-4v4M7 4H5a2 2 0 0 0-2 2v2c0 3 2 6 4 7m10-9h2a2 2 0 0 1 2 2v2c0 3-2 6-4 7"/><path d="M7 4h10v9a5 5 0 0 1-10 0V4z"/></svg></div>
+      <h2>Paycheck Details</h2>
+    </div>
+    <div class="form-grid">
+      <div class="form-row"><label>Year-to-Date Contributions</label><div class="input-prefix"><span>$</span><input type="number" id="ytd" value="8000" oninput="c()"></div></div>
+      <div class="form-row"><label>Your Age</label><input type="number" id="age" value="45" oninput="c()"></div>
+      <div class="form-row"><label>Pay Periods Remaining This Year</label><input type="number" id="periods" value="18" oninput="c()"></div>
+      <div class="form-row"><label>Pay Frequency</label>
+        <select id="freq" onchange="c()"><option value="26">Bi-weekly (26/yr)</option><option value="24">Semi-monthly (24/yr)</option><option value="12">Monthly (12/yr)</option></select>
+      </div>
+      <div class="form-row"><label>Annual Gross Salary</label><div class="input-prefix"><span>$</span><input type="number" id="salary" value="85000" oninput="c()"></div></div>
+    </div>
+    <button class="calc-btn span-2" aria-label="Calculate" onclick="c()">Calculate</button>
+  </div>
+  <div class="calc-results-panel">
+    <div class="calc-results-numbers">
+      <h3>Results</h3>
+      <div class="result-grid">
+        <div class="result-item"><div class="label">2025 Annual Limit</div><div class="value " id="limit">—</div></div>
+        <div class="result-item"><div class="label">Contributed So Far</div><div class="value " id="ytdShow">—</div></div>
+        <div class="result-item"><div class="label">Remaining to Contribute</div><div class="value teal" id="remain">—</div></div>
+        <div class="result-item"><div class="label">Per-Paycheck Amount</div><div class="value teal" id="perPay">—</div></div>
+        <div class="result-item"><div class="label">% of Each Paycheck</div><div class="value " id="pct">—</div></div>
+        <div class="result-item"><div class="label">Catch-Up Available?</div><div class="value " id="catchup">—</div></div>
+      </div>
+    </div>
+    <div class="calc-results-chart">
+      <div class="chart-tabs-sm">
+        <button class="chart-tab-sm active" onclick="showChart('progress')">Year Progress</button>
+      </div>
+      <div class="chart-container"><canvas id="ch"></canvas></div>
+      <div class="chart-legend" id="leg"></div>
+    </div>
+  </div>
+</div><div class="content-card">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the super catch-up for ages 60–63?</button><div class="faq-a">Starting in 2025 under SECURE 2.0, workers aged 60, 61, 62, or 63 can contribute an additional $11,250 (instead of the standard $7,500 catch-up for 50+), totaling $34,750. This is a significant planning opportunity for those in their early 60s with high income.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What if I can't max the 401(k)?</button><div class="faq-a">At minimum, contribute enough to get the full employer match — it's an immediate 50–100% return. After the match, prioritize: max TFSA/Roth IRA (tax-free growth), then return to 401(k)/RRSP for additional tax-deferred savings.</div></div>
+</div><div class="disclaimer">&#9888;&#65039; USA only. 2025 limits. Pay frequency affects per-paycheck amount.</div>
+</div>
+<div class="calc-sidebar">
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:250px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:22px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+  <div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+      <div style="width:32px;height:32px;background:#e8f5e9;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <span style="color:#1b5e20;font-weight:700;font-size:0.95rem;">EQ Bank</span>
+    </div>
+    <div style="color:#111827;font-size:1.1rem;font-weight:700;line-height:1.3;margin-bottom:8px;">Earn 4.00%* on your savings</div>
+    <div style="color:#6b7280;font-size:0.78rem;line-height:1.6;">Canada's leading digital bank. No monthly fees. No minimum balance. CDIC insured deposits.</div>
+  </div>
+  <div>
+    <div style="background:#2e7d32;color:white;font-size:0.82rem;font-weight:700;padding:10px 18px;border-radius:8px;display:inline-block;cursor:pointer;">Open a Free Account</div>
+    <div style="color:#9ca3af;font-size:0.6rem;margin-top:8px;">*Rate subject to change. Conditions apply.</div>
+  </div>
+</div></div>
+  <div class="related-card"><h4>Related Calculators</h4><ul class="related-list"><li><a href="401k-contribution.html">401k Contribution</a></li><li><a href="ira-comparison.html">IRA Comparison</a></li><li><a href="retirement-planning.html">Retirement Planning</a></li></ul></div>
+  <div class="sidebar-ad" style="border:none;background:transparent;padding:0;min-height:auto;display:block;"><div style="width:300px;height:600px;background:white;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;padding:28px;font-family:'IBM Plex Sans',sans-serif;box-shadow:0 2px 12px rgba(0,0,0,0.07);">
+  <div style="color:#0066cc;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;">Sun Life Financial</div>
+  <div style="color:#111827;font-size:1.4rem;font-weight:700;line-height:1.25;margin-bottom:12px;">Protect what<br>matters most.</div>
+  <div style="color:#6b7280;font-size:0.82rem;line-height:1.65;margin-bottom:22px;">Term life insurance from $20/month. Get a quote in 60 seconds — no medical exam required for coverage up to $1M.</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px;">
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:9px;padding:14px;">
+      <div style="color:#0369a1;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 10-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $18/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:14px;">
+      <div style="color:#15803d;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ 20-Year Term</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">From $29/mo</div>
+      <div style="color:#6b7280;font-size:0.72rem;">$500K coverage</div>
+    </div>
+    <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:9px;padding:14px;">
+      <div style="color:#7c3aed;font-size:0.72rem;font-weight:700;margin-bottom:4px;">✓ Whole Life</div>
+      <div style="color:#111827;font-size:1.1rem;font-weight:700;">Builds cash value</div>
+      <div style="color:#6b7280;font-size:0.72rem;">Lifelong protection</div>
+    </div>
+  </div>
+  <div style="background:#0066cc;color:white;font-size:0.88rem;font-weight:700;padding:13px 18px;border-radius:9px;text-align:center;cursor:pointer;margin-bottom:10px;">Get Free Quote →</div>
+  <div style="color:#9ca3af;font-size:0.6rem;text-align:center;line-height:1.5;">Sun Life Assurance Company of Canada. Subject to underwriting.</div>
+</div></div>
+</div>
+</div>
+<script>
+let ch=null;
+function fmt(n){return '$'+Math.round(Math.max(0,n)).toLocaleString();}
+
+function c(){
+  const ytd=parseFloat(document.getElementById('ytd').value)||0;
+  const age=parseInt(document.getElementById('age').value)||45;
+  const periods=parseInt(document.getElementById('periods').value)||1;
+  const salary=parseFloat(document.getElementById('salary').value)||0;
+  const freq=parseInt(document.getElementById('freq').value)||26;
+  const superCatchup=age>=60&&age<=63; const catchup=age>=50;
+  const limit=superCatchup?35750:catchup?32500:24500;
+  const remain=Math.max(0,limit-ytd);
+  const perPay=periods>0?remain/periods:0;
+  const grossPerPay=salary/ ((freq)||1);
+  const pct=grossPerPay>0?(perPay/grossPerPay*100):0;
+  const progress=limit>0?Math.min(100,ytd/limit*100):100;
+  document.getElementById('limit').textContent='$'+limit.toLocaleString();
+  document.getElementById('ytdShow').textContent='$'+Math.round(ytd).toLocaleString();
+  document.getElementById('remain').textContent='$'+Math.round(remain).toLocaleString();
+  document.getElementById('perPay').textContent='$'+perPay.toFixed(2);
+  document.getElementById('pct').textContent=pct.toFixed(1)+'% of gross paycheck';
+  document.getElementById('catchup').textContent=superCatchup?'✓ Super catch-up (+$11,250)':catchup?'✓ Catch-up eligible (+$7,500)':'No (under 50)';
+  if(ch)ch.destroy();
+  const ctx=document.getElementById('ch').getContext('2d');
+  ch=new Chart(ctx,{type:'doughnut',data:{labels:['Contributed','Remaining'],datasets:[{data:[Math.round(ytd),Math.round(remain)],backgroundColor:['#0ea5a0','rgba(255,255,255,0.1)'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'70%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' $'+Math.round(ctx.raw).toLocaleString()}}}}});
+  document.getElementById('leg').innerHTML='<div class="legend-item"><div class="legend-dot" style="background:#0ea5a0"></div>Contributed $'+Math.round(ytd).toLocaleString()+'</div><div class="legend-item"><div class="legend-dot" style="background:rgba(21,42,69,0.5)"></div>Remaining $'+Math.round(remain).toLocaleString()+'</div>';
+}
+function showChart(m){c();}
+</script>
+
+
+
+
+});
+<script>
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', c);
+</script>
+<script>function toggleFaq(b){b.parentElement.classList.toggle('open');}</script>
+<script src="../shared.js"></script>
+</body></html>
